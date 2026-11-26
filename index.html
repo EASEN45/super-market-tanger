@@ -20,14 +20,17 @@
             --primary-solid: #0f766e;
             --primary-dark: #042f2e;
             --header-bg: #0b3f3b;
+            --header-deep: #052623;
             --primary-light: #ccfbf1;
             --luxury-black: #020617;
             --navy-blue: #0f172a;
             --accent-gold: #eab308;
+            --apple-gold: #d4af37;
             --accent-gold-soft: #fef08a;
-            --accent-gold-glow: rgba(251, 191, 36, 0.55);
+            --apple-gold-soft: #f5e6b3;
+            --ivory: #fbfaf6;
             --glass-bg: rgba(255, 255, 255, 0.72);
-            --glass-border: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.88);
             --card-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
             --radius-premium: 24px;
             --header-height: 74px;
@@ -35,6 +38,8 @@
             --safe-bottom: env(safe-area-inset-bottom, 0px);
             --safe-left: env(safe-area-inset-left, 0px);
             --safe-right: env(safe-area-inset-right, 0px);
+            --ease-apple: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-spring: cubic-bezier(0.2, 0.95, 0.3, 1);
         }
 
         * {
@@ -105,7 +110,7 @@
             justify-content: center;
             gap: 5px;
             touch-action: manipulation;
-            transition: transform 0.25s ease, background 0.25s ease;
+            transition: transform 0.25s var(--ease-apple), background 0.25s var(--ease-apple);
         }
 
         .menu-trigger-btn:active {
@@ -163,6 +168,8 @@
         }
 
         #main-basket-btn {
+            position: relative;
+            overflow: hidden;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -178,12 +185,17 @@
             white-space: nowrap;
             touch-action: manipulation;
             box-shadow: 0 4px 14px rgba(234, 179, 8, 0.35);
-            transition: transform 0.25s ease, background 0.25s ease;
+            transition: transform 0.28s var(--ease-spring), background 0.25s var(--ease-apple), box-shadow 0.28s var(--ease-apple);
         }
 
         #main-basket-btn:active {
             transform: scale(0.95);
             background: #facc15;
+        }
+
+        #main-basket-btn.basket-catch-pulse {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 5px rgba(254, 240, 138, 0.4), 0 10px 24px rgba(234, 179, 8, 0.55);
         }
 
         #main-basket-count {
@@ -198,6 +210,7 @@
             font-size: 11px;
             font-weight: 900;
             padding: 0 5px;
+            transition: transform 0.28s var(--ease-spring);
         }
 
         .header-spacer {
@@ -207,7 +220,7 @@
         }
 
         /* ========================================================
-           القائمة الجانبية الرئيسية المنظمة
+           القائمة الجانبية الرئيسية المنظمة (بدون إيموجيات)
            ======================================================== */
         .side-menu-backdrop {
             position: fixed;
@@ -236,12 +249,12 @@
             padding-bottom: calc(24px + var(--safe-bottom));
             padding-right: calc(18px + var(--safe-right));
             padding-left: 18px;
-            background: linear-gradient(160deg, #0b3f3b 0%, #062825 100%);
+            background: linear-gradient(160deg, var(--header-bg) 0%, #062825 100%);
             border-left: 1px solid rgba(254, 240, 138, 0.22);
             box-shadow: -12px 0 36px rgba(2, 6, 23, 0.35);
             z-index: 9995;
             transform: translateX(100%);
-            transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: transform 0.36s var(--ease-apple);
             display: flex;
             flex-direction: column;
             overscroll-behavior: contain;
@@ -264,6 +277,7 @@
             color: var(--accent-gold-soft);
             font-size: 19px;
             font-weight: 800;
+            letter-spacing: 0.2px;
         }
 
         .side-menu-close {
@@ -297,11 +311,13 @@
         }
 
         .side-menu-btn {
+            position: relative;
+            overflow: hidden;
             width: 100%;
-            background: rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            padding: 12px 14px;
+            color: #f8fafc;
+            padding: 12px 15px;
             border-radius: 14px;
             font-size: 15px;
             font-weight: 700;
@@ -311,23 +327,31 @@
             align-items: center;
             justify-content: space-between;
             touch-action: manipulation;
-            transition: background 0.22s ease, transform 0.22s ease, color 0.22s ease;
+            transition: background 0.22s ease, transform 0.22s ease, color 0.22s ease, border-color 0.22s ease;
         }
 
         .side-menu-btn:hover,
         .side-menu-btn:active {
-            background: rgba(234, 179, 8, 0.18);
+            background: rgba(234, 179, 8, 0.16);
             border-color: rgba(254, 240, 138, 0.45);
             color: var(--accent-gold-soft);
             transform: translateX(-3px);
+        }
+
+        .side-menu-arrow {
+            color: rgba(254, 240, 138, 0.72);
+            font-size: 14px;
+            font-weight: 800;
         }
 
         .side-menu-section-label {
             font-size: 11px;
             font-weight: 800;
             color: #99f6e4;
-            padding: 8px 6px 2px;
+            padding: 10px 6px 4px;
             letter-spacing: 0.4px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 4px;
         }
 
         /* ========================================================
@@ -350,7 +374,7 @@
             position: absolute;
             inset: 0;
             z-index: 1;
-            transition: opacity 0.8s ease-in-out;
+            transition: opacity 0.6s ease-in-out;
         }
 
         .slider-overlay-gradient {
@@ -616,83 +640,230 @@
             padding: 0 18px 40px;
         }
 
-        .scifi-orbital-viewport {
-            margin: 24px auto 32px;
+        #quick-categories-anchor.tanqar-liquid-dock {
+            max-width: 1240px;
+            margin: 26px auto 36px;
+            padding: 18px 16px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(22px) saturate(175%);
+            -webkit-backdrop-filter: blur(22px) saturate(175%);
+            border: 1px solid rgba(255, 255, 255, 0.92);
+            box-shadow:
+                0 16px 36px rgba(15, 23, 42, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.96);
         }
 
-        .futuristic-scrolly-deck {
+        .tanqar-liquid-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding: 0 4px;
+        }
+
+        .tanqar-liquid-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--primary-dark);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tanqar-liquid-title::before {
+            content: "";
+            width: 5px;
+            height: 22px;
+            border-radius: 99px;
+            background: linear-gradient(180deg, var(--primary-solid), var(--accent-gold));
+        }
+
+        .tanqar-liquid-sub {
+            font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+        }
+
+        .tanqar-liquid-grid {
             display: flex;
             gap: 14px;
-            padding: 12px 4px 18px;
             overflow-x: auto;
+            scroll-snap-type: x proximity;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
+            padding: 6px 2px 12px;
         }
 
-        .futuristic-scrolly-deck::-webkit-scrollbar {
+        .tanqar-liquid-grid::-webkit-scrollbar {
             display: none;
         }
 
         @media (min-width: 992px) {
-            .futuristic-scrolly-deck {
+            .tanqar-liquid-grid {
                 display: grid;
-                grid-template-columns: repeat(6, 1fr);
+                grid-template-columns: repeat(6, minmax(0, 1fr));
                 overflow-x: visible;
                 gap: 16px;
+                padding: 6px 0 4px;
+            }
+            .tanqar-liquid-sub {
+                display: none;
             }
         }
 
-        .quantum-scifi-card {
-            flex: 0 0 128px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 22px;
-            padding: 16px 10px;
-            text-align: center;
-            cursor: pointer;
+        .liquid-cat-card {
+            --liq-tint: rgba(15, 118, 110, 0.11);
+            --liq-accent: #0f766e;
+            --liq-glow: rgba(15, 118, 110, 0.18);
+            --liq-border: rgba(15, 118, 110, 0.16);
+
+            position: relative;
+            flex: 0 0 130px;
+            scroll-snap-align: start;
+            border-radius: 36px 24px 36px 24px;
+            padding: 16px 12px 15px;
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(20px) saturate(170%);
+            -webkit-backdrop-filter: blur(20px) saturate(170%);
+            border: 1px solid var(--liq-border);
+            box-shadow:
+                0 12px 26px rgba(15, 23, 42, 0.05),
+                0 0 0 1px rgba(255, 255, 255, 0.75),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95);
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: var(--card-shadow);
-            touch-action: manipulation;
-            transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
-        }
-
-        .quantum-scifi-card:hover,
-        .quantum-scifi-card:active {
-            transform: translateY(-5px);
-            border-color: rgba(15, 118, 110, 0.35);
-            box-shadow: 0 16px 32px rgba(15, 118, 110, 0.14);
-        }
-
-        .neon-halo-wrapper {
-            width: 78px;
-            height: 78px;
-            border-radius: 50%;
-            padding: 3px;
-            background: linear-gradient(135deg, #0f766e, #eab308);
-            display: flex;
-            align-items: center;
             justify-content: center;
+            gap: 11px;
+            cursor: pointer;
             overflow: hidden;
+            touch-action: manipulation;
+            opacity: 0;
+            transform: translateY(18px) scale(0.97);
+            transition:
+                opacity 0.55s var(--ease-apple),
+                transform 0.28s var(--ease-spring),
+                box-shadow 0.28s var(--ease-spring),
+                border-color 0.22s ease,
+                background-color 0.24s ease;
+            will-change: transform, opacity;
         }
 
-        .neon-halo-wrapper img {
+        .liquid-cat-card.island-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .liquid-cat-card::before {
+            content: "";
+            position: absolute;
+            top: -35%;
+            left: -90%;
+            width: 58%;
+            height: 170%;
+            background: linear-gradient(
+                110deg,
+                transparent 15%,
+                rgba(255, 255, 255, 0.78) 50%,
+                transparent 85%
+            );
+            transform: skewX(-24deg);
+            transition: left 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .liquid-cat-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 25%, var(--liq-tint) 0%, transparent 75%);
+            opacity: 0;
+            transform: scale(0.88);
+            transition: opacity 0.24s ease, transform 0.28s var(--ease-spring);
+            pointer-events: none;
+        }
+
+        .liquid-cat-card.island-visible:hover,
+        .liquid-cat-card.island-visible:active {
+            transform: translateY(-6px) rotate(-0.6deg) scale(1.025);
+            background-color: rgba(255, 255, 255, 0.92);
+            border-color: var(--liq-accent);
+            box-shadow:
+                0 18px 34px var(--liq-glow),
+                0 0 0 3px var(--liq-tint),
+                inset 0 1px 1px rgba(255, 255, 255, 1);
+        }
+
+        .liquid-cat-card:hover::before,
+        .liquid-cat-card:active::before {
+            left: 140%;
+        }
+
+        .liquid-cat-card:hover::after,
+        .liquid-cat-card:active::after {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .liquid-cat-card.island-visible:active {
+            transform: translateY(-2px) scale(0.965);
+        }
+
+        .liquid-cat-orb {
+            position: relative;
+            z-index: 2;
+            width: 68px;
+            height: 68px;
+            border-radius: 26px 18px 26px 18px;
+            padding: 3px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--liq-border);
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.07);
+            overflow: hidden;
+            transition: transform 0.26s var(--ease-spring), border-color 0.22s ease;
+        }
+
+        .liquid-cat-card:hover .liquid-cat-orb,
+        .liquid-cat-card:active .liquid-cat-orb {
+            transform: scale(1.06) rotate(-2deg);
+            border-color: var(--liq-accent);
+        }
+
+        .liquid-cat-orb img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 50%;
+            border-radius: 22px 15px 22px 15px;
             background: #ffffff;
+            display: block;
         }
 
-        .quantum-scifi-card h3 {
+        .liquid-cat-name {
+            position: relative;
+            z-index: 2;
             font-size: 13px;
             font-weight: 800;
-            color: var(--navy-blue);
-            margin-top: 10px;
-            white-space: nowrap;
+            color: #0f172a;
+            text-align: center;
+            line-height: 1.35;
+            transition: color 0.2s ease;
+        }
+
+        .liquid-cat-card:hover .liquid-cat-name,
+        .liquid-cat-card:active .liquid-cat-name {
+            color: var(--liq-accent);
+        }
+
+        .liq-cold-drinks { --liq-tint: rgba(14, 165, 233, 0.16); --liq-accent: #0284c7; --liq-glow: rgba(2, 132, 199, 0.18); --liq-border: rgba(2, 132, 199, 0.2); }
+        .liq-dairy { --liq-tint: rgba(59, 130, 246, 0.15); --liq-accent: #2563eb; --liq-glow: rgba(37, 99, 235, 0.16); --liq-border: rgba(37, 99, 235, 0.18); }
+        .liq-bakery { --liq-tint: rgba(245, 158, 11, 0.17); --liq-accent: #b45309; --liq-glow: rgba(217, 119, 6, 0.18); --liq-border: rgba(217, 119, 6, 0.22); }
+        .liq-grocery { --liq-tint: rgba(16, 185, 129, 0.16); --liq-accent: #0f766e; --liq-glow: rgba(15, 118, 110, 0.18); --liq-border: rgba(15, 118, 110, 0.2); }
+        .liq-sweets { --liq-tint: rgba(236, 72, 153, 0.15); --liq-accent: #be185d; --liq-glow: rgba(190, 24, 93, 0.16); --liq-border: rgba(190, 24, 93, 0.2); }
+        .liq-homecare { --liq-tint: rgba(20, 184, 166, 0.16); --liq-accent: #0d9488; --liq-glow: rgba(13, 148, 136, 0.18); --liq-border: rgba(13, 148, 136, 0.2); }
+
+        .mobile-types-showcase {
+            display: none;
         }
 
         .bakery-hero-card {
@@ -771,29 +942,99 @@
             flex-wrap: wrap;
         }
 
-        .filter-btn {
-            background: #ffffff;
-            border: 1.5px solid #cbd5e1;
-            color: var(--navy-blue);
+        .filter-btn,
+        .category-toggle-btn,
+        .checkout-btn,
+        .continue-shopping-btn {
+            position: relative;
+            overflow: hidden;
+            touch-action: manipulation;
+            transition:
+                transform 0.35s var(--ease-apple),
+                box-shadow 0.35s var(--ease-apple),
+                background 0.35s var(--ease-apple),
+                border-color 0.35s var(--ease-apple),
+                color 0.3s ease;
+        }
+
+        .filter-btn::before,
+        .category-toggle-btn::before,
+        .checkout-btn::before,
+        .continue-shopping-btn::before {
+            content: "";
+            position: absolute;
+            top: -40%;
+            left: -65%;
+            width: 55%;
+            height: 180%;
+            background: linear-gradient(
+                115deg,
+                transparent 20%,
+                rgba(255, 255, 255, 0.45) 50%,
+                transparent 80%
+            );
+            transform: skewX(-22deg);
+            transition: left 0.65s var(--ease-apple);
+            pointer-events: none;
+        }
+
+        .filter-btn:hover::before,
+        .category-toggle-btn:hover::before,
+        .checkout-btn:hover::before,
+        .continue-shopping-btn:hover::before {
+            left: 125%;
+        }
+
+        .filter-btn:not(.active),
+        .continue-shopping-btn {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.85), rgba(244, 247, 246, 0.7));
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            border: 1px solid rgba(11, 63, 59, 0.15);
+            color: var(--header-deep);
             padding: 8px 18px;
             border-radius: 999px;
             font-size: 13px;
             font-weight: 800;
             cursor: pointer;
-            touch-action: manipulation;
-            transition: all 0.22s ease;
+            box-shadow:
+                0 8px 22px rgba(11, 63, 59, 0.07),
+                inset 0 1px 1px rgba(255, 255, 255, 0.95);
         }
 
-        .filter-btn:hover {
-            border-color: var(--primary-solid);
-            color: var(--primary-solid);
+        .filter-btn:not(.active):hover,
+        .continue-shopping-btn:hover {
+            transform: translateY(-2px) scale(1.015);
+            border-color: rgba(212, 175, 55, 0.55);
+            box-shadow:
+                0 12px 26px rgba(11, 63, 59, 0.13),
+                inset 0 1px 2px rgba(255, 255, 255, 1);
+        }
+
+        .filter-btn.active,
+        .category-toggle-btn,
+        .checkout-btn {
+            background: linear-gradient(135deg, #0f5c56 0%, #062e2b 100%);
+            color: var(--ivory);
+            border: 1px solid rgba(245, 230, 179, 0.35);
+            box-shadow:
+                0 10px 24px rgba(11, 63, 59, 0.22),
+                inset 0 1px 1px rgba(255, 255, 255, 0.25);
         }
 
         .filter-btn.active {
-            background: linear-gradient(135deg, var(--primary-solid), var(--primary-dark));
-            color: #ffffff;
-            border-color: var(--primary-solid);
-            box-shadow: 0 6px 18px rgba(15, 118, 110, 0.28);
+            padding: 8px 18px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .filter-btn:active,
+        .category-toggle-btn:active,
+        .checkout-btn:active,
+        .continue-shopping-btn:active {
+            transform: scale(0.96);
         }
 
         .products-showcase {
@@ -811,12 +1052,35 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            opacity: 0;
+            transform: translateY(18px) scale(0.97);
+            transition:
+                opacity 0.55s var(--ease-apple),
+                transform 0.55s var(--ease-apple),
+                box-shadow 0.4s var(--ease-apple),
+                border-color 0.4s var(--ease-apple);
+            will-change: transform, opacity;
         }
 
-        .premium-product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 32px rgba(15, 23, 42, 0.1);
+        .premium-product-card.island-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .premium-product-card.island-visible:hover {
+            transform: translateY(-7px) scale(1.015);
+            border-color: rgba(212, 175, 55, 0.55);
+            box-shadow:
+                0 20px 38px rgba(11, 63, 59, 0.14),
+                0 0 0 1px rgba(212, 175, 55, 0.22);
+        }
+
+        .premium-product-card.island-pulse {
+            transform: translateY(-6px) scale(1.025);
+            border-color: var(--apple-gold);
+            box-shadow:
+                0 22px 42px rgba(11, 63, 59, 0.18),
+                0 0 0 3px rgba(212, 175, 55, 0.28);
         }
 
         .product-img-frame {
@@ -881,67 +1145,294 @@
             justify-content: center;
             touch-action: manipulation;
             box-shadow: 0 6px 16px rgba(15, 118, 110, 0.3);
-            transition: transform 0.22s ease;
+            transition: transform 0.22s var(--ease-spring), box-shadow 0.22s ease;
         }
 
         .circle-add-btn:active {
-            transform: scale(0.92);
+            transform: scale(0.9);
         }
 
         .category-toggle-btn {
-            background: linear-gradient(135deg, var(--primary-solid), var(--primary-dark));
-            color: #ffffff;
-            border: none;
             padding: 11px 32px;
             border-radius: 999px;
             font-size: 14px;
             font-weight: 800;
             cursor: pointer;
-            touch-action: manipulation;
-            box-shadow: 0 8px 20px rgba(15, 118, 110, 0.25);
-            transition: transform 0.22s ease;
-        }
-
-        .category-toggle-btn:active {
-            transform: scale(0.96);
         }
 
         /* ========================================================
-           قسم الخدمات والتواصل أسفل الصفحة
+           قسم أوقات الدوام والتواصل — تنسيق Apple الفاخر الناعم
            ======================================================== */
-        #services-anchor-box {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 14px;
-            margin: 44px 0 16px;
-            padding: 20px 12px;
+        #services-anchor-box.apple-hours-section {
+            margin: 52px auto 18px;
+            padding: 28px 22px;
+            border-radius: 32px;
+            background:
+                radial-gradient(circle at 12% 15%, rgba(15, 118, 110, 0.09), transparent 48%),
+                radial-gradient(circle at 88% 85%, rgba(212, 175, 55, 0.11), transparent 52%),
+                rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(28px) saturate(185%);
+            -webkit-backdrop-filter: blur(28px) saturate(185%);
+            border: 1px solid rgba(255, 255, 255, 0.94);
+            box-shadow:
+                0 22px 50px rgba(15, 23, 42, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.98);
+            display: grid;
+            grid-template-columns: 1.35fr 1fr;
+            gap: 18px;
+            align-items: stretch;
+            opacity: 0;
+            transform: translateY(20px);
+            transition:
+                opacity 0.65s var(--ease-apple),
+                transform 0.65s var(--ease-apple),
+                box-shadow 0.4s var(--ease-apple);
+            will-change: transform, opacity;
         }
 
-        .working-hours-capsule,
-        .phone-call-btn-link,
-        .waze-premium-btn {
-            background: #ffffff;
-            border: 1.5px solid #cbd5e1;
-            border-radius: 999px;
-            padding: 12px 22px;
-            color: var(--navy-blue);
-            font-size: 14px;
-            font-weight: 800;
-            text-decoration: none;
+        #services-anchor-box.apple-hours-section.hours-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .apple-hours-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.72));
+            border: 1px solid rgba(11, 63, 59, 0.1);
+            border-radius: 26px;
+            padding: 22px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+            box-shadow:
+                0 10px 26px rgba(15, 23, 42, 0.04),
+                inset 0 1px 1px rgba(255, 255, 255, 0.95);
+            transition: transform 0.38s var(--ease-apple), box-shadow 0.38s var(--ease-apple), border-color 0.38s var(--ease-apple);
+        }
+
+        .apple-hours-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(212, 175, 55, 0.45);
+            box-shadow: 0 16px 34px rgba(11, 63, 59, 0.09);
+        }
+
+        .apple-hours-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .apple-hours-label-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .apple-hours-icon-ring {
+            width: 44px;
+            height: 44px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--header-bg), var(--header-deep));
+            color: var(--apple-gold-soft);
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
-            transition: transform 0.22s ease, border-color 0.22s ease;
+            justify-content: center;
+            box-shadow: 0 8px 18px rgba(11, 63, 59, 0.2);
+            flex-shrink: 0;
         }
 
-        .phone-call-btn-link:hover,
-        .waze-premium-btn:hover {
-            border-color: var(--primary-solid);
+        .apple-hours-title {
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--navy-blue);
+            line-height: 1.25;
+        }
+
+        .apple-hours-subtitle {
+            font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        .apple-status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 13px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+            background: rgba(16, 185, 129, 0.12);
+            color: #047857;
+            border: 1px solid rgba(16, 185, 129, 0.28);
+        }
+
+        .apple-status-pill.is-closed {
+            background: rgba(239, 68, 68, 0.1);
+            color: #b91c1c;
+            border-color: rgba(239, 68, 68, 0.25);
+        }
+
+        .apple-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+        }
+
+        .apple-status-pill.is-closed .apple-status-dot {
+            background: #ef4444;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.18);
+        }
+
+        .apple-hours-timeline {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 12px;
+            background: rgba(241, 245, 249, 0.72);
+            border: 1px solid rgba(15, 23, 42, 0.06);
+            border-radius: 20px;
+            padding: 14px 16px;
+        }
+
+        .apple-time-slot {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .apple-time-slot.end {
+            text-align: left;
+        }
+
+        .apple-time-caption {
+            font-size: 11px;
+            font-weight: 700;
+            color: #64748b;
+        }
+
+        .apple-time-value {
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--header-bg);
+            letter-spacing: -0.2px;
+        }
+
+        .apple-time-divider {
+            width: 34px;
+            height: 2px;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--primary-solid), var(--apple-gold));
+        }
+
+        .apple-actions-stack {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .apple-action-btn {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 16px 20px;
+            border-radius: 22px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--header-deep);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(244, 247, 246, 0.76));
+            backdrop-filter: blur(20px) saturate(165%);
+            -webkit-backdrop-filter: blur(20px) saturate(165%);
+            border: 1px solid rgba(11, 63, 59, 0.14);
+            box-shadow:
+                0 10px 24px rgba(15, 23, 42, 0.05),
+                inset 0 1px 1px rgba(255, 255, 255, 0.96);
+            transition:
+                transform 0.36s var(--ease-apple),
+                box-shadow 0.36s var(--ease-apple),
+                border-color 0.36s var(--ease-apple),
+                color 0.25s ease;
+        }
+
+        .apple-action-btn::before {
+            content: "";
+            position: absolute;
+            top: -40%;
+            left: -65%;
+            width: 55%;
+            height: 180%;
+            background: linear-gradient(
+                115deg,
+                transparent 20%,
+                rgba(255, 255, 255, 0.55) 50%,
+                transparent 80%
+            );
+            transform: skewX(-22deg);
+            transition: left 0.65s var(--ease-apple);
+            pointer-events: none;
+        }
+
+        .apple-action-btn:hover::before {
+            left: 125%;
+        }
+
+        .apple-action-btn:hover {
+            transform: translateY(-3px) scale(1.012);
+            border-color: rgba(212, 175, 55, 0.55);
             color: var(--primary-solid);
-            transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(11, 63, 59, 0.11);
+        }
+
+        .apple-action-btn:active {
+            transform: scale(0.98);
+        }
+
+        .apple-action-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .apple-action-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: rgba(15, 118, 110, 0.1);
+            color: var(--primary-solid);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .apple-action-sub {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #64748b;
+            margin-top: 1px;
+        }
+
+        .apple-action-chevron {
+            font-size: 15px;
+            font-weight: 900;
+            color: #94a3b8;
+            transition: transform 0.3s var(--ease-apple), color 0.3s ease;
+        }
+
+        .apple-action-btn:hover .apple-action-chevron {
+            transform: translateX(-3px);
+            color: var(--primary-solid);
         }
 
         /* ========================================================
@@ -950,13 +1441,16 @@
         .cart-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(2, 6, 23, 0.6);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            width: 100vw;
+            height: 100dvh;
+            background: rgba(2, 6, 23, 0.58);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 9992;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            cursor: pointer;
+            transition: opacity 0.32s var(--ease-apple);
         }
 
         .cart-overlay.active {
@@ -970,18 +1464,22 @@
             left: 0;
             width: min(420px, 100vw);
             height: 100dvh;
+            max-height: 100dvh;
             padding-top: var(--safe-top);
             padding-bottom: var(--safe-bottom);
             padding-left: var(--safe-left);
             padding-right: var(--safe-right);
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(24px) saturate(175%);
+            -webkit-backdrop-filter: blur(24px) saturate(175%);
             z-index: 9996;
-            box-shadow: 14px 0 44px rgba(2, 6, 23, 0.25);
+            box-shadow: 16px 0 48px rgba(2, 6, 23, 0.26);
             display: flex;
             flex-direction: column;
-            transform: translateX(-100%);
-            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateX(-102%);
+            transition: transform 0.38s var(--ease-apple);
             overscroll-behavior: contain;
+            touch-action: pan-y;
         }
 
         .sidebar-cart.open {
@@ -994,7 +1492,8 @@
             justify-content: space-between;
             padding: 16px 20px;
             border-bottom: 1px solid #e2e8f0;
-            background: #f8fafc;
+            background: rgba(248, 250, 252, 0.9);
+            flex-shrink: 0;
         }
 
         .cart-top-header h3 {
@@ -1025,7 +1524,8 @@
         }
 
         .cart-scroll-area {
-            flex: 1;
+            flex: 1 1 auto;
+            min-height: 0;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             padding: 14px 20px;
@@ -1081,68 +1581,103 @@
             justify-content: space-between;
             align-items: center;
             color: var(--luxury-black);
-            background: #f8fafc;
+            background: rgba(248, 250, 252, 0.92);
+            flex-shrink: 0;
         }
 
         .cart-actions-footer {
-            padding: 14px 20px 20px;
-            background: #ffffff;
+            padding: 14px 20px calc(18px + var(--safe-bottom));
+            background: rgba(255, 255, 255, 0.96);
             display: flex;
             flex-direction: column;
             gap: 10px;
+            flex-shrink: 0;
         }
 
-        .checkout-btn {
-            width: 100%;
-            padding: 14px;
-            border-radius: 999px;
-            border: none;
-            background: linear-gradient(135deg, var(--primary-solid), var(--primary-dark));
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 800;
-            cursor: pointer;
-            touch-action: manipulation;
-            box-shadow: 0 10px 22px rgba(15, 118, 110, 0.28);
-        }
-
+        .checkout-btn,
         .continue-shopping-btn {
             width: 100%;
-            padding: 12px;
+            padding: 13px 16px;
             border-radius: 999px;
-            border: 1.5px solid #cbd5e1;
-            background: #ffffff;
-            color: var(--navy-blue);
-            font-size: 14px;
+            font-size: 14.5px;
             font-weight: 800;
             cursor: pointer;
-            touch-action: manipulation;
         }
 
-        /* ========================================================
-           أنيميشن إضافة المنتج للسلة
-           ======================================================== */
-        .flying-product-premium {
+       .flying-product-premium {
+    position: fixed;
+    z-index: 10050;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(212, 175, 55, 0.45);
+    background: #ffffff;
+    pointer-events: none;
+    transform-origin: center center;
+    will-change: transform, opacity, border-radius;
+}
+
+.flying-product-premium img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    padding: 2px;
+}
+
+@media (max-width: 768px) {
+    .flying-product-premium {
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
+    }
+}
+
+        #tanqar-dynamic-island {
             position: fixed;
-            z-index: 10050;
-            width: 54px;
-            height: 54px;
-            border-radius: 50%;
-            background-size: cover;
-            background-position: center;
-            box-shadow: 0 10px 24px rgba(15, 118, 110, 0.45);
-            border: 2px solid var(--accent-gold);
+            top: calc(var(--safe-top) + 84px);
+            left: 50%;
+            transform: translate(-50%, -18px) scale(0.92);
+            background: linear-gradient(135deg, rgba(11, 63, 59, 0.94), rgba(5, 38, 35, 0.96));
+            backdrop-filter: blur(22px) saturate(180%);
+            -webkit-backdrop-filter: blur(22px) saturate(180%);
+            color: var(--apple-gold-soft);
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            border-radius: 999px;
+            padding: 9px 18px;
+            font-size: 13px;
+            font-weight: 800;
+            box-shadow: 0 14px 32px rgba(2, 6, 23, 0.25);
+            z-index: 10060;
+            opacity: 0;
             pointer-events: none;
-            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s ease;
+            white-space: nowrap;
+            max-width: calc(100vw - 28px);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition:
+                opacity 0.32s var(--ease-apple),
+                transform 0.38s var(--ease-apple);
+        }
+
+        #tanqar-dynamic-island.show {
+            opacity: 1;
+            transform: translate(-50%, 0) scale(1);
         }
 
         /* ========================================================
-           الاستجابة للشاشات المتوسطة والهواتف
+           الاستجابة للشاشات المتوسطة والهواتف (iOS & Android)
            ======================================================== */
         @media (max-width: 1024px) {
             .products-showcase {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 16px;
+            }
+            #services-anchor-box.apple-hours-section {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1166,6 +1701,144 @@
             #slider-sub-title {
                 font-size: 13px;
             }
+            #quick-categories-anchor.tanqar-liquid-dock {
+                margin: 18px auto 26px;
+                padding: 14px 12px 16px;
+                border-radius: 26px;
+            }
+            .tanqar-liquid-title {
+                font-size: 18px;
+            }
+            .liquid-cat-card {
+                flex: 0 0 118px;
+                border-radius: 30px 20px 30px 20px;
+                padding: 14px 10px 13px;
+            }
+            .liquid-cat-orb {
+                width: 60px;
+                height: 60px;
+                border-radius: 22px 15px 22px 15px;
+            }
+            .liquid-cat-orb img {
+                border-radius: 19px 12px 19px 12px;
+            }
+            .liquid-cat-name {
+                font-size: 12px;
+            }
+            .mobile-types-showcase {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+                margin-top: 14px;
+                padding-top: 14px;
+                border-top: 1px solid rgba(15, 118, 110, 0.1);
+            }
+            .mobile-type-pill-card {
+                --type-tint: rgba(15, 118, 110, 0.13);
+                --type-accent: #0f766e;
+
+                position: relative;
+                background: rgba(255, 255, 255, 0.82);
+                backdrop-filter: blur(16px) saturate(160%);
+                -webkit-backdrop-filter: blur(16px) saturate(160%);
+                border: 1px solid rgba(15, 118, 110, 0.14);
+                border-radius: 24px 16px 24px 16px;
+                padding: 11px 12px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 8px;
+                cursor: pointer;
+                overflow: hidden;
+                box-shadow:
+                    0 8px 18px rgba(15, 23, 42, 0.04),
+                    0 0 0 1px rgba(255, 255, 255, 0.7),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+                touch-action: manipulation;
+                transition: transform 0.22s var(--ease-spring), border-color 0.2s ease, box-shadow 0.22s ease;
+            }
+            .mobile-type-pill-card::before {
+                content: "";
+                position: absolute;
+                top: -35%;
+                left: -90%;
+                width: 55%;
+                height: 170%;
+                background: linear-gradient(
+                    110deg,
+                    transparent 15%,
+                    rgba(255, 255, 255, 0.75) 50%,
+                    transparent 85%
+                );
+                transform: skewX(-24deg);
+                transition: left 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+                pointer-events: none;
+            }
+            .mobile-type-pill-card::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at 75% 50%, var(--type-tint) 0%, transparent 75%);
+                opacity: 0;
+                transition: opacity 0.22s ease;
+                pointer-events: none;
+            }
+            .mobile-type-pill-card:active {
+                transform: translateY(-2px) scale(0.97);
+                border-color: var(--type-accent);
+                box-shadow:
+                    0 12px 24px rgba(15, 23, 42, 0.08),
+                    0 0 0 3px var(--type-tint);
+            }
+            .mobile-type-pill-card:active::before {
+                left: 140%;
+            }
+            .mobile-type-pill-card:active::after {
+                opacity: 1;
+            }
+            .mobile-type-meta {
+                position: relative;
+                z-index: 2;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+                min-width: 0;
+            }
+            .mobile-type-title {
+                font-size: 12.5px;
+                font-weight: 800;
+                color: #0f172a;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
+            }
+            .mobile-type-cat {
+                font-size: 10.5px;
+                font-weight: 700;
+                color: var(--type-accent);
+            }
+            .mobile-type-arrow {
+                position: relative;
+                z-index: 2;
+                width: 24px;
+                height: 24px;
+                border-radius: 10px 7px 10px 7px;
+                background: rgba(15, 118, 110, 0.1);
+                color: var(--type-accent);
+                font-size: 12px;
+                font-weight: 900;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+            .type-tone-sky { --type-tint: rgba(14, 165, 233, 0.16); --type-accent: #0284c7; }
+            .type-tone-blue { --type-tint: rgba(59, 130, 246, 0.15); --type-accent: #2563eb; }
+            .type-tone-emerald { --type-tint: rgba(16, 185, 129, 0.16); --type-accent: #0f766e; }
+            .type-tone-rose { --type-tint: rgba(236, 72, 153, 0.15); --type-accent: #be185d; }
+
             .products-showcase {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
@@ -1197,10 +1870,21 @@
             .filter-btn {
                 flex: 0 0 auto;
             }
+            #services-anchor-box.apple-hours-section {
+                padding: 20px 14px;
+                border-radius: 26px;
+                margin-top: 38px;
+            }
+            .apple-hours-card {
+                padding: 18px 16px;
+                border-radius: 22px;
+            }
         }
     </style>
 </head>
 <body>
+
+    <div id="tanqar-dynamic-island" role="status" aria-live="polite"></div>
 
     <!-- الهيدر الثابت -->
     <header id="main-header-anchor" class="custom-premium-header">
@@ -1220,7 +1904,7 @@
             </a>
 
             <button type="button" id="main-basket-btn" onclick="toggleCartMenu(true)">
-                <span>🛒 السلة</span>
+                <span>السلة</span>
                 <span id="main-basket-count">0</span>
             </button>
         </div>
@@ -1228,43 +1912,43 @@
 
     <div class="header-spacer"></div>
 
-    <!-- القائمة الجانبية الموحدة -->
+    <!-- القائمة الجانبية الموحدة بدون إيموجيات -->
     <div id="albarakaMenuBackdrop" class="side-menu-backdrop" onclick="toggleAlbarakaMenu(false)"></div>
     <aside id="albaraka-side-menu" class="side-menu-drawer" aria-label="القائمة الرئيسية">
         <div class="side-menu-header">
-            <h3>✨ القائمة الرئيسية</h3>
+            <h3>القائمة الرئيسية</h3>
             <button type="button" class="side-menu-close" aria-label="إغلاق القائمة" onclick="toggleAlbarakaMenu(false)">✕</button>
         </div>
 
         <ul class="side-menu-list">
             <li>
                 <button type="button" class="side-menu-btn" onclick="navigateFromMenu('top')">
-                    <span>🏠 الصفحة الرئيسية</span>
-                    <span>←</span>
+                    <span>الصفحة الرئيسية</span>
+                    <span class="side-menu-arrow">←</span>
                 </button>
             </li>
             <li>
                 <button type="button" class="side-menu-btn" onclick="navigateFromMenu('categories')">
-                    <span>🗂️ الفئات السريعة</span>
-                    <span>←</span>
+                    <span>الفئات السريعة</span>
+                    <span class="side-menu-arrow">←</span>
                 </button>
             </li>
             <li>
                 <button type="button" class="side-menu-btn" onclick="navigateFromMenu('cart')">
-                    <span>🛒 سلة المشتريات</span>
-                    <span>←</span>
+                    <span>سلة المشتريات</span>
+                    <span class="side-menu-arrow">←</span>
                 </button>
             </li>
             <li>
                 <button type="button" class="side-menu-btn" onclick="navigateFromMenu('bakery-hero-anchor')">
-                    <span>🥖 المخبوزات الطازجة</span>
-                    <span>←</span>
+                    <span>المخبوزات الطازجة</span>
+                    <span class="side-menu-arrow">←</span>
                 </button>
             </li>
             <li>
                 <button type="button" class="side-menu-btn" onclick="navigateFromMenu('services-anchor-box')">
-                    <span>📞 أوقات الدوام والتواصل</span>
-                    <span>←</span>
+                    <span>أوقات الدوام والتواصل</span>
+                    <span class="side-menu-arrow">←</span>
                 </button>
             </li>
 
@@ -1272,38 +1956,38 @@
 
             <li>
                 <button type="button" class="side-menu-btn" onclick="focusAndFilterAnchor('cold-drinks-anchor', 'cold_drinks')">
-                    <span>🥤 المشروبات الباردة</span>
-                    <span>←</span>
+                    <span>المشروبات الباردة</span>
+                    <span class="side-menu-arrow">←</span>
                 </button>
             </li>
             <li>
                 <button type="button" class="side-menu-btn" onclick="focusAndFilterAnchor('dairy-anchor', 'dairy')">
-                    <span>🧀 الألبان والأجبان</span>
-                    <span>←</span>
+                    <span>الألبان والأجبان</span>
+                    <span class="side-menu-arrow">←</span>
                 </button>
             </li>
             <li>
                 <button type="button" class="side-menu-btn" onclick="focusAndFilterAnchor('bakery-anchor', 'bakery')">
-                    <span>🥐 المخبوزات والحلويات</span>
-                    <span>←</span>
+                    <span>المخبوزات والحلويات</span>
+                    <span class="side-menu-arrow">←</span>
                 </button>
             </li>
             <li>
                 <button type="button" class="side-menu-btn" onclick="focusAndFilterAnchor('grocery-anchor', 'grocery')">
-                    <span>🛒 مواد التموين</span>
-                    <span>←</span>
+                    <span>مواد التموين</span>
+                    <span class="side-menu-arrow">←</span>
                 </button>
             </li>
             <li>
                 <button type="button" class="side-menu-btn" onclick="focusAndFilterAnchor('sweets-anchor', 'sweets')">
-                    <span>🍫 حلويات ومسليات</span>
-                    <span>←</span>
+                    <span>حلويات ومسليات</span>
+                    <span class="side-menu-arrow">←</span>
                 </button>
             </li>
             <li>
                 <button type="button" class="side-menu-btn" onclick="focusAndFilterAnchor('homecare-anchor', 'homecare')">
-                    <span>🧼 العناية والمنظفات</span>
-                    <span>←</span>
+                    <span>العناية والمنظفات</span>
+                    <span class="side-menu-arrow">←</span>
                 </button>
             </li>
         </ul>
@@ -1314,7 +1998,7 @@
 
     <aside id="sidebarCart" class="sidebar-cart" aria-label="سلة المشتريات">
         <div class="cart-top-header">
-            <h3>🛒 سلة المشتريات</h3>
+            <h3>سلة المشتريات</h3>
             <button type="button" aria-label="إغلاق السلة" onclick="toggleCartMenu(false)" class="cart-close-premium-btn">✕</button>
         </div>
 
@@ -1369,576 +2053,107 @@
 
     <!-- المحتوى الرئيسي -->
     <main id="main-container" class="main-container">
-        <div id="quick-categories-anchor" class="scifi-orbital-viewport">
-            <div style="text-align: center; margin-bottom: 20px;">
-                <span style="font-size: 11px; font-weight: 900; color: var(--primary-solid); letter-spacing: 2px; display: block; margin-bottom: 4px;">THE BEST FOR LESS</span>
-                <h3 style="font-size: 24px; font-weight: 900; color: var(--navy-blue);">الأفضل بتكلفة أقل</h3>
+        <div id="quick-categories-anchor" class="tanqar-liquid-dock">
+            <div class="tanqar-liquid-head">
+                <h3 class="tanqar-liquid-title">الأفضل بتكلفة أقل</h3>
+                <span class="tanqar-liquid-sub">اسحب للتنقل</span>
             </div>
-<!-- ========================================================
-     الأقسام السريعة — بطاقات زجاجية مائلة للمستطيل بلمسة لونية خاطفة
-     ======================================================== -->
-<style id="tanqar-liquid-categories-and-mobile-types-style">
-    #quick-categories-anchor.tanqar-liquid-dock {
-        max-width: 1240px;
-        margin: 26px auto 36px;
-        padding: 18px 16px 20px;
-        border-radius: 30px;
-        background: rgba(255, 255, 255, 0.68);
-        backdrop-filter: blur(22px) saturate(175%);
-        -webkit-backdrop-filter: blur(22px) saturate(175%);
-        border: 1px solid rgba(255, 255, 255, 0.92);
-        box-shadow:
-            0 16px 36px rgba(15, 23, 42, 0.05),
-            inset 0 1px 0 rgba(255, 255, 255, 0.96);
-    }
 
-    .tanqar-liquid-head {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 16px;
-        padding: 0 4px;
-    }
+            <div class="tanqar-liquid-grid">
+                <div class="liquid-cat-card liq-cold-drinks" onclick="smoothScrollTo('cold-drinks-anchor')">
+                    <div class="liquid-cat-orb">
+                        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=300&auto=format&fit=crop&q=60" alt="المشروبات الباردة">
+                    </div>
+                    <span class="liquid-cat-name">المشروبات الباردة</span>
+                </div>
 
-    .tanqar-liquid-title {
-        font-size: 20px;
-        font-weight: 900;
-        color: #042f2e;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-    }
+                <div class="liquid-cat-card liq-dairy" onclick="smoothScrollTo('dairy-anchor')">
+                    <div class="liquid-cat-orb">
+                        <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=300&auto=format&fit=crop&q=60" alt="الألبان والأجبان">
+                    </div>
+                    <span class="liquid-cat-name">الألبان والأجبان</span>
+                </div>
 
-    .tanqar-liquid-title::before {
-        content: "";
-        width: 5px;
-        height: 22px;
-        border-radius: 99px;
-        background: linear-gradient(180deg, #0f766e, #eab308);
-    }
+                <div class="liquid-cat-card liq-bakery" onclick="smoothScrollTo('bakery-anchor')">
+                    <div class="liquid-cat-orb">
+                        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&auto=format&fit=crop&q=60" alt="المخبوزات">
+                    </div>
+                    <span class="liquid-cat-name">المخبوزات</span>
+                </div>
 
-    .tanqar-liquid-sub {
-        font-size: 12px;
-        font-weight: 700;
-        color: #64748b;
-    }
+                <div class="liquid-cat-card liq-grocery" onclick="smoothScrollTo('grocery-anchor')">
+                    <div class="liquid-cat-orb">
+                        <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&auto=format&fit=crop&q=60" alt="مواد تموينية">
+                    </div>
+                    <span class="liquid-cat-name">مواد تموينية</span>
+                </div>
 
-    .tanqar-liquid-grid {
-        display: flex;
-        gap: 14px;
-        overflow-x: auto;
-        scroll-snap-type: x proximity;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding: 6px 2px 12px;
-    }
+                <div class="liquid-cat-card liq-sweets" onclick="smoothScrollTo('sweets-anchor')">
+                    <div class="liquid-cat-orb">
+                        <img src="https://images.unsplash.com/photo-1548814971-12502693faaf?w=300&auto=format&fit=crop&q=60" alt="الحلويات">
+                    </div>
+                    <span class="liquid-cat-name">الحلويات</span>
+                </div>
 
-    .tanqar-liquid-grid::-webkit-scrollbar {
-        display: none;
-    }
-
-    @media (min-width: 992px) {
-        .tanqar-liquid-grid {
-            display: grid;
-            grid-template-columns: repeat(6, minmax(0, 1fr));
-            overflow-x: visible;
-            gap: 16px;
-            padding: 6px 0 4px;
-        }
-        .tanqar-liquid-sub {
-            display: none;
-        }
-    }
-
-    /* بطاقة زجاجية نقية بدون تعبئة لونية كاملة، بشكل دائري مائل للمستطيل */
-    .liquid-cat-card {
-        --liq-tint: rgba(15, 118, 110, 0.11);
-        --liq-accent: #0f766e;
-        --liq-glow: rgba(15, 118, 110, 0.18);
-        --liq-border: rgba(15, 118, 110, 0.16);
-
-        position: relative;
-        flex: 0 0 130px;
-        scroll-snap-align: start;
-        border-radius: 36px 24px 36px 24px;
-        padding: 16px 12px 15px;
-        background: rgba(255, 255, 255, 0.78);
-        backdrop-filter: blur(20px) saturate(170%);
-        -webkit-backdrop-filter: blur(20px) saturate(170%);
-        border: 1px solid var(--liq-border);
-        box-shadow:
-            0 10px 24px rgba(15, 23, 42, 0.045),
-            inset 0 1.5px 1px rgba(255, 255, 255, 0.96);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 11px;
-        cursor: pointer;
-        overflow: hidden;
-        touch-action: manipulation;
-        transition:
-            transform 0.24s cubic-bezier(0.2, 0.95, 0.3, 1),
-            box-shadow 0.24s cubic-bezier(0.2, 0.95, 0.3, 1),
-            border-color 0.22s ease,
-            background-color 0.24s ease;
-    }
-
-    /* ومضة حركة خاطفة عند اللمس أو المرور */
-    .liquid-cat-card::before {
-        content: "";
-        position: absolute;
-        top: -35%;
-        left: -90%;
-        width: 58%;
-        height: 170%;
-        background: linear-gradient(
-            110deg,
-            transparent 15%,
-            rgba(255, 255, 255, 0.78) 50%,
-            transparent 85%
-        );
-        transform: skewX(-24deg);
-        transition: left 0.34s cubic-bezier(0.16, 1, 0.3, 1);
-        pointer-events: none;
-    }
-
-    /* طبقة لون خفيف سحري تظهر فقط عند اللمس أو المرور */
-    .liquid-cat-card::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at 50% 25%, var(--liq-tint) 0%, transparent 75%);
-        opacity: 0;
-        transform: scale(0.88);
-        transition: opacity 0.24s ease, transform 0.28s cubic-bezier(0.2, 0.95, 0.3, 1);
-        pointer-events: none;
-    }
-
-    .liquid-cat-card:hover,
-    .liquid-cat-card:active {
-        transform: translateY(-5px) scale(1.02);
-        background-color: rgba(255, 255, 255, 0.92);
-        border-color: var(--liq-accent);
-        box-shadow:
-            0 16px 32px var(--liq-glow),
-            inset 0 1.5px 2px rgba(255, 255, 255, 1);
-    }
-
-    .liquid-cat-card:hover::before,
-    .liquid-cat-card:active::before {
-        left: 140%;
-    }
-
-    .liquid-cat-card:hover::after,
-    .liquid-cat-card:active::after {
-        opacity: 1;
-        transform: scale(1.05);
-    }
-
-    .liquid-cat-card:active {
-        transform: translateY(-2px) scale(0.965);
-    }
-
-    .liquid-cat-orb {
-        position: relative;
-        z-index: 2;
-        width: 68px;
-        height: 68px;
-        border-radius: 26px 18px 26px 18px;
-        padding: 3px;
-        background: rgba(255, 255, 255, 0.95);
-        border: 1px solid var(--liq-border);
-        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.07);
-        overflow: hidden;
-        transition: transform 0.26s cubic-bezier(0.2, 0.95, 0.3, 1), border-color 0.22s ease;
-    }
-
-    .liquid-cat-card:hover .liquid-cat-orb,
-    .liquid-cat-card:active .liquid-cat-orb {
-        transform: scale(1.06) rotate(-2deg);
-        border-color: var(--liq-accent);
-    }
-
-    .liquid-cat-orb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 22px 15px 22px 15px;
-        background: #ffffff;
-        display: block;
-    }
-
-    .liquid-cat-name {
-        position: relative;
-        z-index: 2;
-        font-size: 13px;
-        font-weight: 800;
-        color: #0f172a;
-        text-align: center;
-        line-height: 1.35;
-        transition: color 0.2s ease;
-    }
-
-    .liquid-cat-card:hover .liquid-cat-name,
-    .liquid-cat-card:active .liquid-cat-name {
-        color: var(--liq-accent);
-    }
-
-    /* الألوان الخفيفة السحرية لكل بطاقة عند اللمس/المرور */
-    .liq-cold-drinks {
-        --liq-tint: rgba(14, 165, 233, 0.16);
-        --liq-accent: #0284c7;
-        --liq-glow: rgba(2, 132, 199, 0.18);
-        --liq-border: rgba(2, 132, 199, 0.2);
-    }
-
-    .liq-dairy {
-        --liq-tint: rgba(59, 130, 246, 0.15);
-        --liq-accent: #2563eb;
-        --liq-glow: rgba(37, 99, 235, 0.16);
-        --liq-border: rgba(37, 99, 235, 0.18);
-    }
-
-    .liq-bakery {
-        --liq-tint: rgba(245, 158, 11, 0.17);
-        --liq-accent: #b45309;
-        --liq-glow: rgba(217, 119, 6, 0.18);
-        --liq-border: rgba(217, 119, 6, 0.22);
-    }
-
-    .liq-grocery {
-        --liq-tint: rgba(16, 185, 129, 0.16);
-        --liq-accent: #0f766e;
-        --liq-glow: rgba(15, 118, 110, 0.18);
-        --liq-border: rgba(15, 118, 110, 0.2);
-    }
-
-    .liq-sweets {
-        --liq-tint: rgba(236, 72, 153, 0.15);
-        --liq-accent: #be185d;
-        --liq-glow: rgba(190, 24, 93, 0.16);
-        --liq-border: rgba(190, 24, 93, 0.2);
-    }
-
-    .liq-homecare {
-        --liq-tint: rgba(20, 184, 166, 0.16);
-        --liq-accent: #0d9488;
-        --liq-glow: rgba(13, 148, 136, 0.18);
-        --liq-border: rgba(13, 148, 136, 0.2);
-    }
-
-    /* بطاقات الأنواع الناعمة المخصصة للهواتف */
-    .mobile-types-showcase {
-        display: none;
-    }
-
-    @media (max-width: 768px) {
-        #quick-categories-anchor.tanqar-liquid-dock {
-            margin: 18px auto 26px;
-            padding: 14px 12px 16px;
-            border-radius: 26px;
-        }
-        .tanqar-liquid-title {
-            font-size: 18px;
-        }
-        .liquid-cat-card {
-            flex: 0 0 118px;
-            border-radius: 30px 20px 30px 20px;
-            padding: 14px 10px 13px;
-        }
-        .liquid-cat-orb {
-            width: 60px;
-            height: 60px;
-            border-radius: 22px 15px 22px 15px;
-        }
-        .liquid-cat-orb img {
-            border-radius: 19px 12px 19px 12px;
-        }
-        .liquid-cat-name {
-            font-size: 12px;
-        }
-
-        .mobile-types-showcase {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 10px;
-            margin-top: 14px;
-            padding-top: 14px;
-            border-top: 1px solid rgba(15, 118, 110, 0.1);
-        }
-
-        .mobile-type-pill-card {
-            --type-tint: rgba(15, 118, 110, 0.13);
-            --type-accent: #0f766e;
-
-            position: relative;
-            background: rgba(255, 255, 255, 0.82);
-            backdrop-filter: blur(16px) saturate(160%);
-            -webkit-backdrop-filter: blur(16px) saturate(160%);
-            border: 1px solid rgba(15, 118, 110, 0.14);
-            border-radius: 24px 16px 24px 16px;
-            padding: 11px 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            cursor: pointer;
-            overflow: hidden;
-            box-shadow:
-                0 6px 16px rgba(15, 23, 42, 0.04),
-                inset 0 1px 0 rgba(255, 255, 255, 0.95);
-            touch-action: manipulation;
-            transition: transform 0.22s cubic-bezier(0.2, 0.95, 0.3, 1), border-color 0.2s ease, box-shadow 0.22s ease;
-        }
-
-        .mobile-type-pill-card::before {
-            content: "";
-            position: absolute;
-            top: -35%;
-            left: -90%;
-            width: 55%;
-            height: 170%;
-            background: linear-gradient(
-                110deg,
-                transparent 15%,
-                rgba(255, 255, 255, 0.75) 50%,
-                transparent 85%
-            );
-            transform: skewX(-24deg);
-            transition: left 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-            pointer-events: none;
-        }
-
-        .mobile-type-pill-card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 75% 50%, var(--type-tint) 0%, transparent 75%);
-            opacity: 0;
-            transition: opacity 0.22s ease;
-            pointer-events: none;
-        }
-
-        .mobile-type-pill-card:active {
-            transform: scale(0.96);
-            border-color: var(--type-accent);
-            box-shadow: 0 10px 20px rgba(15, 118, 110, 0.12);
-        }
-
-        .mobile-type-pill-card:active::before {
-            left: 140%;
-        }
-
-        .mobile-type-pill-card:active::after {
-            opacity: 1;
-        }
-
-        .mobile-type-meta {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 2px;
-            min-width: 0;
-        }
-
-        .mobile-type-title {
-            font-size: 12.5px;
-            font-weight: 800;
-            color: #0f172a;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
-        }
-
-        .mobile-type-cat {
-            font-size: 10.5px;
-            font-weight: 700;
-            color: var(--type-accent);
-        }
-
-        .mobile-type-arrow {
-            position: relative;
-            z-index: 2;
-            width: 24px;
-            height: 24px;
-            border-radius: 10px 7px 10px 7px;
-            background: rgba(15, 118, 110, 0.1);
-            color: var(--type-accent);
-            font-size: 12px;
-            font-weight: 900;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .type-tone-sky { --type-tint: rgba(14, 165, 233, 0.16); --type-accent: #0284c7; }
-        .type-tone-blue { --type-tint: rgba(59, 130, 246, 0.15); --type-accent: #2563eb; }
-        .type-tone-emerald { --type-tint: rgba(16, 185, 129, 0.16); --type-accent: #0f766e; }
-        .type-tone-rose { --type-tint: rgba(236, 72, 153, 0.15); --type-accent: #be185d; }
-    }
-    .liquid-cat-card {
-    box-shadow:
-        0 12px 26px rgba(15, 23, 42, 0.05),
-        0 0 0 1px rgba(255, 255, 255, 0.75),
-        inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.liquid-cat-card:hover,
-.liquid-cat-card:active {
-    transform: translateY(-6px) rotate(-0.6deg) scale(1.025);
-    border-color: var(--liq-accent);
-    box-shadow:
-        0 18px 34px var(--liq-glow),
-        0 0 0 3px var(--liq-tint),
-        inset 0 1px 1px rgba(255, 255, 255, 1);
-}
-
-.mobile-type-pill-card {
-    box-shadow:
-        0 8px 18px rgba(15, 23, 42, 0.04),
-        0 0 0 1px rgba(255, 255, 255, 0.7),
-        inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.mobile-type-pill-card:active {
-    transform: translateY(-2px) scale(0.97);
-    border-color: var(--type-accent);
-    box-shadow:
-        0 12px 24px rgba(15, 23, 42, 0.08),
-        0 0 0 3px var(--type-tint);
-}
-</style>
-
-<div id="quick-categories-anchor" class="tanqar-liquid-dock">
-    <div class="tanqar-liquid-head">
-      
-        <span class="tanqar-liquid-sub">اسحب للتنقل</span>
-    </div>
-
-    <div class="tanqar-liquid-grid">
-        <div class="liquid-cat-card liq-cold-drinks" onclick="smoothScrollTo('cold-drinks-anchor')">
-            <div class="liquid-cat-orb">
-                <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=300&auto=format&fit=crop&q=60" alt="المشروبات الباردة">
+                <div class="liquid-cat-card liq-homecare" onclick="smoothScrollTo('homecare-anchor')">
+                    <div class="liquid-cat-orb">
+                        <img src="https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=300&auto=format&fit=crop&q=60" alt="المنظفات">
+                    </div>
+                    <span class="liquid-cat-name">المنظفات</span>
+                </div>
             </div>
-            <span class="liquid-cat-name">المشروبات الباردة</span>
+
+            <!-- بطاقات الأنواع الناعمة المخصصة للهواتف -->
+            <div class="mobile-types-showcase" aria-label="أنواع الأقسام السريعة">
+                <div class="mobile-type-pill-card type-tone-sky" onclick="selectSubFilterAndScroll('cold-drinks-anchor', 'cold_drinks', 'juices')">
+                    <div class="mobile-type-meta">
+                        <span class="mobile-type-title">عصائر ومشروبات فواكه</span>
+                        <span class="mobile-type-cat">المشروبات الباردة</span>
+                    </div>
+                    <span class="mobile-type-arrow">←</span>
+                </div>
+
+                <div class="mobile-type-pill-card type-tone-sky" onclick="selectSubFilterAndScroll('cold-drinks-anchor', 'cold_drinks', 'soda')">
+                    <div class="mobile-type-meta">
+                        <span class="mobile-type-title">غازيات ومشروبات طاقة</span>
+                        <span class="mobile-type-cat">المشروبات الباردة</span>
+                    </div>
+                    <span class="mobile-type-arrow">←</span>
+                </div>
+
+                <div class="mobile-type-pill-card type-tone-blue" onclick="selectSubFilterAndScroll('dairy-anchor', 'dairy', 'white_cheese')">
+                    <div class="mobile-type-meta">
+                        <span class="mobile-type-title">أجبان وألبان</span>
+                        <span class="mobile-type-cat">الألبان والأجبان</span>
+                    </div>
+                    <span class="mobile-type-arrow">←</span>
+                </div>
+
+                <div class="mobile-type-pill-card type-tone-blue" onclick="selectSubFilterAndScroll('dairy-anchor', 'dairy', 'yogurt')">
+                    <div class="mobile-type-meta">
+                        <span class="mobile-type-title">حليب ويوغورت</span>
+                        <span class="mobile-type-cat">الألبان والأجبان</span>
+                    </div>
+                    <span class="mobile-type-arrow">←</span>
+                </div>
+
+                <div class="mobile-type-pill-card type-tone-emerald" onclick="selectSubFilterAndScroll('grocery-anchor', 'grocery', 'rice_beans')">
+                    <div class="mobile-type-meta">
+                        <span class="mobile-type-title">الحبوب والنشويات</span>
+                        <span class="mobile-type-cat">مواد تموينية</span>
+                    </div>
+                    <span class="mobile-type-arrow">←</span>
+                </div>
+
+                <div class="mobile-type-pill-card type-tone-rose" onclick="selectSubFilterAndScroll('sweets-anchor', 'sweets', 'chocolate')">
+                    <div class="mobile-type-meta">
+                        <span class="mobile-type-title">شوكولاتة وحلويات</span>
+                        <span class="mobile-type-cat">حلويات ومسليات</span>
+                    </div>
+                    <span class="mobile-type-arrow">←</span>
+                </div>
+            </div>
         </div>
-
-        <div class="liquid-cat-card liq-dairy" onclick="smoothScrollTo('dairy-anchor')">
-            <div class="liquid-cat-orb">
-                <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=300&auto=format&fit=crop&q=60" alt="الألبان والأجبان">
-            </div>
-            <span class="liquid-cat-name">الألبان والأجبان</span>
-        </div>
-
-        <div class="liquid-cat-card liq-bakery" onclick="smoothScrollTo('bakery-anchor')">
-            <div class="liquid-cat-orb">
-                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&auto=format&fit=crop&q=60" alt="المخبوزات">
-            </div>
-            <span class="liquid-cat-name">المخبوزات</span>
-        </div>
-
-        <div class="liquid-cat-card liq-grocery" onclick="smoothScrollTo('grocery-anchor')">
-            <div class="liquid-cat-orb">
-                <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&auto=format&fit=crop&q=60" alt="مواد تموينية">
-            </div>
-            <span class="liquid-cat-name">مواد تموينية</span>
-        </div>
-
-        <div class="liquid-cat-card liq-sweets" onclick="smoothScrollTo('sweets-anchor')">
-            <div class="liquid-cat-orb">
-                <img src="https://images.unsplash.com/photo-1548814971-12502693faaf?w=300&auto=format&fit=crop&q=60" alt="الحلويات">
-            </div>
-            <span class="liquid-cat-name">الحلويات</span>
-        </div>
-
-        <div class="liquid-cat-card liq-homecare" onclick="smoothScrollTo('homecare-anchor')">
-            <div class="liquid-cat-orb">
-                <img src="https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=300&auto=format&fit=crop&q=60" alt="المنظفات">
-            </div>
-            <span class="liquid-cat-name">المنظفات</span>
-        </div>
-    </div>
-
-    <!-- بطاقات الأنواع الناعمة للهواتف -->
-    <div class="mobile-types-showcase" aria-label="أنواع الأقسام السريعة">
-        <div class="mobile-type-pill-card type-tone-sky" onclick="selectSubFilterAndScroll('cold-drinks-anchor', 'cold_drinks', 'juices')">
-            <div class="mobile-type-meta">
-                <span class="mobile-type-title">عصائر ومشروبات فواكه</span>
-                <span class="mobile-type-cat">المشروبات الباردة</span>
-            </div>
-            <span class="mobile-type-arrow">←</span>
-        </div>
-
-        <div class="mobile-type-pill-card type-tone-sky" onclick="selectSubFilterAndScroll('cold-drinks-anchor', 'cold_drinks', 'soda')">
-            <div class="mobile-type-meta">
-                <span class="mobile-type-title">غازيات ومشروبات طاقة</span>
-                <span class="mobile-type-cat">المشروبات الباردة</span>
-            </div>
-            <span class="mobile-type-arrow">←</span>
-        </div>
-
-        <div class="mobile-type-pill-card type-tone-blue" onclick="selectSubFilterAndScroll('dairy-anchor', 'dairy', 'white_cheese')">
-            <div class="mobile-type-meta">
-                <span class="mobile-type-title">أجبان وألبان</span>
-                <span class="mobile-type-cat">الألبان والأجبان</span>
-            </div>
-            <span class="mobile-type-arrow">←</span>
-        </div>
-
-        <div class="mobile-type-pill-card type-tone-blue" onclick="selectSubFilterAndScroll('dairy-anchor', 'dairy', 'yogurt')">
-            <div class="mobile-type-meta">
-                <span class="mobile-type-title">حليب ويوغورت</span>
-                <span class="mobile-type-cat">الألبان والأجبان</span>
-            </div>
-            <span class="mobile-type-arrow">←</span>
-        </div>
-
-        <div class="mobile-type-pill-card type-tone-emerald" onclick="selectSubFilterAndScroll('grocery-anchor', 'grocery', 'rice_beans')">
-            <div class="mobile-type-meta">
-                <span class="mobile-type-title">الحبوب والنشويات</span>
-                <span class="mobile-type-cat">مواد تموينية</span>
-            </div>
-            <span class="mobile-type-arrow">←</span>
-        </div>
-
-        <div class="mobile-type-pill-card type-tone-rose" onclick="selectSubFilterAndScroll('sweets-anchor', 'sweets', 'chocolate')">
-            <div class="mobile-type-meta">
-                <span class="mobile-type-title">شوكولاتة وحلويات</span>
-                <span class="mobile-type-cat">حلويات ومسليات</span>
-            </div>
-            <span class="mobile-type-arrow">←</span>
-        </div>
-    </div>
-</div>
-
-<script id="tanqar-mobile-types-helper-script">
-    function selectSubFilterAndScroll(anchorId, catKey, subKey) {
-        const section = document.getElementById(anchorId);
-        if (section && typeof filterCategoryProducts === "function") {
-            const buttons = section.querySelectorAll(".filter-btn");
-            let matchedBtn = null;
-            buttons.forEach((btn) => {
-                const attr = btn.getAttribute("onclick") || "";
-                if (attr.includes(`'${subKey}'`)) {
-                    matchedBtn = btn;
-                }
-            });
-            if (matchedBtn) {
-                filterCategoryProducts(matchedBtn, catKey, subKey);
-            } else if (typeof renderShowcaseCategory === "function") {
-                renderShowcaseCategory(catKey, subKey);
-            }
-        }
-        if (typeof smoothScrollTo === "function") {
-            smoothScrollTo(anchorId);
-        }
-    }
-</script>
 
         <!-- بطاقة المخبوزات -->
         <div id="bakery-hero-anchor" class="bakery-hero-card">
@@ -2011,16 +2226,75 @@
             <div class="products-showcase" id="container-homecare"></div>
         </section>
 
-        <!-- معلومات الدوام والتواصل -->
-        <div id="services-anchor-box">
-            <div class="working-hours-capsule">
-                🕰️ أوقات الدوام: يوميًا من <span>07:00 صباحًا</span> حتى <span>22:00 مساءً</span>
+        <!-- معلومات أوقات الدوام والتواصل بأسلوب Apple الفاخر الناعم -->
+        <section id="services-anchor-box" class="apple-hours-section" aria-label="أوقات الدوام والتواصل">
+            <div class="apple-hours-card">
+                <div class="apple-hours-top">
+                    <div class="apple-hours-label-group">
+                        <span class="apple-hours-icon-ring" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <polyline points="12 7 12 12 15.5 14"></polyline>
+                            </svg>
+                        </span>
+                        <div>
+                            <div class="apple-hours-title">أوقات الدوام</div>
+                            <div class="apple-hours-subtitle">طوال أيام الأسبوع • خدمة مستمرة</div>
+                        </div>
+                    </div>
+
+                    <div id="store-open-status-pill" class="apple-status-pill">
+                        <span class="apple-status-dot"></span>
+                        <span id="store-open-status-text">متاح الآن</span>
+                    </div>
+                </div>
+
+                <div class="apple-hours-timeline">
+                    <div class="apple-time-slot start">
+                        <span class="apple-time-caption">يبدأ الدوام</span>
+                        <span class="apple-time-value">07:00 صباحًا</span>
+                    </div>
+                    <div class="apple-time-divider" aria-hidden="true"></div>
+                    <div class="apple-time-slot end">
+                        <span class="apple-time-caption">يستمر حتى</span>
+                        <span class="apple-time-value">22:00 مساءً</span>
+                    </div>
+                </div>
             </div>
 
-            <a href="tel:0524310286" class="phone-call-btn-link">📞 اتصل بنا: 052-4310286</a>
+            <div class="apple-actions-stack">
+                <a href="tel:0524310286" class="apple-action-btn">
+                    <span class="apple-action-left">
+                        <span class="apple-action-badge" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </span>
+                        <span>
+                            <span>اتصل بنا مباشرة</span>
+                            <span class="apple-action-sub">052-4310286</span>
+                        </span>
+                    </span>
+                    <span class="apple-action-chevron">←</span>
+                </a>
 
-            <a href="https://waze.com/ul?ll=31.3756,34.8648&navigate=yes" target="_blank" rel="noopener noreferrer" class="waze-premium-btn">📍 موقعنا على Waze</a>
-        </div>
+                <a href="https://waze.com/ul?ll=31.3756,34.8648&navigate=yes" target="_blank" rel="noopener noreferrer" class="apple-action-btn">
+                    <span class="apple-action-left">
+                        <span class="apple-action-badge" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </span>
+                        <span>
+                            <span>الوصول عبر Waze</span>
+                            <span class="apple-action-sub">دكانة طنقر • اللقية</span>
+                        </span>
+                    </span>
+                    <span class="apple-action-chevron">←</span>
+                </a>
+            </div>
+        </section>
     </main>
 
     <footer style="background: var(--luxury-black); color: #94a3b8; text-align: center; padding: 32px 20px calc(32px + var(--safe-bottom)); font-weight: 700; font-size: 14px;">
@@ -2030,7 +2304,6 @@
     <script>
         const FALLBACK_IMG = "https://placehold.co/400x300/0f766e/ffffff?text=دكانة+طنقر";
 
-        // قاعدة البيانات المنظفة (مع أرقام تعريف فريدة وأسماء وصور صحيحة)
         const storeProductsDatabase = {
             dairy: [
                 { id: 101, name: "جبنة بيضاء 9% دهون", price: 7.00, sub: "white_cheese", img: "https://noyhasade.b-cdn.net/wp-content/uploads/2026/03/7290000047942_600.jpg" },
@@ -2094,7 +2367,7 @@
             ]
         };
 
-        const INITIAL_SHOWCASE_LIMIT = 4; // عرض 4 منتجات مبدئياً لكل قسم لعدم إطالة التمرير بشكل مرهق
+        const INITIAL_SHOWCASE_LIMIT = 4;
 
         const showcaseLimitsState = {
             dairy: false,
@@ -2175,7 +2448,8 @@
             const target = document.getElementById(elementId);
             if (!target) return;
             const headerOffset = (document.querySelector('.custom-premium-header')?.offsetHeight || 74) + 14;
-            const y = target.getBoundingClientRect().top + (document.body.dataset.scrollLocked === 'true' ? savedScrollY : window.scrollY) - headerOffset;
+            const baseScroll = document.body.dataset.scrollLocked === 'true' ? savedScrollY : window.scrollY;
+            const y = target.getBoundingClientRect().top + baseScroll - headerOffset;
             window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
         }
 
@@ -2208,6 +2482,26 @@
                 renderShowcaseCategory(catKey, 'all');
             }
             setTimeout(() => smoothScrollTo(anchorId), 180);
+        }
+
+        function selectSubFilterAndScroll(anchorId, catKey, subKey) {
+            const section = document.getElementById(anchorId);
+            if (section) {
+                const buttons = section.querySelectorAll(".filter-btn");
+                let matchedBtn = null;
+                buttons.forEach((btn) => {
+                    const attr = btn.getAttribute("onclick") || "";
+                    if (attr.includes(`'${subKey}'`)) {
+                        matchedBtn = btn;
+                    }
+                });
+                if (matchedBtn) {
+                    filterCategoryProducts(matchedBtn, catKey, subKey);
+                } else {
+                    renderShowcaseCategory(catKey, subKey);
+                }
+            }
+            smoothScrollTo(anchorId);
         }
 
         // ========================================================
@@ -2257,6 +2551,9 @@
             });
 
             manageShowMoreButton(catKey, filtered.length);
+            if (typeof window.scanDynamicCards === 'function') {
+                window.scanDynamicCards();
+            }
         }
 
         function manageShowMoreButton(catKey, totalItems) {
@@ -2305,13 +2602,14 @@
         }
 
         // ========================================================
-        // السلة وإدارة الكميات
+        // السلة وإدارة الكميات وحركة طيران وتصغير صورة المنتج للسلة
         // ========================================================
         function toggleCartMenu(shouldOpen) {
             const sidebar = document.getElementById('sidebarCart');
             const overlay = document.getElementById('cartOverlay');
-            const menuOpen = document.getElementById('albaraka-side-menu')?.classList.contains('open');
+            if (!sidebar || !overlay) return;
 
+            const menuOpen = document.getElementById('albaraka-side-menu')?.classList.contains('open');
             if (shouldOpen && menuOpen) {
                 toggleAlbarakaMenu(false);
             }
@@ -2326,43 +2624,103 @@
             syncBodyScrollLock();
         }
 
-        function animateAndAddProduct(event, id, name, price) {
-            const btnElement = event.currentTarget;
-            const basketBtn = document.getElementById('main-basket-btn');
-
-            if (btnElement && basketBtn) {
-                const productCard = btnElement.closest('.premium-product-card');
-                const productImg = productCard ? productCard.querySelector('img') : null;
-                const imgUrl = productImg ? productImg.currentSrc || productImg.src : '';
-
-                const btnRect = btnElement.getBoundingClientRect();
-                const basketRect = basketBtn.getBoundingClientRect();
-
-                const flyer = document.createElement('div');
-                flyer.className = 'flying-product-premium';
-                flyer.style.top = `${btnRect.top}px`;
-                flyer.style.left = `${btnRect.left}px`;
-                if (imgUrl) flyer.style.backgroundImage = `url('${imgUrl}')`;
-
-                document.body.appendChild(flyer);
-
-                requestAnimationFrame(() => {
-                    flyer.style.transform = `translate(${basketRect.left - btnRect.left}px, ${basketRect.top - btnRect.top}px) scale(0.25) rotate(360deg)`;
-                    flyer.style.opacity = '0.2';
-                });
-
-                setTimeout(() => flyer.remove(), 750);
-            }
-
-            const existing = userCartList.find(item => item.id === id);
-            if (existing) {
-                existing.qty += 1;
-            } else {
-                userCartList.push({ id, name, price, qty: 1 });
-            }
-
-            refreshCartInterface();
+        function showDynamicIslandNotice(text) {
+            const island = document.getElementById("tanqar-dynamic-island");
+            if (!island) return;
+            island.textContent = text.trim();
+            island.classList.add("show");
+            clearTimeout(island._hideTimer);
+            island._hideTimer = setTimeout(() => {
+                island.classList.remove("show");
+            }, 1800);
         }
+
+      function launchProductFlightToBasket(productImg, basketBtn) {
+    if (!productImg || !basketBtn) return;
+
+    const startRect = productImg.getBoundingClientRect();
+    const targetRect = basketBtn.getBoundingClientRect();
+    if (!startRect.width || !startRect.height || !targetRect.width) return;
+
+    const isMobile = window.innerWidth <= 768;
+    const flyerSize = isMobile ? 26 : 32;
+    const initialScale = isMobile ? 0.55 : 0.65;
+    const finalScale = isMobile ? 0.12 : 0.15;
+
+    const imgUrl = productImg.currentSrc || productImg.src || FALLBACK_IMG;
+    const flyer = document.createElement('div');
+    flyer.className = 'flying-product-premium';
+    flyer.style.width = `${flyerSize}px`;
+    flyer.style.height = `${flyerSize}px`;
+    flyer.innerHTML = `<img src="${imgUrl}" alt="">`;
+    document.body.appendChild(flyer);
+
+    const startCenterX = startRect.left + startRect.width / 2;
+    const startCenterY = startRect.top + startRect.height / 2;
+    const targetCenterX = targetRect.left + targetRect.width / 2;
+    const targetCenterY = targetRect.top + targetRect.height / 2;
+
+    const arcLift = isMobile ? 22 : 44;
+    const duration = isMobile ? 580 : 660;
+    const startTime = performance.now();
+
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function step(now) {
+        const rawT = Math.min(1, (now - startTime) / duration);
+        const progress = easeInOutCubic(rawT);
+
+        const currentCenterX = startCenterX + (targetCenterX - startCenterX) * progress;
+        const arcOffset = -4 * arcLift * rawT * (1 - rawT);
+        const currentCenterY = startCenterY + (targetCenterY - startCenterY) * progress + arcOffset;
+
+        const scale = initialScale - (initialScale - finalScale) * Math.pow(rawT, 1.2);
+        const rotateDeg = (targetCenterX < startCenterX ? -1 : 1) * 8 * progress;
+        const opacity = rawT < 0.7 ? 0.92 : Math.max(0, 0.92 * (1 - (rawT - 0.7) / 0.3));
+        const radiusPx = 12 + (50 - 12) * progress;
+
+        const tx = currentCenterX - flyerSize / 2;
+        const ty = currentCenterY - flyerSize / 2;
+
+        flyer.style.transform = `translate3d(${tx.toFixed(1)}px, ${ty.toFixed(1)}px, 0) scale(${scale.toFixed(3)}) rotate(${rotateDeg.toFixed(1)}deg)`;
+        flyer.style.borderRadius = `${radiusPx.toFixed(1)}%`;
+        flyer.style.opacity = opacity.toFixed(3);
+
+        if (rawT < 1) {
+            requestAnimationFrame(step);
+        } else {
+            flyer.remove();
+            basketBtn.classList.add('basket-catch-pulse');
+            setTimeout(() => basketBtn.classList.remove('basket-catch-pulse'), 280);
+        }
+    }
+
+    requestAnimationFrame(step);
+}
+       function animateAndAddProduct(event, id, name, price) {
+    const btnElement = event.currentTarget;
+    const basketBtn = document.getElementById('main-basket-btn');
+    const productCard = btnElement ? btnElement.closest('.premium-product-card') : null;
+
+    if (productCard) {
+        productCard.classList.add("island-pulse");
+        setTimeout(() => productCard.classList.remove("island-pulse"), 450);
+    }
+
+    const productImg = productCard ? productCard.querySelector('.product-img-frame img') : null;
+    launchProductFlightToBasket(productImg, basketBtn);
+
+    const existing = userCartList.find(item => item.id === id);
+    if (existing) {
+        existing.qty += 1;
+    } else {
+        userCartList.push({ id, name, price, qty: 1 });
+    }
+
+    refreshCartInterface();
+}
 
         function refreshCartInterface() {
             const cartItemsContainer = document.getElementById('cart-items-list-container');
@@ -2382,8 +2740,7 @@
             if (userCartList.length === 0) {
                 cartItemsContainer.innerHTML = `
                     <div style="text-align: center; padding: 48px 20px; color: #94a3b8;">
-                        <span style="font-size: 40px; display: block; margin-bottom: 10px;">🛒</span>
-                        <p style="font-size: 15px; font-weight: 800;">سلتك فارغة حالياً</p>
+                        <p style="font-size: 15px; font-weight: 800;">سلتك فارغة حاليًا</p>
                     </div>
                 `;
                 if (cartTotalElement) cartTotalElement.textContent = "0.00";
@@ -2449,12 +2806,39 @@
             } catch (_) {}
         }
 
+        // إغلاق تلقائي للسلة عند الضغط خارجها على الهواتف والأجهزة اللوحية والحاسوب
+        (function bindOutsideCartDismissal() {
+            function handleOutsideDismiss(event) {
+                const sidebar = document.getElementById('sidebarCart');
+                const basketBtn = document.getElementById('main-basket-btn');
+                if (!sidebar || !sidebar.classList.contains('open')) return;
+                if (document.getElementById('albaraka-sky-modal')) return;
+
+                const clickedInsideCart = sidebar.contains(event.target);
+                const clickedBasketBtn = basketBtn && basketBtn.contains(event.target);
+
+                if (!clickedInsideCart && !clickedBasketBtn) {
+                    toggleCartMenu(false);
+                }
+            }
+
+            document.addEventListener('pointerdown', handleOutsideDismiss, { passive: true });
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    const sidebar = document.getElementById('sidebarCart');
+                    if (sidebar && sidebar.classList.contains('open')) {
+                        toggleCartMenu(false);
+                    }
+                }
+            });
+        })();
+
         // ========================================================
         // إرسال الطلب عبر WhatsApp مع موقع Waze
         // ========================================================
         function sendCartToWhatsApp() {
             if (!userCartList || userCartList.length === 0) {
-                alert("سلتك فارغة حالياً، يرجى إضافة منتجات أولاً.");
+                alert("سلتك فارغة حاليًا، يرجى إضافة منتجات أولًا.");
                 return;
             }
 
@@ -2468,7 +2852,7 @@
             const modalHTML = `
                 <div id="albaraka-sky-modal" style="position: fixed; inset: 0; background: rgba(2, 6, 23, 0.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 10020; padding: 16px;">
                     <div style="background: #fffef0; border: 2px solid rgba(234, 179, 8, 0.65); width: 100%; max-width: 420px; padding: 26px 20px; border-radius: 24px; box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25); text-align: center;">
-                        <h3 style="margin: 0 0 14px; font-size: 19px; font-weight: 900; color: #854d0e;">✨ إتمام طلبك من دكانة طنقر</h3>
+                        <h3 style="margin: 0 0 14px; font-size: 19px; font-weight: 900; color: #854d0e;">إتمام طلبك من دكانة طنقر</h3>
 
                         <div style="margin-bottom: 16px; text-align: right;">
                             <label for="modal-cust-name" style="display: block; font-size: 13px; font-weight: 800; color: #713f12; margin-bottom: 6px;">الاسم الكامل:</label>
@@ -2478,7 +2862,7 @@
                         <div style="margin-bottom: 20px; text-align: right;">
                             <label style="display: block; font-size: 13px; font-weight: 800; color: #713f12; margin-bottom: 6px;">موقع التوصيل عبر Waze:</label>
                             <button type="button" id="geo-location-btn" style="width: 100%; padding: 13px; border: 2px dashed #ca8a04; border-radius: 14px; background: rgba(254, 240, 138, 0.35); color: #854d0e; font-size: 13px; font-weight: 800; cursor: pointer;">
-                                📍 مشاركة الموقع الجغرافي لفتح Waze
+                                مشاركة الموقع الجغرافي لفتح Waze
                             </button>
                             <div id="geo-status" style="font-size: 12px; font-weight: 800; margin-top: 8px; text-align: center; display: none;"></div>
                         </div>
@@ -2515,13 +2899,13 @@
                 if (!navigator.geolocation) {
                     locationStatus.style.display = "block";
                     locationStatus.style.color = "#dc2626";
-                    locationStatus.textContent = "المتصفح لا يدعم تحديد الموقع تلقائياً.";
+                    locationStatus.textContent = "المتصفح لا يدعم تحديد الموقع تلقائيًا.";
                     return;
                 }
 
                 locationStatus.style.display = "block";
                 locationStatus.style.color = "#a16207";
-                locationStatus.textContent = "⏳ جاري تحديد الموقع...";
+                locationStatus.textContent = "جاري تحديد الموقع...";
 
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -2532,7 +2916,7 @@
                         locationBtn.style.background = "#dcfce7";
                         locationBtn.style.borderColor = "#16a34a";
                         locationBtn.style.color = "#166534";
-                        locationBtn.textContent = "✅ تم تحديد الموقع وربطه بـ Waze";
+                        locationBtn.textContent = "تم تحديد الموقع وربطه بـ Waze";
 
                         locationStatus.style.color = "#166534";
                         locationStatus.textContent = "الموقع جاهز للإرسال مع الطلب.";
@@ -2562,15 +2946,15 @@
                     locationBtn.style.borderColor = "#dc2626";
                     locationStatus.style.display = "block";
                     locationStatus.style.color = "#dc2626";
-                    locationStatus.textContent = "يرجى مشاركة الموقع الجغرافي أولاً.";
+                    locationStatus.textContent = "يرجى مشاركة الموقع الجغرافي أولًا.";
                     return;
                 }
 
                 const storeWhatsAppNumber = "972524310286";
                 let messageText = `*طلب جديد من دكانة طنقر • اللقية*\n\n`;
-                messageText += `👤 *الاسم:* ${customerName}\n`;
-                messageText += `📍 *رابط Waze:* ${customerWazeURL}\n`;
-                messageText += `📱 *فتح التطبيق مباشرة:* waze://?ll=${customerLat},${customerLon}&navigate=yes\n`;
+                messageText += `الاسم: ${customerName}\n`;
+                messageText += `رابط Waze: ${customerWazeURL}\n`;
+                messageText += `فتح التطبيق مباشرة: waze://?ll=${customerLat},${customerLon}&navigate=yes\n`;
                 messageText += `-----------------------------------\n`;
 
                 let finalTotal = 0;
@@ -2581,7 +2965,7 @@
                 });
 
                 messageText += `-----------------------------------\n`;
-                messageText += `💰 *الإجمالي:* *${finalTotal.toFixed(2)} ₪*`;
+                messageText += `الإجمالي: *${finalTotal.toFixed(2)} ₪*`;
 
                 const whatsappURL = `https://api.whatsapp.com/send?phone=${storeWhatsAppNumber}&text=${encodeURIComponent(messageText)}`;
 
@@ -2719,12 +3103,60 @@
         })();
 
         // ========================================================
-        // السلايدر التلقائي والتهيئة الأولية
+        // تحديث حالة الدوام والظهور الانسيابي للبطاقات والسلايدر
         // ========================================================
+        function updateWorkingHoursStatus() {
+            const pill = document.getElementById('store-open-status-pill');
+            const label = document.getElementById('store-open-status-text');
+            if (!pill || !label) return;
+
+            const now = new Date();
+            const minutesNow = now.getHours() * 60 + now.getMinutes();
+            const openMinutes = 7 * 60;
+            const closeMinutes = 22 * 60;
+            const isOpen = minutesNow >= openMinutes && minutesNow < closeMinutes;
+
+            pill.classList.toggle('is-closed', !isOpen);
+            label.textContent = isOpen ? 'مفتوح الآن' : 'مغلق حاليًا';
+        }
+
+        function initSmoothRevealObservers() {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry, idx) => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                if (entry.target.id === 'services-anchor-box') {
+                                    entry.target.classList.add('hours-visible');
+                                } else {
+                                    entry.target.classList.add('island-visible');
+                                }
+                            }, Math.min(idx * 45, 220));
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.08, rootMargin: '0px 0px -20px 0px' }
+            );
+
+            window.scanDynamicCards = function () {
+                document.querySelectorAll('.premium-product-card, .liquid-cat-card, #services-anchor-box').forEach((el) => {
+                    if (!el.dataset.revealObserved) {
+                        el.dataset.revealObserved = 'true';
+                        observer.observe(el);
+                    }
+                });
+            };
+
+            window.scanDynamicCards();
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             initializeAllShowcases();
             loadCartFromLocalStorage();
             refreshCartInterface();
+            updateWorkingHoursStatus();
+            initSmoothRevealObservers();
 
             const slides = [
                 {
@@ -2734,7 +3166,7 @@
                 },
                 {
                     img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop",
-                    title: "مخبوزات طازجة يومياً",
+                    title: "مخبوزات طازجة يوميًا",
                     sub: "أصناف متنوعة من الخبز والمعجنات الطازجة"
                 },
                 {
@@ -2763,287 +3195,5 @@
             }
         });
     </script>
-
-
-
-<!-- ========================================================
-     طبقة التصميم المائي الفاخر وحركة الجزيرة الديناميكية
-     ======================================================== -->
-<style id="tanqar-apple-liquid-island-style">
-    :root {
-        --tq-emerald: #0b3f3b;
-        --tq-emerald-deep: #052623;
-        --tq-gold: #d4af37;
-        --tq-gold-soft: #f5e6b3;
-        --tq-ivory: #fbfaf6;
-        --tq-glass: rgba(255, 255, 255, 0.72);
-        --tq-glass-border: rgba(255, 255, 255, 0.88);
-        --tq-ease-apple: cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    /* أزرار بطابع مائي زجاجي لامع */
-    .filter-btn,
-    .category-toggle-btn,
-    .checkout-btn,
-    .continue-shopping-btn,
-    .phone-call-btn-link,
-    .waze-premium-btn,
-    #main-basket-btn,
-    .side-menu-btn {
-        position: relative;
-        overflow: hidden;
-        transition:
-            transform 0.35s var(--tq-ease-apple),
-            box-shadow 0.35s var(--tq-ease-apple),
-            background 0.35s var(--tq-ease-apple),
-            border-color 0.35s var(--tq-ease-apple),
-            color 0.3s ease;
-    }
-
-    .filter-btn::before,
-    .category-toggle-btn::before,
-    .checkout-btn::before,
-    .continue-shopping-btn::before,
-    .phone-call-btn-link::before,
-    .waze-premium-btn::before,
-    #main-basket-btn::before,
-    .side-menu-btn::before {
-        content: "";
-        position: absolute;
-        top: -40%;
-        left: -65%;
-        width: 55%;
-        height: 180%;
-        background: linear-gradient(
-            115deg,
-            transparent 20%,
-            rgba(255, 255, 255, 0.45) 50%,
-            transparent 80%
-        );
-        transform: skewX(-22deg);
-        transition: left 0.65s var(--tq-ease-apple);
-        pointer-events: none;
-    }
-
-    .filter-btn:hover::before,
-    .category-toggle-btn:hover::before,
-    .checkout-btn:hover::before,
-    .continue-shopping-btn:hover::before,
-    .phone-call-btn-link:hover::before,
-    .waze-premium-btn:hover::before,
-    #main-basket-btn:hover::before,
-    .side-menu-btn:hover::before {
-        left: 125%;
-    }
-
-    .filter-btn:not(.active),
-    .continue-shopping-btn,
-    .phone-call-btn-link,
-    .waze-premium-btn {
-        background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(244, 247, 246, 0.65));
-        backdrop-filter: blur(18px) saturate(160%);
-        -webkit-backdrop-filter: blur(18px) saturate(160%);
-        border: 1px solid rgba(11, 63, 59, 0.14);
-        color: var(--tq-emerald-deep);
-        box-shadow:
-            0 8px 22px rgba(11, 63, 59, 0.07),
-            inset 0 1px 1px rgba(255, 255, 255, 0.95);
-    }
-
-    .filter-btn:not(.active):hover,
-    .continue-shopping-btn:hover,
-    .phone-call-btn-link:hover,
-    .waze-premium-btn:hover {
-        transform: translateY(-2px) scale(1.015);
-        border-color: rgba(212, 175, 55, 0.55);
-        box-shadow:
-            0 12px 26px rgba(11, 63, 59, 0.13),
-            inset 0 1px 2px rgba(255, 255, 255, 1);
-    }
-
-    .filter-btn.active,
-    .category-toggle-btn,
-    .checkout-btn {
-        background: linear-gradient(135deg, #0f5c56 0%, #062e2b 100%);
-        color: var(--tq-ivory);
-        border: 1px solid rgba(245, 230, 179, 0.35);
-        box-shadow:
-            0 10px 24px rgba(11, 63, 59, 0.22),
-            inset 0 1px 1px rgba(255, 255, 255, 0.25);
-    }
-
-    .filter-btn:active,
-    .category-toggle-btn:active,
-    .checkout-btn:active,
-    .continue-shopping-btn:active,
-    .phone-call-btn-link:active,
-    .waze-premium-btn:active,
-    #main-basket-btn:active {
-        transform: scale(0.96);
-    }
-
-    /* حركة الجزيرة الديناميكية للبطاقات */
-    .premium-product-card,
-    .quantum-scifi-card {
-        opacity: 0;
-        transform: translateY(18px) scale(0.97);
-        transition:
-            opacity 0.55s var(--tq-ease-apple),
-            transform 0.55s var(--tq-ease-apple),
-            box-shadow 0.4s var(--tq-ease-apple),
-            border-color 0.4s var(--tq-ease-apple);
-        will-change: transform, opacity;
-    }
-
-    .premium-product-card.island-visible,
-    .quantum-scifi-card.island-visible {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-
-    .premium-product-card.island-visible:hover,
-    .quantum-scifi-card.island-visible:hover {
-        transform: translateY(-7px) scale(1.015);
-        border-color: rgba(212, 175, 55, 0.55);
-        box-shadow:
-            0 20px 38px rgba(11, 63, 59, 0.14),
-            0 0 0 1px rgba(212, 175, 55, 0.22);
-    }
-
-    .premium-product-card.island-pulse {
-        transform: translateY(-6px) scale(1.025);
-        border-color: var(--tq-gold);
-        box-shadow:
-            0 22px 42px rgba(11, 63, 59, 0.18),
-            0 0 0 3px rgba(212, 175, 55, 0.28);
-    }
-
-    /* جزيرة عائمة صغيرة تظهر عند إضافة منتج للسلة */
-    #tanqar-dynamic-island {
-        position: fixed;
-        top: calc(env(safe-area-inset-top, 0px) + 84px);
-        left: 50%;
-        transform: translate(-50%, -18px) scale(0.92);
-        background: linear-gradient(135deg, rgba(11, 63, 59, 0.94), rgba(5, 38, 35, 0.96));
-        backdrop-filter: blur(22px) saturate(180%);
-        -webkit-backdrop-filter: blur(22px) saturate(180%);
-        color: var(--tq-gold-soft);
-        border: 1px solid rgba(212, 175, 55, 0.45);
-        border-radius: 999px;
-        padding: 9px 18px;
-        font-size: 13px;
-        font-weight: 800;
-        box-shadow: 0 14px 32px rgba(2, 6, 23, 0.25);
-        z-index: 10060;
-        opacity: 0;
-        pointer-events: none;
-        white-space: nowrap;
-        max-width: calc(100vw - 28px);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        transition:
-            opacity 0.32s var(--tq-ease-apple),
-            transform 0.38s var(--tq-ease-apple);
-    }
-
-    #tanqar-dynamic-island.show {
-        opacity: 1;
-        transform: translate(-50%, 0) scale(1);
-    }
-</style>
-
-<div id="tanqar-dynamic-island" role="status" aria-live="polite"></div>
-
-<script id="tanqar-apple-liquid-island-script">
-    (function () {
-        const emojiRegex = /[\p{Extended_Pictographic}\uFE0F]/gu;
-
-        function cleanTextNodesEmoji(root) {
-            if (!root) return;
-            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
-            const nodes = [];
-            let current;
-            while ((current = walker.nextNode())) {
-                if (emojiRegex.test(current.nodeValue)) {
-                    nodes.push(current);
-                }
-                emojiRegex.lastIndex = 0;
-            }
-            nodes.forEach((node) => {
-                node.nodeValue = node.nodeValue
-                    .replace(emojiRegex, "")
-                    .replace(/\s{2,}/g, " ")
-                    .trimStart();
-            });
-        }
-
-        function showDynamicIslandNotice(text) {
-            const island = document.getElementById("tanqar-dynamic-island");
-            if (!island) return;
-            island.textContent = text.replace(emojiRegex, "").trim();
-            island.classList.add("show");
-            clearTimeout(island._hideTimer);
-            island._hideTimer = setTimeout(() => {
-                island.classList.remove("show");
-            }, 1800);
-        }
-
-        function observeDynamicIslands() {
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry, idx) => {
-                        if (entry.isIntersecting) {
-                            setTimeout(() => {
-                                entry.target.classList.add("island-visible");
-                            }, Math.min(idx * 45, 220));
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                },
-                { threshold: 0.08, rootMargin: "0px 0px -20px 0px" }
-            );
-
-            function scanCards() {
-                document.querySelectorAll(".premium-product-card, .quantum-scifi-card").forEach((card) => {
-                    if (!card.dataset.islandObserved) {
-                        card.dataset.islandObserved = "true";
-                        observer.observe(card);
-                    }
-                });
-            }
-
-            scanCards();
-
-            const mutationObserver = new MutationObserver(() => {
-                cleanTextNodesEmoji(document.body);
-                scanCards();
-            });
-
-            mutationObserver.observe(document.body, {
-                childList: true,
-                subtree: true
-            });
-        }
-
-        document.addEventListener("click", (e) => {
-            const addBtn = e.target.closest(".circle-add-btn");
-            if (addBtn) {
-                const card = addBtn.closest(".premium-product-card");
-                const prodTitle = card ? card.querySelector("h4")?.textContent?.trim() : "";
-                if (card) {
-                    card.classList.add("island-pulse");
-                    setTimeout(() => card.classList.remove("island-pulse"), 450);
-                }
-                showDynamicIslandNotice(prodTitle ? `تمت إضافة: ${prodTitle}` : "تمت الإضافة إلى السلة");
-            }
-        });
-
-        window.addEventListener("DOMContentLoaded", () => {
-            cleanTextNodesEmoji(document.body);
-            observeDynamicIslands();
-        });
-    })();
-</script>
-
 </body>
 </html>
