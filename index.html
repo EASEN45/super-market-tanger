@@ -862,9 +862,10 @@
         .liq-sweets { --liq-tint: rgba(236, 72, 153, 0.15); --liq-accent: #be185d; --liq-glow: rgba(190, 24, 93, 0.16); --liq-border: rgba(190, 24, 93, 0.2); }
         .liq-homecare { --liq-tint: rgba(20, 184, 166, 0.16); --liq-accent: #0d9488; --liq-glow: rgba(13, 148, 136, 0.18); --liq-border: rgba(13, 148, 136, 0.2); }
 
-        .mobile-types-showcase {
-            display: none;
-        }
+     .mobile-types-showcase,
+.mobile-types-showcase * {
+    display: none !important;
+}
 
         .bakery-hero-card {
             background: linear-gradient(135deg, #0f172a 0%, #042f2e 100%);
@@ -2103,58 +2104,7 @@
                 </div>
             </div>
 
-            <!-- بطاقات الأنواع الناعمة المخصصة للهواتف -->
-            <div class="mobile-types-showcase" aria-label="أنواع الأقسام السريعة">
-                <div class="mobile-type-pill-card type-tone-sky" onclick="selectSubFilterAndScroll('cold-drinks-anchor', 'cold_drinks', 'juices')">
-                    <div class="mobile-type-meta">
-                        <span class="mobile-type-title">عصائر ومشروبات فواكه</span>
-                        <span class="mobile-type-cat">المشروبات الباردة</span>
-                    </div>
-                    <span class="mobile-type-arrow">←</span>
-                </div>
-
-                <div class="mobile-type-pill-card type-tone-sky" onclick="selectSubFilterAndScroll('cold-drinks-anchor', 'cold_drinks', 'soda')">
-                    <div class="mobile-type-meta">
-                        <span class="mobile-type-title">غازيات ومشروبات طاقة</span>
-                        <span class="mobile-type-cat">المشروبات الباردة</span>
-                    </div>
-                    <span class="mobile-type-arrow">←</span>
-                </div>
-
-                <div class="mobile-type-pill-card type-tone-blue" onclick="selectSubFilterAndScroll('dairy-anchor', 'dairy', 'white_cheese')">
-                    <div class="mobile-type-meta">
-                        <span class="mobile-type-title">أجبان وألبان</span>
-                        <span class="mobile-type-cat">الألبان والأجبان</span>
-                    </div>
-                    <span class="mobile-type-arrow">←</span>
-                </div>
-
-                <div class="mobile-type-pill-card type-tone-blue" onclick="selectSubFilterAndScroll('dairy-anchor', 'dairy', 'yogurt')">
-                    <div class="mobile-type-meta">
-                        <span class="mobile-type-title">حليب ويوغورت</span>
-                        <span class="mobile-type-cat">الألبان والأجبان</span>
-                    </div>
-                    <span class="mobile-type-arrow">←</span>
-                </div>
-
-                <div class="mobile-type-pill-card type-tone-emerald" onclick="selectSubFilterAndScroll('grocery-anchor', 'grocery', 'rice_beans')">
-                    <div class="mobile-type-meta">
-                        <span class="mobile-type-title">الحبوب والنشويات</span>
-                        <span class="mobile-type-cat">مواد تموينية</span>
-                    </div>
-                    <span class="mobile-type-arrow">←</span>
-                </div>
-
-                <div class="mobile-type-pill-card type-tone-rose" onclick="selectSubFilterAndScroll('sweets-anchor', 'sweets', 'chocolate')">
-                    <div class="mobile-type-meta">
-                        <span class="mobile-type-title">شوكولاتة وحلويات</span>
-                        <span class="mobile-type-cat">حلويات ومسليات</span>
-                    </div>
-                    <span class="mobile-type-arrow">←</span>
-                </div>
-            </div>
-        </div>
-
+          
         <!-- بطاقة المخبوزات -->
         <div id="bakery-hero-anchor" class="bakery-hero-card">
             <div class="bakery-hero-content">
