@@ -1,0 +1,3080 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="دكانة طنقر">
+    <meta name="theme-color" content="#0b3f3b">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>دكانة طنقر • اللقية | تسوق بكل راحة ومتعة</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-solid: #0f766e;
+            --primary-dark: #042f2e;
+            --header-bg: #0b3f3b;
+            --header-deep: #052623;
+            --primary-light: #ccfbf1;
+            --luxury-black: #020617;
+            --navy-blue: #0f172a;
+            --accent-gold: #eab308;
+            --apple-gold: #d4af37;
+            --accent-gold-soft: #fef08a;
+            --apple-gold-soft: #f5e6b3;
+            --ivory: #fbfaf6;
+            --glass-bg: rgba(255, 255, 255, 0.72);
+            --glass-border: rgba(255, 255, 255, 0.88);
+            --card-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+            --radius-premium: 24px;
+            --header-height: 74px;
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-left: env(safe-area-inset-left, 0px);
+            --safe-right: env(safe-area-inset-right, 0px);
+            --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 55%, #f1f5f9 100%);
+            color: #1e293b;
+            width: 100%;
+            min-height: 100dvh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ========================================================
+           الهيدر الثابت المتوافق مع الهواتف (iOS & Android)
+           ======================================================== */
+        .custom-premium-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            min-height: calc(var(--header-height) + var(--safe-top));
+            padding-top: var(--safe-top);
+            padding-left: calc(16px + var(--safe-left));
+            padding-right: calc(16px + var(--safe-right));
+            background: rgba(11, 63, 59, 0.94);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 2px solid rgba(234, 179, 8, 0.35);
+            z-index: 9000;
+            box-shadow: 0 8px 28px rgba(11, 63, 59, 0.18);
+            display: flex;
+            align-items: center;
+        }
+
+        .header-inner {
+            width: 100%;
+            max-width: 1240px;
+            height: var(--header-height);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .menu-trigger-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(254, 240, 138, 0.22);
+            border-radius: 14px;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            touch-action: manipulation;
+            transition: transform 0.25s var(--ease-apple), background 0.25s var(--ease-apple);
+        }
+
+        .menu-trigger-btn:active {
+            transform: scale(0.94);
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .menu-trigger-btn .bar {
+            width: 22px;
+            height: 2.5px;
+            background-color: var(--accent-gold-soft);
+            border-radius: 99px;
+            display: block;
+        }
+
+        .brand-logo-container {
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+        }
+
+        .brand-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-logo .main-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--accent-gold-soft);
+            letter-spacing: 0.5px;
+            line-height: 1.15;
+            text-shadow: 0 0 14px rgba(234, 179, 8, 0.35);
+        }
+
+        .brand-logo .logo-divider {
+            width: 44px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            margin: 4px 0 3px;
+            opacity: 0.85;
+        }
+
+        .brand-logo .sub-title {
+            font-size: 10px;
+            font-weight: 600;
+            color: #cbd5e1;
+            letter-spacing: 3px;
+            line-height: 1;
+        }
+
+        #main-basket-btn {
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            border: none;
+            padding: 9px 16px;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            touch-action: manipulation;
+            box-shadow: 0 4px 14px rgba(234, 179, 8, 0.35);
+            transition: transform 0.28s var(--ease-spring), background 0.25s var(--ease-apple), box-shadow 0.28s var(--ease-apple);
+        }
+
+        #main-basket-btn:active {
+            transform: scale(0.95);
+            background: #facc15;
+        }
+
+        #main-basket-btn.basket-catch-pulse {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 5px rgba(254, 240, 138, 0.4), 0 10px 24px rgba(234, 179, 8, 0.55);
+        }
+
+        #main-basket-count {
+            background: var(--primary-dark);
+            color: #ffffff;
+            min-width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 900;
+            padding: 0 5px;
+            transition: transform 0.28s var(--ease-spring);
+        }
+
+        .header-spacer {
+            height: calc(var(--header-height) + var(--safe-top));
+            width: 100%;
+            display: block;
+        }
+
+        /* ========================================================
+           القائمة العائمة الفخمة طراز iPhone 18 Pro Max Dock
+           ======================================================== */
+        #tanqar-core-floating-dock {
+            position: fixed;
+            bottom: calc(18px + var(--safe-bottom));
+            left: 50%;
+            transform: translate(-50%, 140%) scale(0.92);
+            max-width: min(780px, calc(100vw - 20px));
+            width: max-content;
+            padding: 8px 10px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(5, 38, 35, 0.88) 0%, rgba(11, 63, 59, 0.82) 100%);
+            backdrop-filter: blur(32px) saturate(210%);
+            -webkit-backdrop-filter: blur(32px) saturate(210%);
+            border: 1.5px solid rgba(254, 240, 138, 0.4);
+            box-shadow:
+                0 24px 50px rgba(2, 6, 23, 0.38),
+                0 0 20px rgba(234, 179, 8, 0.15),
+                inset 0 1.5px 0 rgba(255, 255, 255, 0.3);
+            z-index: 8500;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            opacity: 0;
+            pointer-events: none;
+            transition:
+                transform 0.48s var(--ease-apple),
+                opacity 0.38s var(--ease-apple),
+                box-shadow 0.3s ease;
+            will-change: transform, opacity;
+        }
+
+        #tanqar-core-floating-dock::-webkit-scrollbar {
+            display: none;
+        }
+
+        #tanqar-core-floating-dock.dock-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, 0) scale(1);
+        }
+
+        .core-dock-pill {
+            position: relative;
+            flex: 0 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.07);
+            color: #f1f5f9;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            white-space: nowrap;
+            touch-action: manipulation;
+            transition:
+                background 0.3s var(--ease-apple),
+                color 0.3s var(--ease-apple),
+                transform 0.26s var(--ease-spring),
+                border-color 0.3s var(--ease-apple),
+                box-shadow 0.3s var(--ease-apple);
+        }
+
+        .core-dock-pill:hover {
+            background: rgba(255, 255, 255, 0.16);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .core-dock-pill:active {
+            transform: scale(0.93);
+        }
+
+        .core-dock-pill.is-active {
+            background: linear-gradient(135deg, #fef08a 0%, #eab308 100%);
+            color: var(--primary-dark);
+            border-color: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 6px 20px rgba(234, 179, 8, 0.45);
+        }
+
+        /* ========================================================
+           القائمة الجانبية الرئيسية المنظمة
+           ======================================================== */
+        .side-menu-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.55);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 9990;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .side-menu-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .side-menu-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: min(320px, 86vw);
+            height: 100dvh;
+            padding-top: calc(20px + var(--safe-top));
+            padding-bottom: calc(24px + var(--safe-bottom));
+            padding-right: calc(18px + var(--safe-right));
+            padding-left: 18px;
+            background: linear-gradient(160deg, var(--header-bg) 0%, #062825 100%);
+            border-left: 1px solid rgba(254, 240, 138, 0.22);
+            box-shadow: -12px 0 36px rgba(2, 6, 23, 0.35);
+            z-index: 9995;
+            transform: translateX(100%);
+            transition: transform 0.36s var(--ease-apple);
+            display: flex;
+            flex-direction: column;
+            overscroll-behavior: contain;
+        }
+
+        .side-menu-drawer.open {
+            transform: translateX(0);
+        }
+
+        .side-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(254, 240, 138, 0.18);
+            padding-bottom: 14px;
+            margin-bottom: 16px;
+        }
+
+        .side-menu-header h3 {
+            color: var(--accent-gold-soft);
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+        }
+
+        .side-menu-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(254, 240, 138, 0.25);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .side-menu-close:active {
+            transform: scale(0.92);
+            background: #ef4444;
+        }
+
+        .side-menu-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .side-menu-btn {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #f8fafc;
+            padding: 12px 15px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: right;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            touch-action: manipulation;
+            transition: background 0.22s ease, transform 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+        }
+
+        .side-menu-btn:hover,
+        .side-menu-btn:active {
+            background: rgba(234, 179, 8, 0.16);
+            border-color: rgba(254, 240, 138, 0.45);
+            color: var(--accent-gold-soft);
+            transform: translateX(-3px);
+        }
+
+        .side-menu-arrow {
+            color: rgba(254, 240, 138, 0.72);
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .side-menu-section-label {
+            font-size: 11px;
+            font-weight: 800;
+            color: #99f6e4;
+            padding: 10px 6px 4px;
+            letter-spacing: 0.4px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 4px;
+        }
+
+        /* ========================================================
+           السلايدر الرئيسي
+           ======================================================== */
+        .magic-slider-wrapper {
+            width: 100%;
+            height: 440px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 24px;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+        }
+
+        #main-dynamic-slide {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            transition: opacity 0.6s ease-in-out;
+        }
+
+        .slider-overlay-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(11, 63, 59, 0.65) 0%, rgba(2, 6, 23, 0.45) 100%);
+            z-index: 2;
+        }
+
+        .slider-content-layer {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 16px;
+            z-index: 3;
+        }
+
+        #magic-text-container {
+            background: rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: 28px 34px;
+            border-radius: 26px;
+            max-width: 680px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        #slider-main-title {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+        }
+
+        #magic-line {
+            width: 64px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            margin: 0 auto 14px;
+        }
+
+        #slider-sub-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #f8fafc;
+        }
+
+        /* ========================================================
+           شريط البحث السريع
+           ======================================================== */
+        #tanqar-liquid-search-wrapper {
+            position: relative;
+            max-width: 720px;
+            margin: 18px auto 26px;
+            padding: 0 16px;
+            z-index: 1500;
+        }
+
+        .liquid-search-bar-outer {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            transition: gap 0.3s ease;
+        }
+
+        .liquid-search-bar-outer.focused {
+            gap: 10px;
+        }
+
+        .liquid-search-field {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(11, 63, 59, 0.92) 0%, rgba(4, 47, 46, 0.96) 100%);
+            border: 1.5px solid rgba(254, 240, 138, 0.35);
+            border-radius: 999px;
+            padding: 0 14px;
+            height: 48px;
+            box-shadow: 0 10px 26px rgba(11, 63, 59, 0.18);
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .liquid-search-bar-outer.focused .liquid-search-field {
+            border-color: var(--accent-gold);
+            box-shadow: 0 12px 30px rgba(11, 63, 59, 0.26), 0 0 0 3px rgba(234, 179, 8, 0.2);
+        }
+
+        .liquid-search-icon {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent-gold-soft);
+            margin-left: 10px;
+        }
+
+        #tanqarSearchInput {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        #tanqarSearchInput::placeholder {
+            color: rgba(226, 232, 240, 0.65);
+            font-weight: 500;
+        }
+
+        .liquid-clear-btn {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(254, 240, 138, 0.25);
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .liquid-clear-btn.active {
+            display: inline-flex;
+        }
+
+        .liquid-cancel-btn {
+            display: none;
+            background: var(--header-bg);
+            border: 1px solid rgba(234, 179, 8, 0.4);
+            color: var(--accent-gold-soft);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 10px 16px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .liquid-search-bar-outer.focused .liquid-cancel-btn {
+            display: inline-block;
+        }
+
+        .liquid-dropdown-sheet {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 16px;
+            right: 16px;
+            background: #ffffff;
+            border: 1.5px solid rgba(11, 63, 59, 0.16);
+            border-radius: 22px;
+            box-shadow: 0 22px 48px rgba(15, 23, 42, 0.18);
+            max-height: 380px;
+            overflow-y: auto;
+            z-index: 2000;
+            padding: 10px;
+        }
+
+        .liquid-dropdown-sheet.active {
+            display: block;
+        }
+
+        .liquid-result-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            border-radius: 16px;
+            cursor: pointer;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .liquid-result-item:hover {
+            background: #f0fdf4;
+            transform: translateX(-3px);
+        }
+
+        .liquid-item-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .liquid-item-img-wrapper {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .liquid-item-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .liquid-item-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .liquid-item-title mark {
+            background: rgba(234, 179, 8, 0.35);
+            color: #042f2e;
+            font-weight: 900;
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        .liquid-item-btn {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--primary-solid);
+            background: #ccfbf1;
+            padding: 5px 12px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .liquid-empty-state {
+            padding: 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        @keyframes highlightPulse {
+            0% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.85); }
+            100% { box-shadow: 0 0 0 14px rgba(234, 179, 8, 0); }
+        }
+
+        .highlight-product-gold {
+            animation: highlightPulse 1.1s ease-out 2;
+            border-color: var(--accent-gold) !important;
+        }
+
+        /* ========================================================
+           الحاوية الرئيسية والأقسام السريعة والمنتجات
+           ======================================================== */
+        .main-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 18px 84px;
+        }
+
+        #quick-categories-anchor.tanqar-liquid-dock {
+            max-width: 1240px;
+            margin: 26px auto 36px;
+            padding: 18px 16px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(22px) saturate(175%);
+            -webkit-backdrop-filter: blur(22px) saturate(175%);
+            border: 1px solid rgba(255, 255, 255, 0.92);
+            box-shadow:
+                0 16px 36px rgba(15, 23, 42, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.96);
+        }
+
+        .tanqar-liquid-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding: 0 4px;
+        }
+
+        .tanqar-liquid-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--primary-dark);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tanqar-liquid-title::before {
+            content: "";
+            width: 5px;
+            height: 22px;
+            border-radius: 99px;
+            background: linear-gradient(180deg, var(--primary-solid), var(--accent-gold));
+        }
+
+        .tanqar-liquid-sub {
+            font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+        }
+
+        .tanqar-liquid-grid {
+            display: flex;
+            gap: 14px;
+            overflow-x: auto;
+            scroll-snap-type: x proximity;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 6px 2px 12px;
+        }
+
+        .tanqar-liquid-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (min-width: 992px) {
+            .tanqar-liquid-grid {
+                display: grid;
+                grid-template-columns: repeat(6, minmax(0, 1fr));
+                overflow-x: visible;
+                gap: 16px;
+                padding: 6px 0 4px;
+            }
+            .tanqar-liquid-sub {
+                display: none;
+            }
+        }
+
+        .liquid-cat-card {
+            --liq-tint: rgba(15, 118, 110, 0.11);
+            --liq-accent: #0f766e;
+            --liq-glow: rgba(15, 118, 110, 0.18);
+            --liq-border: rgba(15, 118, 110, 0.16);
+
+            position: relative;
+            flex: 0 0 130px;
+            scroll-snap-align: start;
+            border-radius: 36px 24px 36px 24px;
+            padding: 16px 12px 15px;
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(20px) saturate(170%);
+            -webkit-backdrop-filter: blur(20px) saturate(170%);
+            border: 1px solid var(--liq-border);
+            box-shadow:
+                0 12px 26px rgba(15, 23, 42, 0.05),
+                0 0 0 1px rgba(255, 255, 255, 0.75),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 11px;
+            cursor: pointer;
+            overflow: hidden;
+            touch-action: manipulation;
+            opacity: 0;
+            transform: translateY(24px) scale(0.95);
+            transition:
+                opacity 0.6s var(--ease-apple),
+                transform 0.6s var(--ease-apple),
+                box-shadow 0.28s var(--ease-spring),
+                border-color 0.22s ease,
+                background-color 0.24s ease;
+            will-change: transform, opacity;
+        }
+
+        .liquid-cat-card.island-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .liquid-cat-orb {
+            position: relative;
+            z-index: 2;
+            width: 68px;
+            height: 68px;
+            border-radius: 26px 18px 26px 18px;
+            padding: 3px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--liq-border);
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.07);
+            overflow: hidden;
+            transition: transform 0.26s var(--ease-spring), border-color 0.22s ease;
+        }
+
+        .liquid-cat-orb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 22px 15px 22px 15px;
+            background: #ffffff;
+            display: block;
+        }
+
+        .liquid-cat-name {
+            position: relative;
+            z-index: 2;
+            font-size: 13px;
+            font-weight: 800;
+            color: #0f172a;
+            text-align: center;
+            line-height: 1.35;
+        }
+
+        .bakery-hero-card {
+            background: linear-gradient(135deg, #0f172a 0%, #042f2e 100%);
+            border-radius: var(--radius-premium);
+            margin: 34px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+            box-shadow: 0 20px 44px rgba(2, 6, 23, 0.18);
+            border: 1px solid rgba(254, 240, 138, 0.16);
+        }
+
+        .bakery-hero-content {
+            padding: 36px;
+            flex: 1;
+            color: #ffffff;
+        }
+
+        .bakery-hero-content .badge {
+            background: linear-gradient(90deg, var(--accent-gold), #d97706);
+            color: #042f2e;
+            padding: 5px 16px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 900;
+            display: inline-block;
+            margin-bottom: 14px;
+        }
+
+        .bakery-hero-content h2 {
+            font-size: 28px;
+            font-weight: 900;
+            color: #fde047;
+            margin-bottom: 10px;
+        }
+
+        .bakery-hero-content p {
+            color: #e2e8f0;
+            font-size: 15px;
+        }
+
+        .bakery-hero-image {
+            width: 42%;
+            min-height: 260px;
+            align-self: stretch;
+            background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .core-category-section {
+            scroll-margin-top: 94px;
+        }
+
+        .title-decorated {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 900;
+            margin: 44px 0 20px;
+            color: var(--luxury-black);
+        }
+
+        .title-decorated::after {
+            content: '';
+            display: block;
+            width: 68px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-solid), var(--accent-gold));
+            margin: 10px auto 0;
+            border-radius: 99px;
+        }
+
+        .subcategory-filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn,
+        .category-toggle-btn,
+        .checkout-btn,
+        .continue-shopping-btn {
+            position: relative;
+            overflow: hidden;
+            touch-action: manipulation;
+            transition:
+                transform 0.35s var(--ease-apple),
+                box-shadow 0.35s var(--ease-apple),
+                background 0.35s var(--ease-apple),
+                border-color 0.35s var(--ease-apple),
+                color 0.3s ease;
+        }
+
+        .filter-btn:not(.active),
+        .continue-shopping-btn {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.85), rgba(244, 247, 246, 0.7));
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            border: 1px solid rgba(11, 63, 59, 0.15);
+            color: var(--header-deep);
+            padding: 8px 18px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow:
+                0 8px 22px rgba(11, 63, 59, 0.07),
+                inset 0 1px 1px rgba(255, 255, 255, 0.95);
+        }
+
+        .filter-btn.active,
+        .category-toggle-btn,
+        .checkout-btn {
+            background: linear-gradient(135deg, #0f5c56 0%, #062e2b 100%);
+            color: var(--ivory);
+            border: 1px solid rgba(245, 230, 179, 0.35);
+            box-shadow:
+                0 10px 24px rgba(11, 63, 59, 0.22),
+                inset 0 1px 1px rgba(255, 255, 255, 0.25);
+        }
+
+        .filter-btn.active {
+            padding: 8px 18px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .products-showcase {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        /* ========================================================
+           تصميم بطاقة المنتجات الفخمة طراز Oppo Find X10 Ultra
+           وحركة الظهور التفاعلية بالكامل للزبون
+           ======================================================== */
+        .premium-product-card {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 24px;
+            padding: 16px;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0;
+            transform: translateY(32px) scale(0.92);
+            transition:
+                opacity 0.65s var(--ease-apple),
+                transform 0.65s var(--ease-apple),
+                box-shadow 0.4s var(--ease-apple),
+                border-color 0.4s var(--ease-apple);
+            will-change: transform, opacity;
+        }
+
+        .premium-product-card.island-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .premium-product-card.island-visible:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(212, 175, 55, 0.65);
+            box-shadow:
+                0 22px 42px rgba(11, 63, 59, 0.16),
+                0 0 0 1px rgba(212, 175, 55, 0.35);
+        }
+
+        .premium-product-card.island-pulse {
+            transform: translateY(-6px) scale(1.03);
+            border-color: var(--apple-gold);
+            box-shadow:
+                0 24px 44px rgba(11, 63, 59, 0.22),
+                0 0 0 3.5px rgba(212, 175, 55, 0.38);
+        }
+
+        .product-img-frame {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+            border-radius: 18px;
+            overflow: hidden;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(15, 118, 110, 0.08);
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.03);
+        }
+
+        .product-img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            padding: 8px;
+            transition: transform 0.5s var(--ease-apple);
+            filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.07));
+        }
+
+        .premium-product-card:hover .product-img-frame img {
+            transform: scale(1.08);
+        }
+
+        .premium-product-card h4 {
+            font-size: 14.5px;
+            font-weight: 800;
+            color: var(--navy-blue);
+            margin-bottom: 10px;
+            line-height: 1.45;
+            min-height: 2.9em;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 6px;
+        }
+
+        .price-tag {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--primary-solid);
+        }
+
+        .circle-add-btn {
+            background: linear-gradient(135deg, var(--primary-solid), var(--primary-dark));
+            color: var(--accent-gold-soft);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+            box-shadow: 0 6px 16px rgba(15, 118, 110, 0.3);
+            transition: transform 0.22s var(--ease-spring), box-shadow 0.22s ease;
+        }
+
+        .circle-add-btn:active {
+            transform: scale(0.9);
+        }
+
+        .showcase-pagination-row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 22px auto 10px;
+        }
+
+        .category-toggle-btn {
+            padding: 11px 28px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .category-collapse-btn {
+            padding: 11px 24px;
+            border-radius: 999px;
+            font-size: 13.5px;
+            font-weight: 800;
+            cursor: pointer;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(241, 245, 249, 0.75));
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            border: 1px solid rgba(11, 63, 59, 0.18);
+            color: var(--header-deep);
+            box-shadow:
+                0 8px 20px rgba(15, 23, 42, 0.06),
+                inset 0 1px 1px rgba(255, 255, 255, 0.95);
+            transition:
+                transform 0.3s var(--ease-apple),
+                box-shadow 0.3s var(--ease-apple),
+                border-color 0.3s var(--ease-apple),
+                color 0.25s ease;
+        }
+
+        .category-collapse-btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(212, 175, 55, 0.55);
+            color: var(--primary-solid);
+            box-shadow: 0 12px 24px rgba(11, 63, 59, 0.11);
+        }
+
+        .category-collapse-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* ========================================================
+           قسم أوقات الدوام والتواصل
+           ======================================================== */
+        #services-anchor-box.apple-hours-section {
+            margin: 52px auto 18px;
+            padding: 28px 22px;
+            border-radius: 32px;
+            background:
+                radial-gradient(circle at 12% 15%, rgba(15, 118, 110, 0.09), transparent 48%),
+                radial-gradient(circle at 88% 85%, rgba(212, 175, 55, 0.11), transparent 52%),
+                rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(28px) saturate(185%);
+            -webkit-backdrop-filter: blur(28px) saturate(185%);
+            border: 1px solid rgba(255, 255, 255, 0.94);
+            box-shadow:
+                0 22px 50px rgba(15, 23, 42, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.98);
+            display: grid;
+            grid-template-columns: 1.35fr 1fr;
+            gap: 18px;
+            align-items: stretch;
+            opacity: 0;
+            transform: translateY(20px);
+            transition:
+                opacity 0.65s var(--ease-apple),
+                transform 0.65s var(--ease-apple),
+                box-shadow 0.4s var(--ease-apple);
+            will-change: transform, opacity;
+        }
+
+        #services-anchor-box.apple-hours-section.hours-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .apple-hours-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.72));
+            border: 1px solid rgba(11, 63, 59, 0.1);
+            border-radius: 26px;
+            padding: 22px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+            box-shadow:
+                0 10px 26px rgba(15, 23, 42, 0.04),
+                inset 0 1px 1px rgba(255, 255, 255, 0.95);
+        }
+
+        .apple-hours-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .apple-hours-label-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .apple-hours-icon-ring {
+            width: 44px;
+            height: 44px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--header-bg), var(--header-deep));
+            color: var(--apple-gold-soft);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 18px rgba(11, 63, 59, 0.2);
+            flex-shrink: 0;
+        }
+
+        .apple-hours-title {
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--navy-blue);
+            line-height: 1.25;
+        }
+
+        .apple-hours-subtitle {
+            font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        .apple-status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 13px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+            background: rgba(16, 185, 129, 0.12);
+            color: #047857;
+            border: 1px solid rgba(16, 185, 129, 0.28);
+        }
+
+        .apple-status-pill.is-closed {
+            background: rgba(239, 68, 68, 0.1);
+            color: #b91c1c;
+            border-color: rgba(239, 68, 68, 0.25);
+        }
+
+        .apple-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+        }
+
+        .apple-status-pill.is-closed .apple-status-dot {
+            background: #ef4444;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.18);
+        }
+
+        .apple-hours-timeline {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 12px;
+            background: rgba(241, 245, 249, 0.72);
+            border: 1px solid rgba(15, 23, 42, 0.06);
+            border-radius: 20px;
+            padding: 14px 16px;
+        }
+
+        .apple-time-slot {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .apple-time-slot.end {
+            text-align: left;
+        }
+
+        .apple-time-caption {
+            font-size: 11px;
+            font-weight: 700;
+            color: #64748b;
+        }
+
+        .apple-time-value {
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--header-bg);
+            letter-spacing: -0.2px;
+        }
+
+        .apple-time-divider {
+            width: 34px;
+            height: 2px;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--primary-solid), var(--apple-gold));
+        }
+
+        .apple-actions-stack {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .apple-action-btn {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 16px 20px;
+            border-radius: 22px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--header-deep);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(244, 247, 246, 0.76));
+            backdrop-filter: blur(20px) saturate(165%);
+            -webkit-backdrop-filter: blur(20px) saturate(165%);
+            border: 1px solid rgba(11, 63, 59, 0.14);
+            box-shadow:
+                0 10px 24px rgba(15, 23, 42, 0.05),
+                inset 0 1px 1px rgba(255, 255, 255, 0.96);
+            transition:
+                transform 0.36s var(--ease-apple),
+                box-shadow 0.36s var(--ease-apple),
+                border-color 0.36s var(--ease-apple),
+                color 0.25s ease;
+        }
+
+        .apple-action-btn:hover {
+            transform: translateY(-3px) scale(1.012);
+            border-color: rgba(212, 175, 55, 0.55);
+            color: var(--primary-solid);
+            box-shadow: 0 16px 32px rgba(11, 63, 59, 0.11);
+        }
+
+        .apple-action-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .apple-action-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: rgba(15, 118, 110, 0.1);
+            color: var(--primary-solid);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .apple-action-sub {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #64748b;
+            margin-top: 1px;
+        }
+
+        .apple-action-chevron {
+            font-size: 15px;
+            font-weight: 900;
+            color: #94a3b8;
+        }
+
+        /* ========================================================
+           السلة الجانبية
+           ======================================================== */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100dvh;
+            background: rgba(2, 6, 23, 0.58);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9992;
+            opacity: 0;
+            pointer-events: none;
+            cursor: pointer;
+            transition: opacity 0.32s var(--ease-apple);
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .sidebar-cart {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: min(420px, 100vw);
+            height: 100dvh;
+            max-height: 100dvh;
+            padding-top: var(--safe-top);
+            padding-bottom: var(--safe-bottom);
+            padding-left: var(--safe-left);
+            padding-right: var(--safe-right);
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(24px) saturate(175%);
+            -webkit-backdrop-filter: blur(24px) saturate(175%);
+            z-index: 9996;
+            box-shadow: 16px 0 48px rgba(2, 6, 23, 0.26);
+            display: flex;
+            flex-direction: column;
+            transform: translateX(-102%);
+            transition: transform 0.38s var(--ease-apple);
+            overscroll-behavior: contain;
+            touch-action: pan-y;
+        }
+
+        .sidebar-cart.open {
+            transform: translateX(0);
+        }
+
+        .cart-top-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            background: rgba(248, 250, 252, 0.9);
+            flex-shrink: 0;
+        }
+
+        .cart-top-header h3 {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--header-bg);
+        }
+
+        .cart-close-premium-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: var(--navy-blue);
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .cart-close-premium-btn:active {
+            transform: scale(0.92);
+            background: #fee2e2;
+        }
+
+        .cart-scroll-area {
+            flex: 1 1 auto;
+            min-height: 0;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 14px 20px;
+        }
+
+        .cart-item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .cart-qty-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 999px;
+        }
+
+        .cart-qty-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: none;
+            background: #ffffff;
+            color: var(--primary-solid);
+            font-size: 16px;
+            font-weight: 900;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        .cart-qty-btn:active {
+            transform: scale(0.9);
+            background: var(--primary-solid);
+            color: #ffffff;
+        }
+
+        .summary-total {
+            font-size: 17px;
+            font-weight: 900;
+            padding: 16px 20px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--luxury-black);
+            background: rgba(248, 250, 252, 0.92);
+            flex-shrink: 0;
+        }
+
+        .cart-actions-footer {
+            padding: 14px 20px calc(18px + var(--safe-bottom));
+            background: rgba(255, 255, 255, 0.96);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .checkout-btn,
+        .continue-shopping-btn {
+            width: 100%;
+            padding: 13px 16px;
+            border-radius: 999px;
+            font-size: 14.5px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .flying-product-premium {
+            position: fixed;
+            z-index: 10050;
+            top: 0;
+            left: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 22px rgba(15, 23, 42, 0.2), 0 0 0 1.5px rgba(212, 175, 55, 0.6);
+            background: #ffffff;
+            pointer-events: none;
+            transform-origin: center center;
+            will-change: transform, opacity, border-radius;
+        }
+
+        .flying-product-premium img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            padding: 2px;
+        }
+
+        #tanqar-dynamic-island {
+            position: fixed;
+            top: calc(var(--safe-top) + 84px);
+            left: 50%;
+            transform: translate(-50%, -18px) scale(0.92);
+            background: linear-gradient(135deg, rgba(11, 63, 59, 0.94), rgba(5, 38, 35, 0.96));
+            backdrop-filter: blur(22px) saturate(180%);
+            -webkit-backdrop-filter: blur(22px) saturate(180%);
+            color: var(--apple-gold-soft);
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            border-radius: 999px;
+            padding: 9px 18px;
+            font-size: 13px;
+            font-weight: 800;
+            box-shadow: 0 14px 32px rgba(2, 6, 23, 0.25);
+            z-index: 10060;
+            opacity: 0;
+            pointer-events: none;
+            white-space: nowrap;
+            max-width: calc(100vw - 28px);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition:
+                opacity 0.32s var(--ease-apple),
+                transform 0.38s var(--ease-apple);
+        }
+
+        #tanqar-dynamic-island.show {
+            opacity: 1;
+            transform: translate(-50%, 0) scale(1);
+        }
+
+        /* ========================================================
+           الاستجابة للشاشات المتنوعة
+           ======================================================== */
+        @media (max-width: 1024px) {
+            .products-showcase {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
+            #services-anchor-box.apple-hours-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .brand-logo .main-title { font-size: 19px; }
+            #main-basket-btn { padding: 8px 12px; font-size: 13px; }
+            #tanqar-core-floating-dock { bottom: calc(12px + var(--safe-bottom)); padding: 6px 8px; gap: 5px; }
+            .core-dock-pill { padding: 6px 12px; font-size: 11.5px; }
+            .magic-slider-wrapper { height: 310px; }
+            #magic-text-container { padding: 20px 18px; }
+            #slider-main-title { font-size: 22px; }
+            #slider-sub-title { font-size: 13px; }
+            #quick-categories-anchor.tanqar-liquid-dock { margin: 18px auto 26px; padding: 14px 12px 16px; border-radius: 26px; }
+            .tanqar-liquid-title { font-size: 18px; }
+            .liquid-cat-card { flex: 0 0 118px; border-radius: 30px 20px 30px 20px; padding: 14px 10px 13px; }
+            .liquid-cat-orb { width: 60px; height: 60px; border-radius: 22px 15px 22px 15px; }
+            .liquid-cat-orb img { border-radius: 19px 12px 19px 12px; }
+            .liquid-cat-name { font-size: 12px; }
+            .products-showcase { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .bakery-hero-card { flex-direction: column; text-align: center; }
+            .bakery-hero-content { padding: 24px 18px; }
+            .bakery-hero-content h2 { font-size: 22px; }
+            .bakery-hero-image { width: 100%; min-height: 190px; }
+            .subcategory-filters { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
+            .subcategory-filters::-webkit-scrollbar { display: none; }
+            .filter-btn { flex: 0 0 auto; }
+            #services-anchor-box.apple-hours-section { padding: 20px 14px; border-radius: 26px; margin-top: 38px; }
+            .apple-hours-card { padding: 18px 16px; border-radius: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="tanqar-dynamic-island" role="status" aria-live="polite"></div>
+
+    <!-- الهيدر الثابت -->
+    <header id="main-header-anchor" class="custom-premium-header">
+        <div class="header-inner">
+            <button type="button" class="menu-trigger-btn" aria-label="فتح القائمة الرئيسية" onclick="toggleAlbarakaMenu(true)">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <a class="brand-logo-container" onclick="smoothScrollTo('promo-slider-anchor')">
+                <div class="brand-logo">
+                    <span class="main-title">دكانة طنقر</span>
+                    <div class="logo-divider"></div>
+                    <span class="sub-title">AL - LAQIA</span>
+                </div>
+            </a>
+
+            <button type="button" id="main-basket-btn" onclick="toggleCartMenu(true)">
+                <span>السلة</span>
+                <span id="main-basket-count">0</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="header-spacer"></div>
+
+    <!-- القائمة العائمة الفخمة للفئات الأساسية (iPhone 18 Pro Max Style) -->
+    <nav id="tanqar-core-floating-dock" aria-label="تنقل سريع بين الفئات الأساسية">
+        <button type="button" class="core-dock-pill is-active" data-dock-target="cold-drinks-anchor" onclick="jumpToCoreCategory('cold-drinks-anchor')">المشروبات الباردة</button>
+        <button type="button" class="core-dock-pill" data-dock-target="dairy-anchor" onclick="jumpToCoreCategory('dairy-anchor')">الألبان والأجبان</button>
+        <button type="button" class="core-dock-pill" data-dock-target="bakery-anchor" onclick="jumpToCoreCategory('bakery-anchor')">المخبوزات والحلويات</button>
+        <button type="button" class="core-dock-pill" data-dock-target="grocery-anchor" onclick="jumpToCoreCategory('grocery-anchor')">مواد التموين</button>
+        <button type="button" class="core-dock-pill" data-dock-target="sweets-anchor" onclick="jumpToCoreCategory('sweets-anchor')">حلويات ومسليات</button>
+        <button type="button" class="core-dock-pill" data-dock-target="homecare-anchor" onclick="jumpToCoreCategory('homecare-anchor')">العناية والمنظفات</button>
+    </nav>
+
+    <!-- القائمة الجانبية الرئيسي -->
+    <div id="albarakaMenuBackdrop" class="side-menu-backdrop" onclick="toggleAlbarakaMenu(false)"></div>
+    <aside id="albaraka-side-menu" class="side-menu-drawer" aria-label="القائمة الرئيسية">
+        <div class="side-menu-header">
+            <h3>القائمة الرئيسية</h3>
+            <button type="button" class="side-menu-close" aria-label="إغلاق القائمة" onclick="toggleAlbarakaMenu(false)">✕</button>
+        </div>
+
+        <ul class="side-menu-list">
+            <li>
+                <button type="button" class="side-menu-btn" onclick="navigateFromMenu('top')">
+                    <span>الصفحة الرئيسية</span>
+                    <span class="side-menu-arrow">←</span>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="side-menu-btn" onclick="navigateFromMenu('categories')">
+                    <span>الفئات السريعة</span>
+                    <span class="side-menu-arrow">←</span>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="side-menu-btn" onclick="navigateFromMenu('cart')">
+                    <span>سلة المشتريات</span>
+                    <span class="side-menu-arrow">←</span>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="side-menu-btn" onclick="navigateFromMenu('bakery-hero-anchor')">
+                    <span>المخبوزات الطازجة</span>
+                    <span class="side-menu-arrow">←</span>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="side-menu-btn" onclick="navigateFromMenu('services-anchor-box')">
+                    <span>أوقات الدوام والتواصل</span>
+                    <span class="side-menu-arrow">←</span>
+                </button>
+            </li>
+
+            <li class="side-menu-section-label">الأقسام المباشرة</li>
+
+            <li>
+                <button type="button" class="side-menu-btn" onclick="focusAndFilterAnchor('cold-drinks-anchor', 'cold_drinks')">
+                    <span>المشروبات الباردة</span>
+                    <span class="side-menu-arrow">←</span>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="side-menu-btn" onclick="focusAndFilterAnchor('dairy-anchor', 'dairy')">
+                    <span>الألبان والأجبان</span>
+                    <span class="side-menu-arrow">←</span>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="side-menu-btn" onclick="focusAndFilterAnchor('bakery-anchor', 'bakery')">
+                    <span>المخبوزات والحلويات</span>
+                    <span class="side-menu-arrow">←</span>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="side-menu-btn" onclick="focusAndFilterAnchor('grocery-anchor', 'grocery')">
+                    <span>مواد التموين</span>
+                    <span class="side-menu-arrow">←</span>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="side-menu-btn" onclick="focusAndFilterAnchor('sweets-anchor', 'sweets')">
+                    <span>حلويات ومسليات</span>
+                    <span class="side-menu-arrow">←</span>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="side-menu-btn" onclick="focusAndFilterAnchor('homecare-anchor', 'homecare')">
+                    <span>العناية والمنظفات</span>
+                    <span class="side-menu-arrow">←</span>
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- السلة الجانبية -->
+    <div id="cartOverlay" class="cart-overlay" onclick="toggleCartMenu(false)"></div>
+
+    <aside id="sidebarCart" class="sidebar-cart" aria-label="سلة المشتريات">
+        <div class="cart-top-header">
+            <h3>سلة المشتريات</h3>
+            <button type="button" aria-label="إغلاق السلة" onclick="toggleCartMenu(false)" class="cart-close-premium-btn">✕</button>
+        </div>
+
+        <div class="cart-scroll-area" id="cart-items-list-container"></div>
+
+        <div class="summary-total">
+            <span>المجموع الإجمالي:</span>
+            <span><strong id="cart-total-amount">0.00</strong> ₪</span>
+        </div>
+
+        <div class="cart-actions-footer">
+            <button type="button" class="checkout-btn" onclick="sendCartToWhatsApp()">إتمام الطلب عبر WhatsApp</button>
+            <button type="button" class="continue-shopping-btn" onclick="toggleCartMenu(false)">متابعة التسوق</button>
+        </div>
+    </aside>
+
+    <!-- السلايدر الرئيسي -->
+    <div id="promo-slider-anchor"></div>
+    <section class="magic-slider-wrapper">
+        <img id="main-dynamic-slide"
+             src="https://images.unsplash.com/photo-1601598851547-4302969d0614?q=80&w=1200&auto=format&fit=crop"
+             alt="دكانة طنقر اللقية">
+        <div class="slider-overlay-gradient"></div>
+
+        <div class="slider-content-layer">
+            <div id="magic-text-container">
+                <h2 id="slider-main-title">جودة مختارة بعناية</h2>
+                <div id="magic-line"></div>
+                <p id="slider-sub-title">شغفنا هو تقديم الأفضل، لأسلوب حياة صحي ومتميز</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- البحث السريع -->
+    <div id="tanqar-liquid-search-wrapper" dir="rtl">
+        <div class="liquid-search-bar-outer">
+            <div class="liquid-search-field">
+                <span class="liquid-search-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </span>
+                <input type="text" id="tanqarSearchInput" placeholder="ابحث عن منتج..." autocomplete="off" spellcheck="false" />
+                <button type="button" id="tanqarClearBtn" class="liquid-clear-btn" aria-label="مسح البحث">✕</button>
+            </div>
+            <button type="button" id="liquidCancelSearchBtn" class="liquid-cancel-btn">إلغاء</button>
+        </div>
+
+        <div id="tanqarSearchResults" class="liquid-dropdown-sheet"></div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <main id="main-container" class="main-container">
+        <div id="quick-categories-anchor" class="tanqar-liquid-dock">
+            <div class="tanqar-liquid-head">
+                <h3 class="tanqar-liquid-title">الأفضل بتكلفة أقل</h3>
+                <span class="tanqar-liquid-sub">اسحب للتنقل</span>
+            </div>
+
+            <div class="tanqar-liquid-grid">
+                <div class="liquid-cat-card liq-cold-drinks" onclick="smoothScrollTo('cold-drinks-anchor')">
+                    <div class="liquid-cat-orb">
+                        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=300&auto=format&fit=crop&q=60" alt="المشروبات الباردة" onerror="handleImgError(this)">
+                    </div>
+                    <span class="liquid-cat-name">المشروبات الباردة</span>
+                </div>
+
+                <div class="liquid-cat-card liq-dairy" onclick="smoothScrollTo('dairy-anchor')">
+                    <div class="liquid-cat-orb">
+                       <img src="https://media.istockphoto.com/id/1031348326/photo/fresh-dairy-products.jpg?s=2048x2048&w=is&k=20&c=ndFC_KdrczKeopimbfCFafBPwszDTVIWILqc777YsxU=" alt="الألبان والأجبان" onerror="handleImgError(this)">
+                    </div>
+                    <span class="liquid-cat-name">الألبان والأجبان</span>
+                </div>
+
+                <div class="liquid-cat-card liq-bakery" onclick="smoothScrollTo('bakery-anchor')">
+                    <div class="liquid-cat-orb">
+                        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&auto=format&fit=crop&q=60" alt="المخبوزات" onerror="handleImgError(this)">
+                    </div>
+                    <span class="liquid-cat-name">المخبوزات</span>
+                </div>
+
+                <div class="liquid-cat-card liq-grocery" onclick="smoothScrollTo('grocery-anchor')">
+                    <div class="liquid-cat-orb">
+                        <img src="https://media.istockphoto.com/id/1284074785/photo/non-perishable-foods-coming-out-a-paper-bag-copy-space.jpg?s=2048x2048&w=is&k=20&c=oNRuym5KMRrfiHfNVoXVFbXN0CeY-XFYSOT0SaKeePY=" alt="المواد التموينية" onerror="handleImgError(this)">
+                    </div>
+                    <span class="liquid-cat-name">مواد تموينية</span>
+                </div>
+
+                <div class="liquid-cat-card liq-sweets" onclick="smoothScrollTo('sweets-anchor')">
+                    <div class="liquid-cat-orb">
+                      <img src="https://media.istockphoto.com/id/639434416/photo/bar-of-dark-chocolate-close-up-and-variety-of-candy.jpg?s=2048x2048&w=is&k=20&c=aBKWFKjDpMFHDSLzr_A0zlaILSjG-Xgaty-s8qWmMNY=" alt="الحلويات" onerror="handleImgError(this)">
+                    </div>
+                    <span class="liquid-cat-name">الحلويات</span>
+                </div>
+
+                <div class="liquid-cat-card liq-homecare" onclick="smoothScrollTo('homecare-anchor')">
+                    <div class="liquid-cat-orb">
+                         <img src="https://media.istockphoto.com/id/1434398256/photo/basket-full-of-cleaning-products-and-tools-on-kitchen-counter.jpg?s=2048x2048&w=is&k=20&c=TUPR8DI9ukdCMFqzDuhjZf5j33_JjalmJwXz7YYyyoA=" alt="المنظفات" onerror="handleImgError(this)">
+                    </div>
+                    <span class="liquid-cat-name">المنظفات</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- بطاقة المخبوزات -->
+        <div id="bakery-hero-anchor" class="bakery-hero-card">
+            <div class="bakery-hero-content">
+                <span class="badge">خبز ساخن طوال اليوم</span>
+                <h2>كل أنواع الخبز متوفرة</h2>
+                <p>نوفر لكم أفضل جودة من الخبز اليومي الطازج، اطلبوا وخدمتنا دائمًا متوفرة لكم.</p>
+            </div>
+            <div class="bakery-hero-image"></div>
+        </div>
+
+        <!-- أقسام المنتجات الأساسية -->
+        <div id="core-categories-zone">
+            <section id="cold-drinks-anchor" class="core-category-section" data-cat-key="cold_drinks">
+                <h3 class="title-decorated">المشروبات الباردة</h3>
+                <div class="subcategory-filters">
+                    <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'cold_drinks', 'all')">الكل</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'cold_drinks', 'juices')">عصائر ومشروبات فواكه</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'cold_drinks', 'soda')">غازيات ومشروبات طاقة</button>
+                </div>
+                <div class="products-showcase" id="container-cold_drinks"></div>
+            </section>
+
+            <section id="dairy-anchor" class="core-category-section" data-cat-key="dairy">
+                <h3 class="title-decorated">الألبان والأجبان</h3>
+                <div class="subcategory-filters">
+                    <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'dairy', 'all')">الكل</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'dairy', 'white_cheese')">أجبان وألبان</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'dairy', 'yellow_cheese')">أجبان صفراء</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'dairy', 'yogurt')">حليب ويوغورت</button>
+                </div>
+                <div class="products-showcase" id="container-dairy"></div>
+            </section>
+
+            <section id="bakery-anchor" class="core-category-section" data-cat-key="bakery">
+                <h3 class="title-decorated">المخبوزات والحلويات اليومية</h3>
+                <div class="products-showcase" id="container-bakery"></div>
+            </section>
+
+            <section id="grocery-anchor" class="core-category-section" data-cat-key="grocery">
+                <h3 class="title-decorated">مواد التموين</h3>
+                <div class="subcategory-filters">
+                    <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'grocery', 'all')">الكل</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'grocery', 'rice_beans')">الحبوب والنشويات</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'grocery', 'canned')">المعلبات والصلصات</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'grocery', 'drinks')">المشروبات والقهوة</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'grocery', 'oils')">الزيوت</button>
+                </div>
+                <div class="products-showcase" id="container-grocery"></div>
+            </section>
+
+            <section id="sweets-anchor" class="core-category-section" data-cat-key="sweets">
+                <h3 class="title-decorated">حلويات ومسليات</h3>
+                <div class="subcategory-filters">
+                    <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'sweets', 'all')">الكل</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'sweets', 'chips')">شيبس ومقرمشات</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'sweets', 'chocolate')">شوكولاتة وحلويات</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'sweets', 'biscuits')">بسكويت</button>
+                </div>
+                <div class="products-showcase" id="container-sweets"></div>
+            </section>
+
+            <section id="homecare-anchor" class="core-category-section" data-cat-key="homecare">
+                <h3 class="title-decorated">العناية بالمنزل والمنظفات</h3>
+                <div class="subcategory-filters">
+                    <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'homecare', 'all')">الكل</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'homecare', 'laundry')">العناية بالملابس</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'homecare', 'cleaners')">المطهرات والمنظفات</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'homecare', 'papers')">المنتجات الورقية</button>
+                </div>
+                <div class="products-showcase" id="container-homecare"></div>
+            </section>
+        </div>
+
+        <!-- معلومات أوقات الدوام والتواصل -->
+        <section id="services-anchor-box" class="apple-hours-section" aria-label="أوقات الدوام والتواصل">
+            <div class="apple-hours-card">
+                <div class="apple-hours-top">
+                    <div class="apple-hours-label-group">
+                        <span class="apple-hours-icon-ring" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <polyline points="12 7 12 12 15.5 14"></polyline>
+                            </svg>
+                        </span>
+                        <div>
+                            <div class="apple-hours-title">أوقات الدوام</div>
+                            <div class="apple-hours-subtitle">طوال أيام الأسبوع • خدمة مستمرة</div>
+                        </div>
+                    </div>
+
+                    <div id="store-open-status-pill" class="apple-status-pill">
+                        <span class="apple-status-dot"></span>
+                        <span id="store-open-status-text">متاح الآن</span>
+                    </div>
+                </div>
+
+                <div class="apple-hours-timeline">
+                    <div class="apple-time-slot start">
+                        <span class="apple-time-caption">يبدأ الدوام</span>
+                        <span class="apple-time-value">07:00 صباحًا</span>
+                    </div>
+                    <div class="apple-time-divider" aria-hidden="true"></div>
+                    <div class="apple-time-slot end">
+                        <span class="apple-time-caption">يستمر حتى</span>
+                        <span class="apple-time-value">22:00 مساءً</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apple-actions-stack">
+                <a href="tel:0524310286" class="apple-action-btn">
+                    <span class="apple-action-left">
+                        <span class="apple-action-badge" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </span>
+                        <span>
+                            <span>اتصل بنا مباشرة</span>
+                            <span class="apple-action-sub">052-4310286</span>
+                        </span>
+                    </span>
+                    <span class="apple-action-chevron">←</span>
+                </a>
+
+                <a href="https://waze.com/ul?ll=31.3756,34.8648&navigate=yes" target="_blank" rel="noopener noreferrer" class="apple-action-btn">
+                    <span class="apple-action-left">
+                        <span class="apple-action-badge" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </span>
+                        <span>
+                            <span>الوصول عبر Waze</span>
+                            <span class="apple-action-sub">دكانة طنقر • اللقية</span>
+                        </span>
+                    </span>
+                    <span class="apple-action-chevron">←</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--luxury-black); color: #94a3b8; text-align: center; padding: 32px 20px calc(76px + var(--safe-bottom)); font-weight: 700; font-size: 14px;">
+        © 2026 دكانة طنقر • اللقية. تجربة تسوق سلسة ومريحة.
+    </footer>
+
+    <script>
+        // الصورة الاحتياطية المصممة أنيقاً
+        const FALLBACK_IMG = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23f1f5f9'/><path d='M160 120 L240 120 L220 190 L180 190 Z' fill='%230f766e' opacity='0.2'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Cairo' font-weight='800' font-size='20' fill='%230f766e'>دكانة طنقر</text></svg>";
+
+        // دالة حماية ومعالجة مسارات الصور على GitHub Pages بشكل دقيق وسريع
+        function handleImgError(imgElement) {
+            if (!imgElement || imgElement.dataset.hasFailed) {
+                imgElement.src = FALLBACK_IMG;
+                return;
+            }
+            imgElement.dataset.hasFailed = "true";
+            
+            let originalSrc = imgElement.getAttribute('src') || '';
+            
+            // إضافة نقطة ومسار نسبي إذا كان مفقوداً
+            if (originalSrc.startsWith('images/')) {
+                imgElement.src = './' + originalSrc;
+                return;
+            }
+            
+            // تجربة الامتدادات التبادلية بحال كانت غير مسبوقة
+            if (originalSrc.endsWith('.jpg')) {
+                imgElement.src = originalSrc.replace('.jpg', '.png');
+            } else if (originalSrc.endsWith('.png')) {
+                imgElement.src = originalSrc.replace('.png', '.webp');
+            } else if (originalSrc.endsWith('.webp')) {
+                imgElement.src = originalSrc.replace('.webp', '.jpg');
+            } else {
+                imgElement.src = FALLBACK_IMG;
+            }
+        }
+
+        const storeProductsDatabase = {
+             cold_drinks: [
+                 { id: 183, name: "كوكولا ", price: 7.00, sub: "juices", img: "images/w77.jpg" },
+                 { id: 184, name: "مشروب منعش", price: 7.00, sub: "juices", img: "images/w78.png" },
+                 { id: 185, name: "عصير فواكه", price: 7.00, sub: "juices", img: "images/w82.png" },
+                 { id: 187, name: "سبرايت ليمون", price: 7.00, sub: "soda", img: "images/w81.png" },
+                 { id: 188, name: "شويبس مشروب فواكة استوائية", price: 7.00, sub: "juices", img: "images/w82.png" },
+                 { id: 189, name: "شويبس مشروب التفاح", price: 7.00, sub: "juices", img: "images/w83.png" },
+                 { id: 194, name: "مشروب شويبس عنب", price: 7.00, sub: "juices", img: "images/w84.webp" },
+                 { id: 175, name: "عصير بارد", price: 7.00, sub: "juices", img: "images/w70.png" },
+                 { id: 176, name: "مشروب الطاقة", price: 7.00, sub: "soda", img: "images/w71.jpg" },
+                 { id: 177, name: "مشروب حمضيات", price: 7.00, sub: "soda", img: "images/w72.webp" },
+                 { id: 178, name: "ماء صودا", price: 7.00, sub: "soda", img: "images/w73.jpg" },
+                 { id: 180, name: "عصير طبيعي", price: 7.00, sub: "juices", img: "images/w74.jpg" },
+                 { id: 181, name: "مشروب غازي", price: 7.00, sub: "soda", img: "images/w75.jpg" },
+                 { id: 182, name: "عصير مكس", price: 7.00, sub: "juices", img: "images/w76.png" }
+             ],
+            dairy: [
+                { id: 101, name: "جبنة بيضاء بنسبة 9% دهون ", price: 7.00, sub: "white_cheese", img: "https://noyhasade.b-cdn.net/wp-content/uploads/2026/03/7290000047942_600.jpg" },
+                { id: 102, name: "حليب مدعم بنسبة 3% دهون", price: 9.00, sub: "yogurt", img: "https://noyhasade.b-cdn.net/wp-content/uploads/2020/09/7290107932080-600-fix.jpg" },
+                { id: 103, name: "جبنة صفراء شرائح فاخرة", price: 14.00, sub: "yellow_cheese", img: "https://images.unsplash.com/photo-1624806992066-5ffcf7ca186b?w=400" },
+                { id: 104, name: "جبنة قشقوان قالب ممتاز", price: 19.00, sub: "yellow_cheese", img: "https://images.unsplash.com/photo-1608686207856-001b95cf60ca?w=400" },
+                { id: 105, name: "حليب طازج كامل الدسم 1 لتر", price: 6.50, sub: "yogurt", img: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400" },
+                { id: 106, name: "لبن شمينت غني بالدسم", price: 3.50, sub: "yogurt", img: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400" },
+                { id: 107, name: "تيسع خوز مع حبه/קוטג", price: 7.00, sub: "white_cheese", img: "images/w1.jpg" },
+                { id: 108, name: "كوتج زتون/ קוטג זית", price: 7.00, sub: "white_cheese", img: "images/w2.WEBP‬‬" },
+                { id: 109, name: "קוטג / كوتج", price: 7.00, sub: "white_cheese", img: "images/w3.webp" },
+                { id: 110, name: "لبنه %5 / גבינה לבנה", price: 7.00, sub: "white_cheese", img: "images/w4.png" },
+                { id: 111, name: "קרם גבינת שמנת /شمينة طبيعية", price: 7.00, sub: "white_cheese", img: "images/w5.webp" },
+                { id: 112, name: "גבינה מותכת / جبنة العزابي", price: 4.00, sub: "white_cheese", img: "images/w6.jpg" },
+                { id: 113, name: "גבינה זיתים ירוקים / جبنة 200גרם ", price: 8.00, sub: "white_cheese", img: "images/w7.webp" },
+                { id: 114, name: "גבינה לבנה / جبنة بيضاء تيسع خوز بدون حبه", price: 7.00, sub: "white_cheese", img: "images/w8.webp" },
+                { id: 115, name: "גבנת שמנת / شمينت جبنه طبيعية دسم%25", price: 7.00, sub: "white_cheese", img: "images/w9.jpg" },
+                { id: 116, name: "جبنه / SKY Cheese", price: 7.00, sub: "white_cheese", img: "images/w10.webp" },
+                { id: 117, name: "شمينت عاديه%15دسم", price: 3.00, sub: "white_cheese", img: "images/w12.jpg" },
+                { id: 118, name: "كريمة كعك %32 دسم / שמנת מתוקה 250מ'ל", price: 5.00, sub: "white_cheese", img: "images/w13.jpg" },
+                { id: 119, name: "كريمة للطبخ %15 دسم / שמנת מתוקה 250מ'ל", price: 5.00, sub: "white_cheese", img: "images/w14.jpg" },
+                { id: 120, name: "شمينت %27 دسم", price: 5.00, sub: "white_cheese", img: "images/w15.jpg" },
+                { id: 121, name: "אשל תנובה לבן %4.5 שומן", price: 4.00, sub: "white_cheese", img: "images/w16.jpg" },
+                { id: 122, name: "حليب شتراوس 2لتر/ חלב מועשר 2לטר", price: 7.00, sub: "yogurt", img: "images/w17.png" },
+                { id: 123, name: "حليب شتراوس 1 لتر 1%دسم / חלב מועשר 1 לטר %1 שומן ", price: 7.00, sub: "yogurt", img: "images/w18.webp" },
+                { id: 124, name: "حليب شتراوس 1 لتر 3%دسم / חלב מועשר 1 לטר 3% שומן ", price: 7.00, sub: "yogurt", img: "images/w19.png" },
+                { id: 125, name: "נטול לקטוז חלב %2שומן 1לטר", price: 7.00, sub: "yogurt", img: "images/w20.jpg" },
+                { id: 126, name: "חלב טרה 2% שומן حليب ", price: 7.00, sub: "yogurt", img: "images/w21.webp" },
+                { id: 127, name: "حليب %4 دسم", price: 7.00, sub: "yogurt", img: "images/w22.jpg" },
+                { id: 128, name: "حليب طازا %3 دسم", price: 7.00, sub: "yogurt", img: "images/w23.jpg" },
+                { id: 129, name: "شوكه 1 لتر /שוקו ", price: 10.00, sub: "yogurt", img: "images/w24.png" },
+                { id: 130, name: "שוקו /شوكه صغيره", price: 5.00, sub: "yogurt", img: "images/w25.jpg" },
+                { id: 131, name: "شوكو صغيره%1.5 دسم", price: 3.00, sub: "yogurt", img: "images/w26.png" },
+                { id: 132, name: "PRO / مشروب القهوة مع بروتين", price: 8.00, sub: "yogurt", img: "images/w27.jpg" },
+                { id: 133, name: "GO /مشروب قهوة مثلج ", price: 8.00, sub: "yogurt", img: "images/w28.jpg" },
+                { id: 134, name: "حمص صغير ", price: 5.00, sub: "white_cheese", img: "images/w29.webp" },
+                { id: 135, name: "דני /برلة صفراء", price: 3.00, sub: "yogurt", img: "images/w30.jpg" },
+                { id: 136, name: "برلة سوداء /דני", price: 3.00, sub: "yogurt", img: "images/w31.jpg" },
+                { id: 137, name: "حلوه مغطاة بشكلاته %4.5 دهون / דנןנה", price: 5.00, sub: "yogurt", img: "images/w32.jpg" },
+                { id: 138, name: "برلة زبادي بنكهة الفراوله %3 دهون", price: 3.00, sub: "yogurt", img: "images/w33.png" },
+                { id: 139, name: "برلة مع شكولاته الراس", price: 7.00, sub: "yogurt", img: "images/w34.webp" },
+                { id: 140, name: "برله بدون شكلاتة الراس", price: 5.00, sub: "yogurt", img: "images/w35.jpg" },
+                { id: 141, name: "גמאדים / قماديم اطفال ", price: 3.00, sub: "yogurt", img: "images/w36.png" },
+                { id: 142, name: "yaplait / مشروب الفراولة ", price: 5.00, sub: "yogurt", img: "images/w37.jpg" },
+                { id: 143, name: "مشروب زبادي דנונה", price: 7.00, sub: "yogurt", img: "images/w38.jpg" }
+            ],
+            grocery: [
+                { id: 301, name: "زيت ذرة نقي عالي الجودة", price: 35.00, sub: "oils", img: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400" },
+                { id: 302, name: "أرز بسمتي حبة طويلة 5 كجم", price: 45.00, sub: "rice_beans", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400" },
+                { id: 303, name: "صلصة طماطم عبوة توفيرية", price: 5.00, sub: "canned", img: "https://images.unsplash.com/photo-1582284540020-8acbe03f4924?w=400" },
+                { id: 304, name: "مكرونة سباجيتي إيطالية", price: 4.50, sub: "rice_beans", img: "https://images.unsplash.com/photo-1551462147-37885acc36f1?w=400" },
+                { id: 305, name: "سكر أبيض نقي ناعم 1 كجم", price: 4.00, sub: "drinks", img: "https://images.unsplash.com/photo-1581441363689-1f3c3c414635?w=400" },
+                { id: 306, name: "قهوة عربية مطحونة بالهيل", price: 20.00, sub: "drinks", img: "https://images.unsplash.com/photo-1559525839-b184a4d698c7?w=400" },
+                { id: 307, name: "علبة تونة بالزيت نخب أول", price: 6.50, sub: "canned", img: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=400" },
+                { id: 308, name: "عدس مجروش فاخر للشوربة", price: 8.00, sub: "rice_beans", img: "https://images.unsplash.com/photo-1515942400420-2b98fed1f515?w=400" },
+                { id: 309, name: "عدس للشوربة", price: 10.00, sub: "rice_beans", img: "https://mosbatesabz.com/mag/wp-content/uploads/2024/07/lentils-1.jpg" }
+            ],
+            bakery: [
+                { id: 401, name: "خبز قمح كامل طازج ساخن", price: 8.00, sub: "all", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400" },
+                { id: 402, name: "كرواسون فرنسي بالزبدة الهشة", price: 5.00, sub: "all", img: "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=400" },
+                { id: 403, name: "كعك بالسمسم مقرمش بلدية", price: 12.00, sub: "all", img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400" },
+                { id: 404, name: "خبز حمام (صمون) للسندوتشات", price: 6.00, sub: "all", img: "https://images.unsplash.com/photo-1534620808146-d33bb39128b2?w=400" }
+            ],
+            sweets: [
+                { id: 501, name: "شوكولاتة فاخرة مشكلة كادبوري", price: 15.00, sub: "chocolate", img: "https://images.unsplash.com/photo-1548814971-12502693faaf?w=400" },
+                { id: 502, name: "بسكويت شاي سادة مقرمش عبوة ترويجية", price: 8.00, sub: "biscuits", img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400" },
+                { id: 503, name: "شيبس بطاطس طبيعي بنكهة الملح", price: 5.00, sub: "chips", img: "https://images.unsplash.com/photo-1566478989037-e924e50ba09c?w=400" },
+                { id: 504, name: "بقلاوة عربية مشكلة بالفستق الحلبي", price: 45.00, sub: "chocolate", img: "https://images.unsplash.com/photo-1534080391025-4979e831447d?w=400" }
+            ],
+            homecare: [
+                { id: 601, name: "سائل جلي مركز للأطباق فيري", price: 12.00, sub: "cleaners", img: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=400" },
+                { id: 602, name: "مسحوق غسيل أوتوماتيك اريال 5 كجم", price: 48.00, sub: "laundry", img: "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400" },
+                { id: 603, name: "منظف ومعطر أرضيات برائحة اللافندر", price: 15.00, sub: "cleaners", img: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400" },
+                { id: 604, name: "مناديل ورقية ناعمة عبوة توفيرية", price: 20.00, sub: "papers", img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400" }
+            ]
+        };
+
+        const INITIAL_SHOWCASE_LIMIT = 4;
+        const SHOW_MORE_STEP = 4;
+
+        const showcaseLimitsState = {
+            dairy: INITIAL_SHOWCASE_LIMIT,
+            cold_drinks: INITIAL_SHOWCASE_LIMIT,
+            grocery: INITIAL_SHOWCASE_LIMIT,
+            bakery: INITIAL_SHOWCASE_LIMIT,
+            sweets: INITIAL_SHOWCASE_LIMIT,
+            homecare: INITIAL_SHOWCASE_LIMIT
+        };
+
+        const activeSubFilters = {
+            dairy: 'all',
+            cold_drinks: 'all',
+            grocery: 'all',
+            bakery: 'all',
+            sweets: 'all',
+            homecare: 'all'
+        };
+
+        let userCartList = [];
+        let savedScrollY = 0;
+        let activeVisibleCategoryKey = null;
+
+        // ========================================================
+        // التحكم بقفل التمرير الآمن للهواتف (iOS & Android)
+        // ========================================================
+        function lockBodyScroll(lock) {
+            if (lock) {
+                if (document.body.dataset.scrollLocked === 'true') return;
+                savedScrollY = window.scrollY || window.pageYOffset || 0;
+                document.body.dataset.scrollLocked = 'true';
+                document.body.style.position = 'fixed';
+                document.body.style.top = `-${savedScrollY}px`;
+                document.body.style.left = '0';
+                document.body.style.right = '0';
+                document.body.style.width = '100%';
+            } else {
+                if (document.body.dataset.scrollLocked !== 'true') return;
+                document.body.dataset.scrollLocked = 'false';
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.left = '';
+                document.body.style.right = '';
+                document.body.style.width = '';
+                window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+            }
+        }
+
+        function syncBodyScrollLock() {
+            const menuOpen = document.getElementById('albaraka-side-menu')?.classList.contains('open');
+            const cartOpen = document.getElementById('sidebarCart')?.classList.contains('open');
+            const modalOpen = Boolean(document.getElementById('albaraka-sky-modal'));
+            lockBodyScroll(Boolean(menuOpen || cartOpen || modalOpen));
+        }
+
+        // ========================================================
+        // إدارة القائمة الرئيسية والتنقل السلس
+        // ========================================================
+        function toggleAlbarakaMenu(open) {
+            const drawer = document.getElementById('albaraka-side-menu');
+            const backdrop = document.getElementById('albarakaMenuBackdrop');
+            const cartOpen = document.getElementById('sidebarCart')?.classList.contains('open');
+
+            if (open && cartOpen) {
+                toggleCartMenu(false);
+            }
+
+            if (open) {
+                drawer.classList.add('open');
+                backdrop.classList.add('open');
+            } else {
+                drawer.classList.remove('open');
+                backdrop.classList.remove('open');
+            }
+            syncBodyScrollLock();
+        }
+
+        function smoothScrollTo(elementId) {
+            const target = document.getElementById(elementId);
+            if (!target) return;
+            const headerOffset = (document.querySelector('.custom-premium-header')?.offsetHeight || 74) + 14;
+            const baseScroll = document.body.dataset.scrollLocked === 'true' ? savedScrollY : window.scrollY;
+            const y = target.getBoundingClientRect().top + baseScroll - headerOffset;
+            window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+        }
+
+        function jumpToCoreCategory(anchorId) {
+            setActiveDockPill(anchorId);
+            smoothScrollTo(anchorId);
+        }
+
+        function setActiveDockPill(anchorId) {
+            document.querySelectorAll('#tanqar-core-floating-dock .core-dock-pill').forEach((pill) => {
+                const isMatch = pill.dataset.dockTarget === anchorId;
+                pill.classList.toggle('is-active', isMatch);
+                if (isMatch) {
+                    pill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
+            });
+        }
+
+        function navigateFromMenu(action) {
+            toggleAlbarakaMenu(false);
+            setTimeout(() => {
+                if (action === 'top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else if (action === 'cart') {
+                    toggleCartMenu(true);
+                } else if (action === 'categories') {
+                    smoothScrollTo('quick-categories-anchor');
+                } else {
+                    smoothScrollTo(action);
+                }
+            }, 180);
+        }
+
+        function focusAndFilterAnchor(anchorId, catKey) {
+            toggleAlbarakaMenu(false);
+            if (catKey && showcaseLimitsState[catKey] !== undefined) {
+                showcaseLimitsState[catKey] = INITIAL_SHOWCASE_LIMIT;
+                activeSubFilters[catKey] = 'all';
+                const section = document.getElementById(anchorId);
+                if (section) {
+                    section.querySelectorAll('.filter-btn').forEach((btn, idx) => {
+                        btn.classList.toggle('active', idx === 0);
+                    });
+                }
+                renderShowcaseCategory(catKey, 'all');
+            }
+            setActiveDockPill(anchorId);
+            setTimeout(() => smoothScrollTo(anchorId), 180);
+        }
+
+        // ========================================================
+        // عرض المنتجات وتفعيل خيار الإغلاق التلقائي ذكياً عند الانتقال
+        // ========================================================
+        function initializeAllShowcases() {
+            Object.keys(storeProductsDatabase).forEach(catKey => {
+                renderShowcaseCategory(catKey, 'all');
+            });
+        }
+
+        function escapeJsString(str) {
+            return String(str || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        }
+
+        function renderShowcaseCategory(catKey, subFilter) {
+            const container = document.getElementById(`container-${catKey}`);
+            if (!container) return;
+
+            activeSubFilters[catKey] = subFilter;
+            const rawProducts = storeProductsDatabase[catKey] || [];
+            const filtered = rawProducts.filter(item => subFilter === 'all' || item.sub === subFilter);
+
+            const currentLimit = Number.isInteger(showcaseLimitsState[catKey])
+                ? showcaseLimitsState[catKey]
+                : INITIAL_SHOWCASE_LIMIT;
+            const visibleCount = Math.min(currentLimit, filtered.length);
+            const productsToRender = filtered.slice(0, visibleCount);
+
+            container.innerHTML = '';
+
+            productsToRender.forEach(prod => {
+                const safeName = escapeJsString(prod.name || 'منتج دكانة طنقر');
+                const imgSrc = prod.img || FALLBACK_IMG;
+                const cardHTML = `
+                    <article class="premium-product-card" data-product-id="${prod.id}">
+                        <div class="product-img-frame">
+                            <img src="${imgSrc}" alt="${prod.name || 'منتج'}" loading="lazy"
+                                 onerror="handleImgError(this)">
+                        </div>
+                        <h4>${prod.name || 'منتج طازج'}</h4>
+                        <div class="card-footer">
+                            <span class="price-tag">${(prod.price || 0).toFixed(2)} ₪</span>
+                            <button type="button" class="circle-add-btn" aria-label="إضافة ${safeName}"
+                                    onclick="animateAndAddProduct(event, ${prod.id}, '${safeName}', ${prod.price})">+</button>
+                        </div>
+                    </article>
+                `;
+                container.insertAdjacentHTML('beforeend', cardHTML);
+            });
+
+            manageShowMoreButton(catKey, filtered.length, visibleCount);
+            if (typeof window.scanDynamicCards === 'function') {
+                window.scanDynamicCards();
+            }
+        }
+
+        function manageShowMoreButton(catKey, totalItems, visibleCount) {
+            const oldRow = document.getElementById(`btn-row-${catKey}`);
+            if (oldRow) oldRow.remove();
+
+            if (totalItems <= INITIAL_SHOWCASE_LIMIT) return;
+
+            const container = document.getElementById(`container-${catKey}`);
+            if (!container) return;
+
+            const remainingItems = totalItems - visibleCount;
+            const hasMore = remainingItems > 0;
+            const nextStepCount = Math.min(SHOW_MORE_STEP, remainingItems);
+            const canShowLess = visibleCount > INITIAL_SHOWCASE_LIMIT;
+
+            const moreBtnHTML = hasMore
+                ? `<button type="button" class="category-toggle-btn" onclick="handleShowMoreClick('${catKey}', ${totalItems})">عرض المزيد (+${nextStepCount})</button>`
+                : '';
+
+            const lessBtnHTML = canShowLess
+                ? `<button type="button" class="category-collapse-btn" onclick="handleCollapseCategory('${catKey}')">عرض أقل</button>`
+                : '';
+
+            const buttonHTML = `
+                <div id="btn-row-${catKey}" class="showcase-pagination-row">
+                    ${moreBtnHTML}
+                    ${lessBtnHTML}
+                </div>
+            `;
+            container.insertAdjacentHTML('afterend', buttonHTML);
+        }
+
+        function handleShowMoreClick(catKey, totalItems) {
+            if (showcaseLimitsState[catKey] === undefined) return;
+            const currentLimit = Number.isInteger(showcaseLimitsState[catKey])
+                ? showcaseLimitsState[catKey]
+                : INITIAL_SHOWCASE_LIMIT;
+
+            if (currentLimit < totalItems) {
+                showcaseLimitsState[catKey] = Math.min(currentLimit + SHOW_MORE_STEP, totalItems);
+                const currentSub = activeSubFilters[catKey] || 'all';
+                renderShowcaseCategory(catKey, currentSub);
+            }
+        }
+
+        function handleCollapseCategory(catKey) {
+            if (showcaseLimitsState[catKey] === undefined) return;
+            showcaseLimitsState[catKey] = INITIAL_SHOWCASE_LIMIT;
+            const currentSub = activeSubFilters[catKey] || 'all';
+            renderShowcaseCategory(catKey, currentSub);
+            const anchorId = `${catKey.replace('_', '-')}-anchor`;
+            smoothScrollTo(anchorId);
+        }
+
+        function autoCollapseOtherCategories(currentActiveKey) {
+            Object.keys(showcaseLimitsState).forEach(catKey => {
+                if (catKey !== currentActiveKey && showcaseLimitsState[catKey] > INITIAL_SHOWCASE_LIMIT) {
+                    showcaseLimitsState[catKey] = INITIAL_SHOWCASE_LIMIT;
+                    renderShowcaseCategory(catKey, activeSubFilters[catKey] || 'all');
+                }
+            });
+        }
+
+        function filterCategoryProducts(btnElement, catKey, subKey) {
+            showcaseLimitsState[catKey] = INITIAL_SHOWCASE_LIMIT;
+            const parent = btnElement.parentElement;
+            if (parent) {
+                parent.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            }
+            btnElement.classList.add('active');
+            renderShowcaseCategory(catKey, subKey);
+        }
+
+        // ========================================================
+        // مراقبة دخول وخروج الأقسام الأساسية لتفعيل القائمة العائمة وتفريغ الأقسام
+        // ========================================================
+        (function initCoreCategoriesFloatingDock() {
+            const dock = document.getElementById('tanqar-core-floating-dock');
+            const coreZone = document.getElementById('core-categories-zone');
+            const coreSections = Array.from(document.querySelectorAll('#core-categories-zone .core-category-section'));
+            if (!dock || !coreZone || !coreSections.length) return;
+
+            function syncFloatingDockState() {
+                const menuOpen = document.getElementById('albaraka-side-menu')?.classList.contains('open');
+                const cartOpen = document.getElementById('sidebarCart')?.classList.contains('open');
+                const modalOpen = Boolean(document.getElementById('albaraka-sky-modal'));
+
+                if (menuOpen || cartOpen || modalOpen) {
+                    dock.classList.remove('dock-visible');
+                    return;
+                }
+
+                const headerHeight = (document.querySelector('.custom-premium-header')?.offsetHeight || 74) + 18;
+                const zoneRect = coreZone.getBoundingClientRect();
+                const viewportH = window.innerHeight || document.documentElement.clientHeight;
+
+                const isInsideCoreZone = zoneRect.top < viewportH - 90 && zoneRect.bottom > headerHeight + 70;
+                dock.classList.toggle('dock-visible', isInsideCoreZone);
+
+                if (!isInsideCoreZone) return;
+
+                let activeSectionId = coreSections[0].id;
+                let activeCatKey = coreSections[0].dataset.catKey;
+                let minDistance = Infinity;
+
+                coreSections.forEach((sec) => {
+                    const rect = sec.getBoundingClientRect();
+                    const triggerLine = headerHeight + 80;
+                    const dist = Math.abs(rect.top - triggerLine);
+                    if (rect.top <= triggerLine + 140 && dist < minDistance) {
+                        minDistance = dist;
+                        activeSectionId = sec.id;
+                        activeCatKey = sec.dataset.catKey;
+                    }
+                });
+
+                if (activeCatKey && activeCatKey !== activeVisibleCategoryKey) {
+                    activeVisibleCategoryKey = activeCatKey;
+                    autoCollapseOtherCategories(activeCatKey);
+                }
+
+                document.querySelectorAll('#tanqar-core-floating-dock .core-dock-pill').forEach((pill) => {
+                    pill.classList.toggle('is-active', pill.dataset.dockTarget === activeSectionId);
+                });
+            }
+
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        syncFloatingDockState();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            window.addEventListener('resize', syncFloatingDockState, { passive: true });
+            window.addEventListener('DOMContentLoaded', () => setTimeout(syncFloatingDockState, 120));
+        })();
+
+        // ========================================================
+        // السلة وحركات طيران وتصغير المنتج الفخمة
+        // ========================================================
+        function toggleCartMenu(shouldOpen) {
+            const sidebar = document.getElementById('sidebarCart');
+            const overlay = document.getElementById('cartOverlay');
+            if (!sidebar || !overlay) return;
+
+            const menuOpen = document.getElementById('albaraka-side-menu')?.classList.contains('open');
+            if (shouldOpen && menuOpen) {
+                toggleAlbarakaMenu(false);
+            }
+
+            if (shouldOpen) {
+                sidebar.classList.add('open');
+                overlay.classList.add('active');
+            } else {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            }
+            syncBodyScrollLock();
+        }
+
+        function launchProductFlightFromPlusBtn(plusBtn, productImg, basketBtn) {
+            if (!plusBtn || !basketBtn) return;
+
+            const originRect = plusBtn.getBoundingClientRect();
+            const targetRect = basketBtn.getBoundingClientRect();
+            if (!originRect.width || !originRect.height || !targetRect.width) return;
+
+            const isMobile = window.innerWidth <= 768;
+            const flyerSize = isMobile ? 26 : 32;
+            const initialScale = 0.6;
+            const finalScale = isMobile ? 0.14 : 0.16;
+
+            const imgUrl = (productImg && (productImg.currentSrc || productImg.src)) || FALLBACK_IMG;
+            const flyer = document.createElement('div');
+            flyer.className = 'flying-product-premium';
+            flyer.style.width = `${flyerSize}px`;
+            flyer.style.height = `${flyerSize}px`;
+            flyer.innerHTML = `<img src="${imgUrl}" alt="" onerror="handleImgError(this)">`;
+            document.body.appendChild(flyer);
+
+            const startCenterX = originRect.left + originRect.width / 2;
+            const startCenterY = originRect.top + originRect.height / 2;
+            const targetCenterX = targetRect.left + targetRect.width / 2;
+            const targetCenterY = targetRect.top + targetRect.height / 2;
+
+            const arcLift = isMobile ? 25 : 40;
+            const duration = isMobile ? 550 : 640;
+            const startTime = performance.now();
+
+            function easeInOutCubic(t) {
+                return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            }
+
+            function step(now) {
+                const rawT = Math.min(1, (now - startTime) / duration);
+                const progress = easeInOutCubic(rawT);
+
+                const currentCenterX = startCenterX + (targetCenterX - startCenterX) * progress;
+                const arcOffset = -4 * arcLift * rawT * (1 - rawT);
+                const currentCenterY = startCenterY + (targetCenterY - startCenterY) * progress + arcOffset;
+
+                const scale = initialScale - (initialScale - finalScale) * Math.pow(rawT, 1.15);
+                const rotateDeg = (targetCenterX < startCenterX ? -1 : 1) * 12 * progress;
+                const opacity = rawT < 0.75 ? 0.95 : Math.max(0, 0.95 * (1 - (rawT - 0.75) / 0.25));
+
+                const tx = currentCenterX - flyerSize / 2;
+                const ty = currentCenterY - flyerSize / 2;
+
+                flyer.style.transform = `translate3d(${tx.toFixed(1)}px, ${ty.toFixed(1)}px, 0) scale(${scale.toFixed(3)}) rotate(${rotateDeg.toFixed(1)}deg)`;
+                flyer.style.opacity = opacity.toFixed(3);
+
+                if (rawT < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    flyer.remove();
+                    basketBtn.classList.add('basket-catch-pulse');
+                    setTimeout(() => basketBtn.classList.remove('basket-catch-pulse'), 280);
+                }
+            }
+
+            requestAnimationFrame(step);
+        }
+
+        function animateAndAddProduct(event, id, name, price) {
+            const btnElement = event.currentTarget;
+            const basketBtn = document.getElementById('main-basket-btn');
+            const productCard = btnElement ? btnElement.closest('.premium-product-card') : null;
+
+            if (productCard) {
+                productCard.classList.add("island-pulse");
+                setTimeout(() => productCard.classList.remove("island-pulse"), 450);
+            }
+
+            const productImg = productCard ? productCard.querySelector('.product-img-frame img') : null;
+            launchProductFlightFromPlusBtn(btnElement, productImg, basketBtn);
+
+            const existing = userCartList.find(item => item.id === id);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                userCartList.push({ id, name, price, qty: 1 });
+            }
+
+            refreshCartInterface();
+        }
+
+        function refreshCartInterface() {
+            const cartItemsContainer = document.getElementById('cart-items-list-container');
+            const cartTotalElement = document.getElementById('cart-total-amount');
+            const mainBasketCount = document.getElementById('main-basket-count');
+
+            const totalItemsCount = userCartList.reduce((sum, item) => sum + item.qty, 0);
+            if (mainBasketCount) {
+                mainBasketCount.textContent = String(totalItemsCount);
+            }
+
+            saveCartToLocalStorage();
+
+            if (!cartItemsContainer) return;
+            cartItemsContainer.innerHTML = '';
+
+            if (userCartList.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div style="text-align: center; padding: 48px 20px; color: #94a3b8;">
+                        <p style="font-size: 15px; font-weight: 800;">سلتك فارغة حاليًا</p>
+                    </div>
+                `;
+                if (cartTotalElement) cartTotalElement.textContent = "0.00";
+                return;
+            }
+
+            let totalPriceSum = 0;
+
+            userCartList.forEach(item => {
+                const itemTotal = item.price * item.qty;
+                totalPriceSum += itemTotal;
+
+                const rowHTML = `
+                    <div class="cart-item-row">
+                        <div style="flex: 1; text-align: right;">
+                            <div style="font-size: 13px; font-weight: 800; color: #0f172a;">${item.name}</div>
+                            <div style="font-size: 12px; font-weight: 700; color: #0f766e;">${item.price.toFixed(2)} ₪</div>
+                        </div>
+                        <div class="cart-qty-box">
+                            <button type="button" class="cart-qty-btn" aria-label="تقليل الكمية" onclick="changeCartQty(${item.id}, -1)">-</button>
+                            <span style="font-size: 13px; font-weight: 900; min-width: 18px; text-align: center;">${item.qty}</span>
+                            <button type="button" class="cart-qty-btn" aria-label="زيادة الكمية" onclick="changeCartQty(${item.id}, 1)">+</button>
+                        </div>
+                        <div style="min-width: 68px; text-align: left; font-size: 13px; font-weight: 900; color: #0f172a;">
+                            ${itemTotal.toFixed(2)} ₪
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.insertAdjacentHTML('beforeend', rowHTML);
+            });
+
+            if (cartTotalElement) {
+                cartTotalElement.textContent = totalPriceSum.toFixed(2);
+            }
+        }
+
+        function changeCartQty(id, delta) {
+            const item = userCartList.find(entry => entry.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                userCartList = userCartList.filter(entry => entry.id !== id);
+            }
+            refreshCartInterface();
+        }
+
+        function saveCartToLocalStorage() {
+            try {
+                localStorage.setItem('tanqar_cart_v1', JSON.stringify(userCartList));
+            } catch (_) {}
+        }
+
+        function loadCartFromLocalStorage() {
+            try {
+                const raw = localStorage.getItem('tanqar_cart_v1');
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (Array.isArray(parsed)) {
+                        userCartList = parsed;
+                        refreshCartInterface();
+                    }
+                }
+            } catch (_) {}
+        }
+
+        // ========================================================
+        // إرسال الطلب عبر WhatsApp مع موقع Waze
+        // ========================================================
+        function sendCartToWhatsApp() {
+            if (!userCartList || userCartList.length === 0) {
+                alert("سلتك فارغة حاليًا، يرجى إضافة منتجات أولًا.");
+                return;
+            }
+
+            const existingModal = document.getElementById('albaraka-sky-modal');
+            if (existingModal) existingModal.remove();
+
+            let customerLat = "";
+            let customerLon = "";
+            let customerWazeURL = "";
+
+            const modalHTML = `
+                <div id="albaraka-sky-modal" style="position: fixed; inset: 0; background: rgba(2, 6, 23, 0.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 10020; padding: 16px;">
+                    <div style="background: #fffef0; border: 2px solid rgba(234, 179, 8, 0.65); width: 100%; max-width: 420px; padding: 26px 20px; border-radius: 24px; box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25); text-align: center;">
+                        <h3 style="margin: 0 0 14px; font-size: 19px; font-weight: 900; color: #854d0e;">إتمام طلبك من دكانة طنقر</h3>
+
+                        <div style="margin-bottom: 16px; text-align: right;">
+                            <label for="modal-cust-name" style="display: block; font-size: 13px; font-weight: 800; color: #713f12; margin-bottom: 6px;">الاسم الكامل:</label>
+                            <input type="text" id="modal-cust-name" placeholder="اكتب اسمك هنا..." style="width: 100%; padding: 12px 14px; border: 1.5px solid rgba(234, 179, 8, 0.45); border-radius: 14px; font-size: 14px; font-weight: 700; outline: none; background: #ffffff; color: #1e293b;">
+                        </div>
+
+                        <div style="margin-bottom: 20px; text-align: right;">
+                            <label style="display: block; font-size: 13px; font-weight: 800; color: #713f12; margin-bottom: 6px;">موقع التوصيل عبر Waze:</label>
+                            <button type="button" id="geo-location-btn" style="width: 100%; padding: 13px; border: 2px dashed #ca8a04; border-radius: 14px; background: rgba(254, 240, 138, 0.35); color: #854d0e; font-size: 13px; font-weight: 800; cursor: pointer;">
+                                مشاركة الموقع الجغرافي لفتح Waze
+                            </button>
+                            <div id="geo-status" style="font-size: 12px; font-weight: 800; margin-top: 8px; text-align: center; display: none;"></div>
+                        </div>
+
+                        <div style="display: flex; gap: 10px;">
+                            <button type="button" id="modal-submit-btn" style="flex: 1.4; background: linear-gradient(135deg, #eab308, #ca8a04); color: #1e293b; border: none; padding: 13px; border-radius: 999px; font-size: 14px; font-weight: 900; cursor: pointer;">
+                                إرسال عبر WhatsApp
+                            </button>
+                            <button type="button" id="modal-close-btn" style="flex: 0.6; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 13px; border-radius: 999px; font-size: 13px; font-weight: 800; cursor: pointer;">
+                                إلغاء
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            syncBodyScrollLock();
+
+            const modalElement = document.getElementById('albaraka-sky-modal');
+            const submitBtn = document.getElementById('modal-submit-btn');
+            const closeBtn = document.getElementById('modal-close-btn');
+            const locationBtn = document.getElementById('geo-location-btn');
+            const locationStatus = document.getElementById('geo-status');
+
+            const closeModal = () => {
+                modalElement.remove();
+                syncBodyScrollLock();
+            };
+
+            closeBtn.addEventListener('click', closeModal);
+
+            locationBtn.addEventListener('click', () => {
+                if (!navigator.geolocation) {
+                    locationStatus.style.display = "block";
+                    locationStatus.style.color = "#dc2626";
+                    locationStatus.textContent = "المتصفح لا يدعم تحديد الموقع تلقائيًا.";
+                    return;
+                }
+
+                locationStatus.style.display = "block";
+                locationStatus.style.color = "#a16207";
+                locationStatus.textContent = "جاري تحديد الموقع...";
+
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        customerLat = position.coords.latitude;
+                        customerLon = position.coords.longitude;
+                        customerWazeURL = `https://www.waze.com/ul?ll=${customerLat},${customerLon}&navigate=yes`;
+
+                        locationBtn.style.background = "#dcfce7";
+                        locationBtn.style.borderColor = "#16a34a";
+                        locationBtn.style.color = "#166534";
+                        locationBtn.textContent = "تم تحديد الموقع وربطه بـ Waze";
+
+                        locationStatus.style.color = "#166534";
+                        locationStatus.textContent = "الموقع جاهز للإرسال مع الطلب.";
+                    },
+                    (error) => {
+                        locationStatus.style.display = "block";
+                        locationStatus.style.color = "#dc2626";
+                        locationStatus.textContent = error.code === error.PERMISSION_DENIED
+                            ? "يرجى السماح بالوصول إلى الموقع الجغرافي."
+                            : "تعذر تحديد الموقع، حاول مرة أخرى.";
+                    },
+                    { enableHighAccuracy: true, timeout: 10000 }
+                );
+            });
+
+            submitBtn.addEventListener('click', () => {
+                const nameInput = document.getElementById('modal-cust-name');
+                const customerName = nameInput.value.trim();
+
+                if (!customerName) {
+                    nameInput.style.borderColor = "#dc2626";
+                    nameInput.focus();
+                    return;
+                }
+
+                if (!customerWazeURL) {
+                    locationBtn.style.borderColor = "#dc2626";
+                    locationStatus.style.display = "block";
+                    locationStatus.style.color = "#dc2626";
+                    locationStatus.textContent = "يرجى مشاركة الموقع الجغرافي أولًا.";
+                    return;
+                }
+
+                const storeWhatsAppNumber = "972524310286";
+                let messageText = `*طلب جديد من دكانة طنقر • اللقية*\n\n`;
+                messageText += `الاسم: ${customerName}\n`;
+                messageText += `رابط Waze: ${customerWazeURL}\n`;
+                messageText += `-----------------------------------\n`;
+
+                let finalTotal = 0;
+                userCartList.forEach((item, idx) => {
+                    const lineTotal = item.price * item.qty;
+                    finalTotal += lineTotal;
+                    messageText += `${idx + 1}) *${item.name}* (${item.qty} × ${item.price.toFixed(2)} ₪) = *${lineTotal.toFixed(2)} ₪*\n`;
+                });
+
+                messageText += `-----------------------------------\n`;
+                messageText += `الإجمالي: *${finalTotal.toFixed(2)} ₪*`;
+
+                const whatsappURL = `https://api.whatsapp.com/send?phone=${storeWhatsAppNumber}&text=${encodeURIComponent(messageText)}`;
+
+                userCartList = [];
+                refreshCartInterface();
+                closeModal();
+                toggleCartMenu(false);
+
+                window.open(whatsappURL, '_blank', 'noopener,noreferrer');
+            });
+        }
+
+        // ========================================================
+        // محرك البحث الفوري
+        // ========================================================
+        (function initSearchEngine() {
+            const searchWrapper = document.querySelector(".liquid-search-bar-outer");
+            const searchInput = document.getElementById("tanqarSearchInput");
+            const clearBtn = document.getElementById("tanqarClearBtn");
+            const cancelBtn = document.getElementById("liquidCancelSearchBtn");
+            const dropdown = document.getElementById("tanqarSearchResults");
+
+            if (!searchInput || !clearBtn || !dropdown) return;
+
+            function normalizeArabic(str) {
+                return (str || "")
+                    .toLowerCase()
+                    .replace(/[إأآا]/g, "ا")
+                    .replace(/ى/g, "ي")
+                    .replace(/ة/g, "ه")
+                    .replace(/[\u064B-\u065F]/g, "")
+                    .trim();
+            }
+
+            function collectAllProducts() {
+                const items = [];
+                Object.entries(storeProductsDatabase).forEach(([catKey, list]) => {
+                    list.forEach(prod => {
+                        if (!prod.name) return;
+                        items.push({
+                            ...prod,
+                            catKey,
+                            cleanName: normalizeArabic(prod.name)
+                        });
+                    });
+                });
+                return items;
+            }
+
+            function highlightMatch(title, query) {
+                const normTitle = normalizeArabic(title);
+                const normQuery = normalizeArabic(query);
+                const idx = normTitle.indexOf(normQuery);
+                if (idx === -1) return title;
+                return `${title.slice(0, idx)}<mark>${title.slice(idx, idx + query.length)}</mark>${title.slice(idx + query.length)}`;
+            }
+
+            function runSearch() {
+                const rawQuery = searchInput.value;
+                const cleanQuery = normalizeArabic(rawQuery);
+                clearBtn.classList.toggle("active", rawQuery.length > 0);
+
+                if (!cleanQuery) {
+                    dropdown.classList.remove("active");
+                    dropdown.innerHTML = "";
+                    return;
+                }
+
+                const matches = collectAllProducts().filter(p =>
+                    p.cleanName.split(/\s+/).some(w => w.startsWith(cleanQuery) || w.replace(/^ال/, "").startsWith(cleanQuery.replace(/^ال/, "")))
+                );
+
+                dropdown.innerHTML = "";
+
+                if (matches.length === 0) {
+                    dropdown.innerHTML = `<div class="liquid-empty-state">لا توجد منتجات مطابقة لـ "<strong>${rawQuery}</strong>"</div>`;
+                } else {
+                    matches.slice(0, 8).forEach(prod => {
+                        const div = document.createElement("div");
+                        div.className = "liquid-result-item";
+                        div.innerHTML = `
+                            <div class="liquid-item-right">
+                                <div class="liquid-item-img-wrapper">
+                                    <img src="${prod.img || FALLBACK_IMG}" class="liquid-item-img" alt="${prod.name}" onerror="handleImgError(this)">
+                                </div>
+                                <span class="liquid-item-title">${highlightMatch(prod.name, rawQuery)}</span>
+                            </div>
+                            <span class="liquid-item-btn">${prod.price.toFixed(2)} ₪</span>
+                        `;
+
+                        div.addEventListener("click", () => {
+                            dropdown.classList.remove("active");
+                            searchWrapper.classList.remove("focused");
+                            const catList = storeProductsDatabase[prod.catKey] || [];
+                            const prodIdx = catList.findIndex(item => item.id === prod.id && item.name === prod.name);
+                            const requiredLimit = prodIdx >= 0
+                                ? Math.ceil((prodIdx + 1) / SHOW_MORE_STEP) * SHOW_MORE_STEP
+                                : INITIAL_SHOWCASE_LIMIT;
+                            showcaseLimitsState[prod.catKey] = Math.max(INITIAL_SHOWCASE_LIMIT, requiredLimit);
+                            renderShowcaseCategory(prod.catKey, activeSubFilters[prod.catKey] || 'all');
+
+                            setTimeout(() => {
+                                const card = document.querySelector(`.premium-product-card[data-product-id="${prod.id}"]`);
+                                if (card) {
+                                    card.scrollIntoView({ behavior: "smooth", block: "center" });
+                                    card.classList.add("highlight-product-gold");
+                                    setTimeout(() => card.classList.remove("highlight-product-gold"), 2200);
+                                }
+                            }, 80);
+                        });
+
+                        dropdown.appendChild(div);
+                    });
+                }
+
+                dropdown.classList.add("active");
+            }
+
+            searchInput.addEventListener("focus", () => searchWrapper.classList.add("focused"));
+            searchInput.addEventListener("input", runSearch);
+
+            clearBtn.addEventListener("click", () => {
+                searchInput.value = "";
+                runSearch();
+                searchInput.focus();
+            });
+
+            cancelBtn.addEventListener("click", () => {
+                searchInput.value = "";
+                dropdown.classList.remove("active");
+                searchWrapper.classList.remove("focused");
+            });
+
+            document.addEventListener("click", (e) => {
+                if (!e.target.closest("#tanqar-liquid-search-wrapper")) {
+                    dropdown.classList.remove("active");
+                    if (!searchInput.value) searchWrapper.classList.remove("focused");
+                }
+            });
+        })();
+
+        // ========================================================
+        // تحديث حالة الدوام والظهور الانسيابي المباشر للبطاقات
+        // ========================================================
+        function updateWorkingHoursStatus() {
+            const pill = document.getElementById('store-open-status-pill');
+            const label = document.getElementById('store-open-status-text');
+            if (!pill || !label) return;
+
+            const now = new Date();
+            const minutesNow = now.getHours() * 60 + now.getMinutes();
+            const openMinutes = 7 * 60;
+            const closeMinutes = 22 * 60;
+            const isOpen = minutesNow >= openMinutes && minutesNow < closeMinutes;
+
+            pill.classList.toggle('is-closed', !isOpen);
+            label.textContent = isOpen ? 'مفتوح الآن' : 'مغلق حاليًا';
+        }
+
+        function initSmoothRevealObservers() {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            if (entry.target.id === 'services-anchor-box') {
+                                entry.target.classList.add('hours-visible');
+                            } else {
+                                entry.target.classList.add('island-visible');
+                            }
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.05, rootMargin: '0px 0px -10px 0px' }
+            );
+
+            window.scanDynamicCards = function () {
+                document.querySelectorAll('.premium-product-card, .liquid-cat-card, #services-anchor-box').forEach((el) => {
+                    if (!el.dataset.revealObserved) {
+                        el.dataset.revealObserved = 'true';
+                        observer.observe(el);
+                    }
+                });
+            };
+
+            window.scanDynamicCards();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initializeAllShowcases();
+            loadCartFromLocalStorage();
+            refreshCartInterface();
+            updateWorkingHoursStatus();
+            initSmoothRevealObservers();
+
+            const slides = [
+                {
+                    img: "https://images.unsplash.com/photo-1601598851547-4302969d0614?q=80&w=1200&auto=format&fit=crop",
+                    title: "جودة مختارة بعناية",
+                    sub: "شغفنا هو تقديم الأفضل، لأسلوب حياة صحي ومتميز"
+                },
+                {
+                    img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1200&auto=format&fit=crop&q=80",
+                    title: "مخبوزات طازجة يوميًا",
+                    sub: "أصناف متنوعة من الخبز والمعجنات الطازجة"
+                },
+                {
+                    img: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&auto=format&fit=crop",
+                    title: "تسوق أسرع وأسهل",
+                    sub: "اختر منتجاتك وأتمم طلبك مباشرة عبر واتساب"
+                }
+            ];
+
+            let currentIdx = 0;
+            const imgEl = document.getElementById('main-dynamic-slide');
+            const titleEl = document.getElementById('slider-main-title');
+            const subEl = document.getElementById('slider-sub-title');
+
+            if (imgEl && titleEl && subEl) {
+                setInterval(() => {
+                    imgEl.style.opacity = "0.25";
+                    setTimeout(() => {
+                        currentIdx = (currentIdx + 1) % slides.length;
+                        imgEl.src = slides[currentIdx].img;
+                        titleEl.textContent = slides[currentIdx].title;
+                        subEl.textContent = slides[currentIdx].sub;
+                        imgEl.style.opacity = "1";
+                    }, 350);
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>
