@@ -220,6 +220,88 @@
         }
 
         /* ========================================================
+           القائمة العائمة الذكية للفئات الأساسية فقط (Apple Dock)
+           ======================================================== */
+        #tanqar-core-floating-dock {
+            position: fixed;
+            bottom: calc(16px + var(--safe-bottom));
+            left: 50%;
+            transform: translate(-50%, 130%) scale(0.94);
+            max-width: min(760px, calc(100vw - 24px));
+            width: max-content;
+            padding: 7px 9px;
+            border-radius: 999px;
+            background: rgba(11, 63, 59, 0.84);
+            backdrop-filter: blur(26px) saturate(190%);
+            -webkit-backdrop-filter: blur(26px) saturate(190%);
+            border: 1px solid rgba(254, 240, 138, 0.34);
+            box-shadow:
+                0 18px 42px rgba(2, 6, 23, 0.28),
+                0 0 0 1px rgba(255, 255, 255, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.24);
+            z-index: 8500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            opacity: 0;
+            pointer-events: none;
+            transition:
+                transform 0.42s var(--ease-apple),
+                opacity 0.32s var(--ease-apple);
+            will-change: transform, opacity;
+        }
+
+        #tanqar-core-floating-dock::-webkit-scrollbar {
+            display: none;
+        }
+
+        #tanqar-core-floating-dock.dock-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, 0) scale(1);
+        }
+
+        .core-dock-pill {
+            position: relative;
+            flex: 0 0 auto;
+            border: 1px solid transparent;
+            background: rgba(255, 255, 255, 0.06);
+            color: #e2e8f0;
+            padding: 7px 14px;
+            border-radius: 999px;
+            font-size: 12.5px;
+            font-weight: 800;
+            cursor: pointer;
+            white-space: nowrap;
+            touch-action: manipulation;
+            transition:
+                background 0.26s var(--ease-apple),
+                color 0.26s var(--ease-apple),
+                transform 0.24s var(--ease-spring),
+                border-color 0.26s var(--ease-apple),
+                box-shadow 0.26s var(--ease-apple);
+        }
+
+        .core-dock-pill:hover {
+            background: rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .core-dock-pill:active {
+            transform: scale(0.95);
+        }
+
+        .core-dock-pill.is-active {
+            background: linear-gradient(135deg, #fef08a 0%, #eab308 100%);
+            color: var(--primary-dark);
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 6px 18px rgba(234, 179, 8, 0.35);
+        }
+
+        /* ========================================================
            القائمة الجانبية الرئيسية المنظمة (بدون إيموجيات)
            ======================================================== */
         .side-menu-backdrop {
@@ -637,7 +719,7 @@
         .main-container {
             max-width: 1240px;
             margin: 0 auto;
-            padding: 0 18px 40px;
+            padding: 0 18px 84px;
         }
 
         #quick-categories-anchor.tanqar-liquid-dock {
@@ -862,10 +944,10 @@
         .liq-sweets { --liq-tint: rgba(236, 72, 153, 0.15); --liq-accent: #be185d; --liq-glow: rgba(190, 24, 93, 0.16); --liq-border: rgba(190, 24, 93, 0.2); }
         .liq-homecare { --liq-tint: rgba(20, 184, 166, 0.16); --liq-accent: #0d9488; --liq-glow: rgba(13, 148, 136, 0.18); --liq-border: rgba(13, 148, 136, 0.2); }
 
-     .mobile-types-showcase,
-.mobile-types-showcase * {
-    display: none !important;
-}
+        .mobile-types-showcase,
+        .mobile-types-showcase * {
+            display: none !important;
+        }
 
         .bakery-hero-card {
             background: linear-gradient(135deg, #0f172a 0%, #042f2e 100%);
@@ -915,6 +997,10 @@
             background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&auto=format&fit=crop&q=80');
             background-size: cover;
             background-position: center;
+        }
+
+        .core-category-section {
+            scroll-margin-top: 94px;
         }
 
         .title-decorated {
@@ -1153,12 +1239,54 @@
             transform: scale(0.9);
         }
 
+        .showcase-pagination-row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 22px auto 10px;
+        }
+
         .category-toggle-btn {
-            padding: 11px 32px;
+            padding: 11px 28px;
             border-radius: 999px;
             font-size: 14px;
             font-weight: 800;
             cursor: pointer;
+        }
+
+        .category-collapse-btn {
+            padding: 11px 24px;
+            border-radius: 999px;
+            font-size: 13.5px;
+            font-weight: 800;
+            cursor: pointer;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(241, 245, 249, 0.75));
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            border: 1px solid rgba(11, 63, 59, 0.18);
+            color: var(--header-deep);
+            box-shadow:
+                0 8px 20px rgba(15, 23, 42, 0.06),
+                inset 0 1px 1px rgba(255, 255, 255, 0.95);
+            transition:
+                transform 0.3s var(--ease-apple),
+                box-shadow 0.3s var(--ease-apple),
+                border-color 0.3s var(--ease-apple),
+                color 0.25s ease;
+        }
+
+        .category-collapse-btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(212, 175, 55, 0.55);
+            color: var(--primary-solid);
+            box-shadow: 0 12px 24px rgba(11, 63, 59, 0.11);
+        }
+
+        .category-collapse-btn:active {
+            transform: scale(0.96);
         }
 
         /* ========================================================
@@ -1605,37 +1733,37 @@
             cursor: pointer;
         }
 
-       .flying-product-premium {
-    position: fixed;
-    z-index: 10050;
-    top: 0;
-    left: 0;
-    width: 32px;
-    height: 32px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(212, 175, 55, 0.45);
-    background: #ffffff;
-    pointer-events: none;
-    transform-origin: center center;
-    will-change: transform, opacity, border-radius;
-}
+        .flying-product-premium {
+            position: fixed;
+            z-index: 10050;
+            top: 0;
+            left: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 9px;
+            overflow: hidden;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(212, 175, 55, 0.45);
+            background: #ffffff;
+            pointer-events: none;
+            transform-origin: center center;
+            will-change: transform, opacity, border-radius;
+        }
 
-.flying-product-premium img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    padding: 2px;
-}
+        .flying-product-premium img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            padding: 2px;
+        }
 
-@media (max-width: 768px) {
-    .flying-product-premium {
-        width: 26px;
-        height: 26px;
-        border-radius: 8px;
-    }
-}
+        @media (max-width: 768px) {
+            .flying-product-premium {
+                width: 24px;
+                height: 24px;
+                border-radius: 7px;
+            }
+        }
 
         #tanqar-dynamic-island {
             position: fixed;
@@ -1689,6 +1817,15 @@
             #main-basket-btn {
                 padding: 8px 12px;
                 font-size: 13px;
+            }
+            #tanqar-core-floating-dock {
+                bottom: calc(12px + var(--safe-bottom));
+                padding: 6px 8px;
+                gap: 5px;
+            }
+            .core-dock-pill {
+                padding: 6px 12px;
+                font-size: 11.5px;
             }
             .magic-slider-wrapper {
                 height: 310px;
@@ -1913,6 +2050,16 @@
 
     <div class="header-spacer"></div>
 
+    <!-- القائمة العائمة للفئات الأساسية فقط (تظهر فقط داخل الأقسام الأساسية) -->
+    <nav id="tanqar-core-floating-dock" aria-label="تنقل سريع بين الفئات الأساسية">
+        <button type="button" class="core-dock-pill is-active" data-dock-target="cold-drinks-anchor" onclick="jumpToCoreCategory('cold-drinks-anchor')">المشروبات الباردة</button>
+        <button type="button" class="core-dock-pill" data-dock-target="dairy-anchor" onclick="jumpToCoreCategory('dairy-anchor')">الألبان والأجبان</button>
+        <button type="button" class="core-dock-pill" data-dock-target="bakery-anchor" onclick="jumpToCoreCategory('bakery-anchor')">المخبوزات والحلويات</button>
+        <button type="button" class="core-dock-pill" data-dock-target="grocery-anchor" onclick="jumpToCoreCategory('grocery-anchor')">مواد التموين</button>
+        <button type="button" class="core-dock-pill" data-dock-target="sweets-anchor" onclick="jumpToCoreCategory('sweets-anchor')">حلويات ومسليات</button>
+        <button type="button" class="core-dock-pill" data-dock-target="homecare-anchor" onclick="jumpToCoreCategory('homecare-anchor')">العناية والمنظفات</button>
+    </nav>
+
     <!-- القائمة الجانبية الموحدة بدون إيموجيات -->
     <div id="albarakaMenuBackdrop" class="side-menu-backdrop" onclick="toggleAlbarakaMenu(false)"></div>
     <aside id="albaraka-side-menu" class="side-menu-drawer" aria-label="القائمة الرئيسية">
@@ -2103,8 +2250,8 @@
                     <span class="liquid-cat-name">المنظفات</span>
                 </div>
             </div>
+        </div>
 
-          
         <!-- بطاقة المخبوزات -->
         <div id="bakery-hero-anchor" class="bakery-hero-card">
             <div class="bakery-hero-content">
@@ -2115,66 +2262,68 @@
             <div class="bakery-hero-image"></div>
         </div>
 
-        <!-- أقسام المنتجات -->
-        <section id="cold-drinks-anchor">
-            <h3 class="title-decorated">المشروبات الباردة</h3>
-            <div class="subcategory-filters">
-                <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'cold_drinks', 'all')">الكل</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'cold_drinks', 'juices')">عصائر ومشروبات فواكه</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'cold_drinks', 'soda')">غازيات ومشروبات طاقة</button>
-            </div>
-            <div class="products-showcase" id="container-cold_drinks"></div>
-        </section>
+        <!-- أقسام المنتجات الأساسية -->
+        <div id="core-categories-zone">
+            <section id="cold-drinks-anchor" class="core-category-section">
+                <h3 class="title-decorated">المشروبات الباردة</h3>
+                <div class="subcategory-filters">
+                    <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'cold_drinks', 'all')">الكل</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'cold_drinks', 'juices')">عصائر ومشروبات فواكه</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'cold_drinks', 'soda')">غازيات ومشروبات طاقة</button>
+                </div>
+                <div class="products-showcase" id="container-cold_drinks"></div>
+            </section>
 
-        <section id="dairy-anchor">
-            <h3 class="title-decorated">الألبان والأجبان</h3>
-            <div class="subcategory-filters">
-                <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'dairy', 'all')">الكل</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'dairy', 'white_cheese')">أجبان وألبان</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'dairy', 'yellow_cheese')">أجبان صفراء</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'dairy', 'yogurt')">حليب ويوغورت</button>
-            </div>
-            <div class="products-showcase" id="container-dairy"></div>
-        </section>
+            <section id="dairy-anchor" class="core-category-section">
+                <h3 class="title-decorated">الألبان والأجبان</h3>
+                <div class="subcategory-filters">
+                    <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'dairy', 'all')">الكل</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'dairy', 'white_cheese')">أجبان وألبان</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'dairy', 'yellow_cheese')">أجبان صفراء</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'dairy', 'yogurt')">حليب ويوغورت</button>
+                </div>
+                <div class="products-showcase" id="container-dairy"></div>
+            </section>
 
-        <section id="bakery-anchor">
-            <h3 class="title-decorated">المخبوزات والحلويات اليومية</h3>
-            <div class="products-showcase" id="container-bakery"></div>
-        </section>
+            <section id="bakery-anchor" class="core-category-section">
+                <h3 class="title-decorated">المخبوزات والحلويات اليومية</h3>
+                <div class="products-showcase" id="container-bakery"></div>
+            </section>
 
-        <section id="grocery-anchor">
-            <h3 class="title-decorated">مواد التموين</h3>
-            <div class="subcategory-filters">
-                <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'grocery', 'all')">الكل</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'grocery', 'rice_beans')">الحبوب والنشويات</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'grocery', 'canned')">المعلبات والصلصات</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'grocery', 'drinks')">المشروبات والقهوة</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'grocery', 'oils')">الزيوت</button>
-            </div>
-            <div class="products-showcase" id="container-grocery"></div>
-        </section>
+            <section id="grocery-anchor" class="core-category-section">
+                <h3 class="title-decorated">مواد التموين</h3>
+                <div class="subcategory-filters">
+                    <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'grocery', 'all')">الكل</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'grocery', 'rice_beans')">الحبوب والنشويات</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'grocery', 'canned')">المعلبات والصلصات</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'grocery', 'drinks')">المشروبات والقهوة</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'grocery', 'oils')">الزيوت</button>
+                </div>
+                <div class="products-showcase" id="container-grocery"></div>
+            </section>
 
-        <section id="sweets-anchor">
-            <h3 class="title-decorated">حلويات ومسليات</h3>
-            <div class="subcategory-filters">
-                <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'sweets', 'all')">الكل</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'sweets', 'chips')">شيبس ومقرمشات</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'sweets', 'chocolate')">شوكولاتة وحلويات</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'sweets', 'biscuits')">بسكويت</button>
-            </div>
-            <div class="products-showcase" id="container-sweets"></div>
-        </section>
+            <section id="sweets-anchor" class="core-category-section">
+                <h3 class="title-decorated">حلويات ومسليات</h3>
+                <div class="subcategory-filters">
+                    <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'sweets', 'all')">الكل</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'sweets', 'chips')">شيبس ومقرمشات</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'sweets', 'chocolate')">شوكولاتة وحلويات</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'sweets', 'biscuits')">بسكويت</button>
+                </div>
+                <div class="products-showcase" id="container-sweets"></div>
+            </section>
 
-        <section id="homecare-anchor">
-            <h3 class="title-decorated">العناية بالمنزل والمنظفات</h3>
-            <div class="subcategory-filters">
-                <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'homecare', 'all')">الكل</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'homecare', 'laundry')">العناية بالملابس</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'homecare', 'cleaners')">المطهرات والمنظفات</button>
-                <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'homecare', 'papers')">المنتجات الورقية</button>
-            </div>
-            <div class="products-showcase" id="container-homecare"></div>
-        </section>
+            <section id="homecare-anchor" class="core-category-section">
+                <h3 class="title-decorated">العناية بالمنزل والمنظفات</h3>
+                <div class="subcategory-filters">
+                    <button type="button" class="filter-btn active" onclick="filterCategoryProducts(this, 'homecare', 'all')">الكل</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'homecare', 'laundry')">العناية بالملابس</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'homecare', 'cleaners')">المطهرات والمنظفات</button>
+                    <button type="button" class="filter-btn" onclick="filterCategoryProducts(this, 'homecare', 'papers')">المنتجات الورقية</button>
+                </div>
+                <div class="products-showcase" id="container-homecare"></div>
+            </section>
+        </div>
 
         <!-- معلومات أوقات الدوام والتواصل بأسلوب Apple الفاخر الناعم -->
         <section id="services-anchor-box" class="apple-hours-section" aria-label="أوقات الدوام والتواصل">
@@ -2247,97 +2396,15 @@
         </section>
     </main>
 
-    <footer style="background: var(--luxury-black); color: #94a3b8; text-align: center; padding: 32px 20px calc(32px + var(--safe-bottom)); font-weight: 700; font-size: 14px;">
+    <footer style="background: var(--luxury-black); color: #94a3b8; text-align: center; padding: 32px 20px calc(76px + var(--safe-bottom)); font-weight: 700; font-size: 14px;">
         © 2026 دكانة طنقر • اللقية. تجربة تسوق سلسة ومريحة.
     </footer>
 
     <script>
         const FALLBACK_IMG = "https://placehold.co/400x300/0f766e/ffffff?text=دكانة+طنقر";
 
-   const storeProductsDatabase = {
-    dairy: [
-        
-     { id: 101, name: "جبنة بيضاء بنسبة 9% دهون ", price: 7.00, sub: "white_cheese", img: "https://noyhasade.b-cdn.net/wp-content/uploads/2026/03/7290000047942_600.jpg" },
-     { id: 102, name: "حليب مدعم بنسبة 3% دهون", price: 9.00, sub: "white_cheese", img: "https://noyhasade.b-cdn.net/wp-content/uploads/2020/09/7290107932080-600-fix.jpg" },
-     { id: 103, name: "جبنة صفراء شرائح فاخرة", price: 14.00, sub: "yellow_cheese", img: "https://images.unsplash.com/photo-1624806992066-5ffcf7ca186b?w=400" },
-     { id: 104, name: "جبنة قشقوان قالب ممتاز", price: 19.00, sub: "yellow_cheese", img: "https://images.unsplash.com/photo-1608686207856-001b95cf60ca?w=400" },
-     { id: 105, name: "حليب طازج كامل الدسم 1 لتر", price: 6.50, sub: "yogurt", img: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400" },
-     { id: 106, name: "لبن شمينت غني بالدسم", price: 3.50, sub: "yogurt", img: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400" },
-     { id: 107, name: "تيسع خوز مع حبه/קוטג", price: 7.00, sub: "white_cheese", img: "images/w1.jpg" },
-     { id: 108, name: "كوتج  زتون/ קוטג זית", price: 7.00, sub: "white_cheese", img: "images/w2.webp" },
-     { id: 109, name: "קוטג / كوتج", price: 7.00, sub: "white_cheese", img: "images/w3.webp" },
-     { id: 110, name: "لبنه %5 / גבינה לבנה", price: 7.00, sub: "white_cheese", img: "images/w4.png" },
-     { id: 111, name: "קרם גבינת שמנת /شمينة طبيعية", price: 7.00, sub: "white_cheese", img: "images/w5.webp" },
-     { id: 112, name: "גבינה מותכת / جبنة العزابي", price: 4.00, sub: "white_cheese", img: "images/w6.jpg" },
-     { id: 113, name: "גבינה זיתים ירוקים / جبنة 200גרם ", price: 8.00, sub: "white_cheese", img: "images/w7.webp" },
-     { id: 114, name: "גבינה לבנה / جبنة بيضاء تيسع خوز بدون حبه", price: 7.00, sub: "white_cheese", img: "images/w8.webp" },
-     { id: 115, name: "גבנת שמנת / شمينت جبنه طبيعية دسم%25", price: 7.00, sub: "white_cheese", img: "images/w9.jpg" },
-     { id: 116, name: "جبنه / SKY Cheese", price: 7.00, sub: "white_cheese", img: "images/w10.webp" },
-     { id: 117, name: "شمينت عاديه%15دسم", price: 3.00, sub: "white_cheese", img: "images/w12.jpg" },
-     { id: 118, name: "كريمة كعك %32 دسم / שמנת מתוקה 250מ'ל", price: 5.00, sub: "white_cheese", img: "images/w13.jpg" },
-     { id: 119, name: "كريمة للطبخ  %15 دسم / שמנת מתוקה 250מ'ל", price: 5.00, sub: "white_cheese", img: "images/w14.jpg" },
-     { id: 120, name: " شمينت %27 دسم", price: 5.00, sub: "white_cheese", img: "images/w15.jpg" },
-     { id: 121, name: "אשל תנובה לבן %4.5 שומן", price: 4.00, sub: "white_cheese", img: "images/w16.jpg" },
-     { id: 122, name: "حليب شتراوس 2لتر/ חלב מועשר 2לטר", price: 7.00, sub: "white_cheese", img: "images/w17.png" },
-     { id: 123, name: "حليب شتراوس 1 لتر 1%دسم / חלב מועשר 1 לטר %1 שומן ", price: 7.00, sub: "white_cheese", img: "images/w18.webp" },
-     { id: 124, name: "حليب شتراوس 1 لتر 3%دسم / חלב מועשר 1 לטר 3% שומן ", price: 7.00, sub: "white_cheese", img: "images/w19.png" },
-     { id: 125, name: "נטול לקטוז חלב %2שומן 1לטר", price: 7.00, sub: "white_cheese", img: "images/w20.jpg" },
-     { id: 126, name: "חלב טרה 2% שומן حليب ", price: 7.00, sub: "white_cheese", img: "images/w21.webp" },
-     { id: 127, name: "حليب %4 دسم", price: 7.00, sub: "white_cheese", img: "images/w22.jpg" },
-     { id: 128, name: "حليب طازا %3 دسم", price: 7.00, sub: "white_cheese", img: "images/w23.jpg" },
-     { id: 128, name: "شوكه 1 لتر /שוקו ", price: 10.00, sub: "white_cheese", img: "images/w24.png" },
-     { id: 128, name: "שוקו /شوكه صغيره", price: 5.00, sub: "white_cheese", img: "images/w25.jpg" },
-     { id: 128, name: "شوكو صغيره%1.5 دسم", price: 3.00, sub: "white_cheese", img: "images/w26.png" },
-     { id: 128, name: "PRO / مشروب القهوة مع بروتين", price: 8.00, sub: "white_cheese", img: "images/w27.jpg" },
-     { id: 129, name: "GO /مشروب قهوة مثلج ", price: 8.00, sub: "white_cheese", img: "images/w28.jpg" },
-     { id: 130, name: "حمص صغير ", price: 5.00, sub: "white_cheese", img: "images/w29.webp" },
-     { id: 131, name: "דני /برلة صفراء", price: 3.00, sub: "white_cheese", img: "images/w30.jpg" },
-     { id: 132, name: "برلة سوداء /דני", price: 3.00, sub: "white_cheese", img: "images/w31.jpg" },
-     { id: 133, name: "حلوه مغطاة بشكلاته %4.5 دهون / דנןנה", price: 5.00, sub: "white_cheese", img: "images/w32.jpg" },
-     { id: 134, name: "برلة زبادي بنكهة الفراوله %3 دهون", price: 3.00, sub: "white_cheese", img: "images/w33.png" },
-     { id: 135, name: "برلة مع شكولاته الراس", price: 7.00, sub: "white_cheese", img: "images/w34.webp" },
-     { id: 136, name: "برله بدون شكلاتة الراس", price: 5.00, sub: "white_cheese", img: "images/w35.jpg" },
-     { id: 137, name: "גמאדים / قماديم اطفال ", price: 3.00, sub: "white_cheese", img: "images/w36.png" },
-     { id: 138, name: "yaplait / مشروب الفراولة ", price: 5.00, sub: "white_cheese", img: "images/w37.jpg" },
-     { id: 139, name: "مشروب زبادي  דנונה", price: 7.00, sub: "white_cheese", img: "images/w38.jpg" },
-     { id: 140, name: "", price: 7.00, sub: "white_cheese", img: "images/w39.jpg" },
-     { id: 141, name: "", price: 7.00, sub: "white_cheese", img: "images/w40.jpeg" }, 
-     { id: 142, name: "", price: 7.00, sub: "white_cheese", img: "images/w41.png" },
-     { id: 143, name: "", price: 7.00, sub: "white_cheese", img: "images/w42.jpg" },
-     { id: 144, name: "", price: 7.00, sub: "white_cheese", img: "images/w43.jpg" },
-     { id: 145, name: "", price: 7.00, sub: "white_cheese", img: "images/w44.jpg" },  
-     { id: 146, name: "", price: 7.00, sub: "white_cheese", img: "images/w45.jpg" },
-     { id: 147, name: "", price: 7.00, sub: "white_cheese", img: "images/w46.jpg" },
-     { id: 148, name: "", price: 7.00, sub: "white_cheese", img: "images/w47.jpg" },
-     { id: 149, name: "", price: 7.00, sub: "white_cheese", img: "images/w48.jpg" },
-     { id: 150, name: "", price: 7.00, sub: "white_cheese", img: "images/w49.jpg" },
-     { id: 151, name: "", price: 7.00, sub: "white_cheese", img: "images/w50.jpg" },
-     { id: 152, name: "", price: 7.00, sub: "white_cheese", img: "images/w51.jpg" },
-     { id: 156, name: "", price: 7.00, sub: "white_cheese", img: "images/w52.jpg" },
-     { id: 157, name: "", price: 7.00, sub: "white_cheese", img: "images/w53.jpg" },
-     { id: 158, name: "", price: 7.00, sub: "white_cheese", img: "images/w54.jpg" },
-     { id: 159, name: "", price: 7.00, sub: "white_cheese", img: "images/w55.jpg" },
-     { id: 160, name: "", price: 7.00, sub: "white_cheese", img: "images/w56.png" },
-     { id: 161, name: "", price: 7.00, sub: "white_cheese", img: "images/w57.png" },
-     { id: 162, name: "", price: 7.00, sub: "white_cheese", img: "images/w58.jpg" },
-     { id: 163, name: "", price: 7.00, sub: "white_cheese", img: "images/w59.jpg" },
-     { id: 164, name: "", price: 7.00, sub: "white_cheese", img: "images/w60.jpg" },
-     { id: 165, name: "", price: 7.00, sub: "white_cheese", img: "images/w61.jpg" },
-     { id: 166, name: "", price: 7.00, sub: "white_cheese", img: "images/w62.webp" },
-     { id: 167, name: "", price: 7.00, sub: "white_cheese", img: "images/w63.jpg" }, 
-     { id: 170, name: "", price: 7.00, sub: "white_cheese", img: "images/w64.jpg" },
-     { id: 170, name: "", price: 7.00, sub: "white_cheese", img: "images/w65.jpg" },
-     { id: 170, name: "", price: 7.00, sub: "white_cheese", img: "images/w66.jpg" },
-     { id: 172, name: "", price: 7.00, sub: "white_cheese", img: "images/w67.webp" },
-     { id: 173, name: "", price: 7.00, sub: "white_cheese", img: "images/w68.jpg" },
-     { id: 174, name: "", price: 7.00, sub: "white_cheese", img: "images/w69.png" },
-     { id: 175, name: "", price: 7.00, sub: "white_cheese", img: "images/w70.png" },
-     { id: 176, name: "", price: 7.00, sub: "white_cheese", img: "images/w71.jpg" },
-     { id: 177, name: "", price: 7.00, sub: "white_cheese", img: "images/w72.webp" },
-     { id: 178, name: "", price: 7.00, sub: "white_cheese", img: "images/w73.jpg" },
-     { id: 180, name: "", price: 7.00, sub: "white_cheese", img: "images/w74.jpg" },
-     { id: 181, name: "", price: 7.00, sub: "white_cheese", img: "images/w75.jpg" },
-     { id: 182, name: "", price: 7.00, sub: "white_cheese", img: "images/w76.png" },
+        const storeProductsDatabase = {
+             cold_drinks: [
      { id: 183, name: "", price: 7.00, sub: "white_cheese", img: "images/w77.jpg" },
      { id: 184, name: "", price: 7.00, sub: "white_cheese", img: "images/w78.png" },
      { id: 185, name: "", price: 7.00, sub: "white_cheese", img: "images/w79.png" },
@@ -2346,6 +2413,15 @@
      { id: 188, name: "شويبس مشروب فواكة استوائية", price: 7.00, sub: "white_cheese", img: "images/w82.jpg" },
      { id: 189, name: "شويبس  مشرو التفاح", price: 7.00, sub: "white_cheese", img: "images/w83.jpg" },
      { id: 194, name: "مشروب شويبس عنب", price: 7.00, sub: "white_cheese", img: "images/w84.webp" },
+       { id: 175, name: "", price: 7.00, sub: "white_cheese", img: "images/w70.png" },
+     { id: 176, name: "", price: 7.00, sub: "white_cheese", img: "images/w71.jpg" },
+     { id: 177, name: "", price: 7.00, sub: "white_cheese", img: "images/w72.webp" },
+     { id: 178, name: "", price: 7.00, sub: "white_cheese", img: "images/w73.jpg" },
+     { id: 180, name: "", price: 7.00, sub: "white_cheese", img: "images/w74.jpg" },
+     { id: 181, name: "", price: 7.00, sub: "white_cheese", img: "images/w75.jpg" },
+     { id: 182, name: "", price: 7.00, sub: "white_cheese", img: "images/w76.png" },
+      { id: 173, name: "", price: 7.00, sub: "white_cheese", img: "images/w68.jpg" },
+     { id: 174, name: "", price: 7.00, sub: "white_cheese", img: "images/w69.png" },
      { id: 195, name: "", price: 7.00, sub: "white_cheese", img: "" },
      { id: 196, name: "", price: 7.00, sub: "white_cheese", img: "" },
      { id: 197, name: "", price: 7.00, sub: "white_cheese", img: "" },
@@ -2353,69 +2429,165 @@
      { id: 199, name: "", price: 7.00, sub: "white_cheese", img: "" },
      { id: 200, name: "", price: 7.00, sub: "white_cheese", img: "" }
  ],
-    vegetables: [
-        { id: 201, name: "بندورة حمراء بلدية طازجة", price: 5.50, sub: "daily_veg", img: "https://images.unsplash.com/photo-1595855759920-86582396756a?w=400" },
-        { id: 202, name: "خيار صنديد نخب أول", price: 4.50, sub: "daily_veg", img: "https://images.unsplash.com/photo-1604948501466-4e9c339b9c24?w=400" },
-        { id: 203, name: "بطاطا بيضاء للطهي والقلي", price: 5.00, sub: "daily_veg", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400" },
-        { id: 204, name: "تفاح أحمر سكري إيطالي", price: 9.00, sub: "fruits", img: "https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?w=400" },
-        { id: 205, name: "موز صومالي حلو المذاق", price: 6.00, sub: "fruits", img: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400" },
-        { id: 206, name: "برتقال عصير طازج", price: 4.00, sub: "fruits", img: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=400" },
-        { id: 207, name: "ضمة بقدونس مغسولة ونظيفة", price: 1.50, sub: "leafy", img: "https://images.unsplash.com/photo-1515252873117-d56f57ee97a1?w=400" },
-        { id: 208, name: "ضمة نعنع أخضر ذو رائحة زكية", price: 1.50, sub: "leafy", img: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" }
-    ],
-    grocery: [
-        { id: 301, name: "زيت ذرة نقي عالي الجودة", price: 35.00, sub: "oils", img: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400" },
-        { id: 302, name: "أرز بسمتي حبة طويلة 5 كجم", price: 45.00, sub: "rice_beans", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400" },
-        { id: 303, name: "صلصة طماطم عبوة توفيرية", price: 5.00, sub: "canned", img: "https://images.unsplash.com/photo-1582284540020-8acbe03f4924?w=400" },
-        { id: 304, name: "مكرونة سباجيتي إيطالية", price: 4.50, sub: "pasta", img: "https://images.unsplash.com/photo-1551462147-37885acc36f1?w=400" },
-        { id: 305, name: "سكر أبيض نقي ناعم 1 كجم", price: 4.00, sub: "drinks", img: "https://images.unsplash.com/photo-1581441363689-1f3c3c414635?w=400" },
-       
-        { id: 306, name: "قهوة عربية مطحونة بالهيل", price: 20.00, sub: "drinks", img: "https://images.unsplash.com/photo-1559525839-b184a4d698c7?w=400" },
-        { id: 307, name: "علبة تونة بالزيت نخب أول", price: 6.50, sub: "canned", img: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=400" },
-        { id: 308, name: "عدس مجروش فاخر للشوربة", price: 8.00, sub: "rice_beans", img: "https://images.unsplash.com/photo-1515942400420-2b98fed1f515?w=400" },
-        { id: 309, name: "عدس للشوربة", price: 10.00, sub: "rice_beans", img: "https://mosbatesabz.com/mag/wp-content/uploads/2024/07/lentils-1.jpg" }
-        
-
-    ],
-    bakery: [
-        { id: 401, name: "خبز قمح كامل طازج ساخن", price: 8.00, sub: "all", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400" },
-        { id: 402, name: "كرواسون فرنسي بالزبدة الهشة", price: 5.00, sub: "all", img: "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=400" },
-        { id: 403, name: "كعك بالسمسم مقرمش بلدية", price: 12.00, sub: "all", img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400" },
-        { id: 404, name: "خبز حمام (صمون) للسندوتشات", price: 6.00, sub: "all", img: "https://images.unsplash.com/photo-1534620808146-d33bb39128b2?w=400" }
-    ],
-    sweets: [
-        { id: 501, name: "شوكولاتة فاخرة مشكلة كادبوري", price: 15.00, sub: "all", img: "https://images.unsplash.com/photo-1548814971-12502693faaf?w=400" },
-        { id: 502, name: "بسكويت شاي سادة مقرمش عبوة ترويجية", price: 8.00, sub: "all", img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400" },
-        { id: 503, name: "شيبس بطاطس طبيعي بنكهة الملح", price: 5.00, sub: "all", img: "https://images.unsplash.com/photo-1566478989037-e924e50ba09c?w=400" },
-        { id: 504, name: "بقلاوة عربية مشكلة بالفستق الحلبي", price: 45.00, sub: "all", img: "https://images.unsplash.com/photo-1534080391025-4979e831447d?w=400" }
-    ],
-    homecare: [
-        { id: 601, name: "سائل جلي مركز للأطباق فيري", price: 12.00, sub: "all", img: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=400" },
-        { id: 602, name: "مسحوق غسيل أوتوماتيك اريال 5 كجم", price: 48.00, sub: "all", img: "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400" },
-        { id: 603, name: "منظف ومعطر أرضيات برائحة اللافندر", price: 15.00, sub: "all", img: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400" },
-        { id: 604, name: "مناديل ورقية ناعمة عبوة توفيرية", price: 20.00, sub: "all", img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400" }
-    ],
-    meats: [
-        { id: 701, name: "لحم خروف بلدي طازج مشفي", price: 85.00, sub: "red_meat", img: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?w=400" },
-        { id: 702, name: "شرائح ستيك عجل هولندي فاخر", price: 75.00, sub: "red_meat", img: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400" },
-        { id: 703, name: "صدر دجاج طازج نظيف ومسحب", price: 28.00, sub: "poultry", img: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400" },
-        { id: 704, name: "لحم مفروم عجل ناعم للكفتة والطهي", price: 60.00, sub: "red_meat", img: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=400" },
-        { id: 705, name: "شيش طاووق متبل بالخلطة الخاصة جاهز للشوي", price: 35.00, sub: "poultry", img: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400" },
-        { id: 706, name: "فخذ دجاج طازج مغسول ومنظف", price: 18.00, sub: "poultry", img: "https://images.unsplash.com/photo-1569395171110-23c902e5f980?w=400" },
-        { id: 707, name: "برجر بقري جامبو مجمد كيس عائلي", price: 40.00, sub: "frozen", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400" },
-        { id: 708, name: "أصابع كباب مجمدة مجهزة للشوي", price: 38.00, sub: "frozen", img: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400" }
-    ]
-};
+            dairy: [
+                { id: 101, name: "جبنة بيضاء بنسبة 9% دهون ", price: 7.00, sub: "white_cheese", img: "https://noyhasade.b-cdn.net/wp-content/uploads/2026/03/7290000047942_600.jpg" },
+                { id: 102, name: "حليب مدعم بنسبة 3% دهون", price: 9.00, sub: "white_cheese", img: "https://noyhasade.b-cdn.net/wp-content/uploads/2020/09/7290107932080-600-fix.jpg" },
+                { id: 103, name: "جبنة صفراء شرائح فاخرة", price: 14.00, sub: "yellow_cheese", img: "https://images.unsplash.com/photo-1624806992066-5ffcf7ca186b?w=400" },
+                { id: 104, name: "جبنة قشقوان قالب ممتاز", price: 19.00, sub: "yellow_cheese", img: "https://images.unsplash.com/photo-1608686207856-001b95cf60ca?w=400" },
+                { id: 105, name: "حليب طازج كامل الدسم 1 لتر", price: 6.50, sub: "yogurt", img: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400" },
+                { id: 106, name: "لبن شمينت غني بالدسم", price: 3.50, sub: "yogurt", img: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400" },
+                { id: 107, name: "تيسع خوز مع حبه/קוטג", price: 7.00, sub: "white_cheese", img: "images/w1.jpg" },
+                { id: 108, name: "كوتج  زتون/ קוטג זית", price: 7.00, sub: "white_cheese", img: "images/w2.webp" },
+                { id: 109, name: "קוטג / كوتج", price: 7.00, sub: "white_cheese", img: "images/w3.webp" },
+                { id: 110, name: "لبنه %5 / גבינה לבנה", price: 7.00, sub: "white_cheese", img: "images/w4.png" },
+                { id: 111, name: "קרם גבינת שמנת /شمينة طبيعية", price: 7.00, sub: "white_cheese", img: "images/w5.webp" },
+                { id: 112, name: "גבינה מותכת / جبنة العزابي", price: 4.00, sub: "white_cheese", img: "images/w6.jpg" },
+                { id: 113, name: "גבינה זיתים ירוקים / جبنة 200גרם ", price: 8.00, sub: "white_cheese", img: "images/w7.webp" },
+                { id: 114, name: "גבינה לבנה / جبنة بيضاء تيسع خوز بدون حبه", price: 7.00, sub: "white_cheese", img: "images/w8.webp" },
+                { id: 115, name: "גבנת שמנת / شمينت جبنه طبيعية دسم%25", price: 7.00, sub: "white_cheese", img: "images/w9.jpg" },
+                { id: 116, name: "جبنه / SKY Cheese", price: 7.00, sub: "white_cheese", img: "images/w10.webp" },
+                { id: 117, name: "شمينت عاديه%15دسم", price: 3.00, sub: "white_cheese", img: "images/w12.jpg" },
+                { id: 118, name: "كريمة كعك %32 دسم / שמנת מתוקה 250מ'ל", price: 5.00, sub: "white_cheese", img: "images/w13.jpg" },
+                { id: 119, name: "كريمة للطبخ  %15 دسم / שמנת מתוקה 250מ'ל", price: 5.00, sub: "white_cheese", img: "images/w14.jpg" },
+                { id: 120, name: " شمينت %27 دسم", price: 5.00, sub: "white_cheese", img: "images/w15.jpg" },
+                { id: 121, name: "אשל תנובה לבן %4.5 שומן", price: 4.00, sub: "white_cheese", img: "images/w16.jpg" },
+                { id: 122, name: "حليب شتراوس 2لتر/ חלב מועשר 2לטר", price: 7.00, sub: "white_cheese", img: "images/w17.png" },
+                { id: 123, name: "حليب شتراوس 1 لتر 1%دسم / חלב מועשר 1 לטר %1 שומן ", price: 7.00, sub: "white_cheese", img: "images/w18.webp" },
+                { id: 124, name: "حليب شتراوس 1 لتر 3%دسم / חלב מועשר 1 לטר 3% שומן ", price: 7.00, sub: "white_cheese", img: "images/w19.png" },
+                { id: 125, name: "נטול לקטוז חלב %2שומן 1לטר", price: 7.00, sub: "white_cheese", img: "images/w20.jpg" },
+                { id: 126, name: "חלב טרה 2% שומן حليب ", price: 7.00, sub: "white_cheese", img: "images/w21.webp" },
+                { id: 127, name: "حليب %4 دسم", price: 7.00, sub: "white_cheese", img: "images/w22.jpg" },
+                { id: 128, name: "حليب طازا %3 دسم", price: 7.00, sub: "white_cheese", img: "images/w23.jpg" },
+                { id: 128, name: "شوكه 1 لتر /שוקו ", price: 10.00, sub: "white_cheese", img: "images/w24.png" },
+                { id: 128, name: "שוקו /شوكه صغيره", price: 5.00, sub: "white_cheese", img: "images/w25.jpg" },
+                { id: 128, name: "شوكو صغيره%1.5 دسم", price: 3.00, sub: "white_cheese", img: "images/w26.png" },
+                { id: 128, name: "PRO / مشروب القهوة مع بروتين", price: 8.00, sub: "white_cheese", img: "images/w27.jpg" },
+                { id: 129, name: "GO /مشروب قهوة مثلج ", price: 8.00, sub: "white_cheese", img: "images/w28.jpg" },
+                { id: 130, name: "حمص صغير ", price: 5.00, sub: "white_cheese", img: "images/w29.webp" },
+                { id: 131, name: "דני /برلة صفراء", price: 3.00, sub: "white_cheese", img: "images/w30.jpg" },
+                { id: 132, name: "برلة سوداء /דני", price: 3.00, sub: "white_cheese", img: "images/w31.jpg" },
+                { id: 133, name: "حلوه مغطاة بشكلاته %4.5 دهون / דנןנה", price: 5.00, sub: "white_cheese", img: "images/w32.jpg" },
+                { id: 134, name: "برلة زبادي بنكهة الفراوله %3 دهون", price: 3.00, sub: "white_cheese", img: "images/w33.png" },
+                { id: 135, name: "برلة مع شكولاته الراس", price: 7.00, sub: "white_cheese", img: "images/w34.webp" },
+                { id: 136, name: "برله بدون شكلاتة الراس", price: 5.00, sub: "white_cheese", img: "images/w35.jpg" },
+                { id: 137, name: "גמאדים / قماديم اطفال ", price: 3.00, sub: "white_cheese", img: "images/w36.png" },
+                { id: 138, name: "yaplait / مشروب الفراولة ", price: 5.00, sub: "white_cheese", img: "images/w37.jpg" },
+                { id: 139, name: "مشروب زبادي  דנונה", price: 7.00, sub: "white_cheese", img: "images/w38.jpg" },
+                { id: 140, name: "", price: 7.00, sub: "white_cheese", img: "images/w39.jpg" },
+                { id: 141, name: "", price: 7.00, sub: "white_cheese", img: "images/w40.jpeg" }, 
+                { id: 142, name: "", price: 7.00, sub: "white_cheese", img: "images/w41.png" },
+                { id: 143, name: "", price: 7.00, sub: "white_cheese", img: "images/w42.jpg" },
+                { id: 144, name: "", price: 7.00, sub: "white_cheese", img: "images/w43.jpg" },
+                { id: 145, name: "", price: 7.00, sub: "white_cheese", img: "images/w44.jpg" },  
+                { id: 146, name: "", price: 7.00, sub: "white_cheese", img: "images/w45.jpg" },
+                { id: 147, name: "", price: 7.00, sub: "white_cheese", img: "images/w46.jpg" },
+                { id: 148, name: "", price: 7.00, sub: "white_cheese", img: "images/w47.jpg" },
+                { id: 149, name: "", price: 7.00, sub: "white_cheese", img: "images/w48.jpg" },
+                { id: 150, name: "", price: 7.00, sub: "white_cheese", img: "images/w49.jpg" },
+                { id: 151, name: "", price: 7.00, sub: "white_cheese", img: "images/w50.jpg" },
+                { id: 152, name: "", price: 7.00, sub: "white_cheese", img: "images/w51.jpg" },
+                { id: 156, name: "", price: 7.00, sub: "white_cheese", img: "images/w52.jpg" },
+                { id: 157, name: "", price: 7.00, sub: "white_cheese", img: "images/w53.jpg" },
+                { id: 158, name: "", price: 7.00, sub: "white_cheese", img: "images/w54.jpg" },
+                { id: 159, name: "", price: 7.00, sub: "white_cheese", img: "images/w55.jpg" },
+                { id: 160, name: "", price: 7.00, sub: "white_cheese", img: "images/w56.png" },
+                { id: 161, name: "", price: 7.00, sub: "white_cheese", img: "images/w57.png" },
+                { id: 162, name: "", price: 7.00, sub: "white_cheese", img: "images/w58.jpg" },
+                { id: 163, name: "", price: 7.00, sub: "white_cheese", img: "images/w59.jpg" },
+                { id: 164, name: "", price: 7.00, sub: "white_cheese", img: "images/w60.jpg" },
+                { id: 165, name: "", price: 7.00, sub: "white_cheese", img: "images/w61.jpg" },
+                { id: 166, name: "", price: 7.00, sub: "white_cheese", img: "images/w62.webp" },
+                { id: 167, name: "", price: 7.00, sub: "white_cheese", img: "images/w63.jpg" }, 
+                { id: 170, name: "", price: 7.00, sub: "white_cheese", img: "images/w64.jpg" },
+                { id: 170, name: "", price: 7.00, sub: "white_cheese", img: "images/w65.jpg" },
+                { id: 170, name: "", price: 7.00, sub: "white_cheese", img: "images/w66.jpg" },
+                { id: 172, name: "", price: 7.00, sub: "white_cheese", img: "images/w67.webp" },
+                { id: 173, name: "", price: 7.00, sub: "white_cheese", img: "images/w68.jpg" },
+                { id: 174, name: "", price: 7.00, sub: "white_cheese", img: "images/w69.png" },
+                { id: 175, name: "", price: 7.00, sub: "white_cheese", img: "images/w70.png" },
+                { id: 176, name: "", price: 7.00, sub: "white_cheese", img: "images/w71.jpg" },
+                { id: 177, name: "", price: 7.00, sub: "white_cheese", img: "images/w72.webp" },
+                { id: 178, name: "", price: 7.00, sub: "white_cheese", img: "images/w73.jpg" },
+                { id: 180, name: "", price: 7.00, sub: "white_cheese", img: "images/w74.jpg" },
+                { id: 181, name: "", price: 7.00, sub: "white_cheese", img: "images/w75.jpg" },
+                { id: 182, name: "", price: 7.00, sub: "white_cheese", img: "images/w76.png" },
+                { id: 183, name: "", price: 7.00, sub: "white_cheese", img: "images/w77.jpg" },
+                { id: 184, name: "", price: 7.00, sub: "white_cheese", img: "images/w78.png" },
+                { id: 185, name: "", price: 7.00, sub: "white_cheese", img: "images/w79.png" },
+                { id: 186, name: "فانتة برتقال", price: 7.00, sub: "white_cheese", img: "images/w80.png" },
+                { id: 187, name: "سبرايت ليمون", price: 7.00, sub: "white_cheese", img: "images/w81.jpg" },
+                { id: 188, name: "شويبس مشروب فواكة استوائية", price: 7.00, sub: "white_cheese", img: "images/w82.jpg" },
+                { id: 189, name: "شويبس  مشرو التفاح", price: 7.00, sub: "white_cheese", img: "images/w83.jpg" },
+                { id: 194, name: "مشروب شويبس عنب", price: 7.00, sub: "white_cheese", img: "images/w84.webp" },
+                { id: 195, name: "", price: 7.00, sub: "white_cheese", img: "" },
+                { id: 196, name: "", price: 7.00, sub: "white_cheese", img: "" },
+                { id: 197, name: "", price: 7.00, sub: "white_cheese", img: "" },
+                { id: 198, name: "", price: 7.00, sub: "white_cheese", img: "" },
+                { id: 199, name: "", price: 7.00, sub: "white_cheese", img: "" },
+                { id: 200, name: "", price: 7.00, sub: "white_cheese", img: "" }
+            ],
+            vegetables: [
+                { id: 201, name: "بندورة حمراء بلدية طازجة", price: 5.50, sub: "daily_veg", img: "https://images.unsplash.com/photo-1595855759920-86582396756a?w=400" },
+                { id: 202, name: "خيار صنديد نخب أول", price: 4.50, sub: "daily_veg", img: "https://images.unsplash.com/photo-1604948501466-4e9c339b9c24?w=400" },
+                { id: 203, name: "بطاطا بيضاء للطهي والقلي", price: 5.00, sub: "daily_veg", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400" },
+                { id: 204, name: "تفاح أحمر سكري إيطالي", price: 9.00, sub: "fruits", img: "https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?w=400" },
+                { id: 205, name: "موز صومالي حلو المذاق", price: 6.00, sub: "fruits", img: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400" },
+                { id: 206, name: "برتقال عصير طازج", price: 4.00, sub: "fruits", img: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=400" },
+                { id: 207, name: "ضمة بقدونس مغسولة ونظيفة", price: 1.50, sub: "leafy", img: "https://images.unsplash.com/photo-1515252873117-d56f57ee97a1?w=400" },
+                { id: 208, name: "ضمة نعنع أخضر ذو رائحة زكية", price: 1.50, sub: "leafy", img: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" }
+            ],
+            grocery: [
+                { id: 301, name: "زيت ذرة نقي عالي الجودة", price: 35.00, sub: "oils", img: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400" },
+                { id: 302, name: "أرز بسمتي حبة طويلة 5 كجم", price: 45.00, sub: "rice_beans", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400" },
+                { id: 303, name: "صلصة طماطم عبوة توفيرية", price: 5.00, sub: "canned", img: "https://images.unsplash.com/photo-1582284540020-8acbe03f4924?w=400" },
+                { id: 304, name: "مكرونة سباجيتي إيطالية", price: 4.50, sub: "pasta", img: "https://images.unsplash.com/photo-1551462147-37885acc36f1?w=400" },
+                { id: 305, name: "سكر أبيض نقي ناعم 1 كجم", price: 4.00, sub: "drinks", img: "https://images.unsplash.com/photo-1581441363689-1f3c3c414635?w=400" },
+                { id: 306, name: "قهوة عربية مطحونة بالهيل", price: 20.00, sub: "drinks", img: "https://images.unsplash.com/photo-1559525839-b184a4d698c7?w=400" },
+                { id: 307, name: "علبة تونة بالزيت نخب أول", price: 6.50, sub: "canned", img: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=400" },
+                { id: 308, name: "عدس مجروش فاخر للشوربة", price: 8.00, sub: "rice_beans", img: "https://images.unsplash.com/photo-1515942400420-2b98fed1f515?w=400" },
+                { id: 309, name: "عدس للشوربة", price: 10.00, sub: "rice_beans", img: "https://mosbatesabz.com/mag/wp-content/uploads/2024/07/lentils-1.jpg" }
+            ],
+            bakery: [
+                { id: 401, name: "خبز قمح كامل طازج ساخن", price: 8.00, sub: "all", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400" },
+                { id: 402, name: "كرواسون فرنسي بالزبدة الهشة", price: 5.00, sub: "all", img: "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=400" },
+                { id: 403, name: "كعك بالسمسم مقرمش بلدية", price: 12.00, sub: "all", img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400" },
+                    { id: 403, name: "كعك بالسمسم مقرمش بلدية", price: 12.00, sub: "all", img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400" },
+                { id: 404, name: "خبز حمام (صمون) للسندوتشات", price: 6.00, sub: "all", img: "https://images.unsplash.com/photo-1534620808146-d33bb39128b2?w=400" }
+            ],
+            sweets: [
+                { id: 501, name: "شوكولاتة فاخرة مشكلة كادبوري", price: 15.00, sub: "all", img: "https://images.unsplash.com/photo-1548814971-12502693faaf?w=400" },
+                { id: 502, name: "بسكويت شاي سادة مقرمش عبوة ترويجية", price: 8.00, sub: "all", img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400" },
+                { id: 503, name: "شيبس بطاطس طبيعي بنكهة الملح", price: 5.00, sub: "all", img: "https://images.unsplash.com/photo-1566478989037-e924e50ba09c?w=400" },
+                { id: 504, name: "بقلاوة عربية مشكلة بالفستق الحلبي", price: 45.00, sub: "all", img: "https://images.unsplash.com/photo-1534080391025-4979e831447d?w=400" }
+            ],
+            homecare: [
+                { id: 601, name: "سائل جلي مركز للأطباق فيري", price: 12.00, sub: "all", img: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=400" },
+                { id: 602, name: "مسحوق غسيل أوتوماتيك اريال 5 كجم", price: 48.00, sub: "all", img: "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400" },
+                { id: 603, name: "منظف ومعطر أرضيات برائحة اللافندر", price: 15.00, sub: "all", img: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400" },
+                { id: 604, name: "مناديل ورقية ناعمة عبوة توفيرية", price: 20.00, sub: "all", img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400" }
+            ],
+            meats: [
+                { id: 701, name: "لحم خروف بلدي طازج مشفي", price: 85.00, sub: "red_meat", img: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?w=400" },
+                { id: 702, name: "شرائح ستيك عجل هولندي فاخر", price: 75.00, sub: "red_meat", img: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400" },
+                { id: 703, name: "صدر دجاج طازج نظيف ومسحب", price: 28.00, sub: "poultry", img: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400" },
+                { id: 704, name: "لحم مفروم عجل ناعم للكفتة والطهي", price: 60.00, sub: "red_meat", img: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=400" },
+                { id: 705, name: "شيش طاووق متبل بالخلطة الخاصة جاهز للشوي", price: 35.00, sub: "poultry", img: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400" },
+                { id: 706, name: "فخذ دجاج طازج مغسول ومنظف", price: 18.00, sub: "poultry", img: "https://images.unsplash.com/photo-1569395171110-23c902e5f980?w=400" },
+                { id: 707, name: "برجر بقري جامبو مجمد كيس عائلي", price: 40.00, sub: "frozen", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400" },
+                { id: 708, name: "أصابع كباب مجمدة مجهزة للشوي", price: 38.00, sub: "frozen", img: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400" }
+            ]
+        };
 
         const INITIAL_SHOWCASE_LIMIT = 4;
+        const SHOW_MORE_STEP = 4;
 
         const showcaseLimitsState = {
-            dairy: false,
-            cold_drinks: false,
-            grocery: false,
-            bakery: false,
-            sweets: false,
-            homecare: false
+            dairy: INITIAL_SHOWCASE_LIMIT,
+            cold_drinks: INITIAL_SHOWCASE_LIMIT,
+            grocery: INITIAL_SHOWCASE_LIMIT,
+            bakery: INITIAL_SHOWCASE_LIMIT,
+            sweets: INITIAL_SHOWCASE_LIMIT,
+            homecare: INITIAL_SHOWCASE_LIMIT
         };
 
         const activeSubFilters = {
@@ -2493,6 +2665,21 @@
             window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
         }
 
+        function jumpToCoreCategory(anchorId) {
+            setActiveDockPill(anchorId);
+            smoothScrollTo(anchorId);
+        }
+
+        function setActiveDockPill(anchorId) {
+            document.querySelectorAll('#tanqar-core-floating-dock .core-dock-pill').forEach((pill) => {
+                const isMatch = pill.dataset.dockTarget === anchorId;
+                pill.classList.toggle('is-active', isMatch);
+                if (isMatch) {
+                    pill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
+            });
+        }
+
         function navigateFromMenu(action) {
             toggleAlbarakaMenu(false);
             setTimeout(() => {
@@ -2511,7 +2698,7 @@
         function focusAndFilterAnchor(anchorId, catKey) {
             toggleAlbarakaMenu(false);
             if (catKey && showcaseLimitsState[catKey] !== undefined) {
-                showcaseLimitsState[catKey] = false;
+                showcaseLimitsState[catKey] = INITIAL_SHOWCASE_LIMIT;
                 activeSubFilters[catKey] = 'all';
                 const section = document.getElementById(anchorId);
                 if (section) {
@@ -2521,6 +2708,7 @@
                 }
                 renderShowcaseCategory(catKey, 'all');
             }
+            setActiveDockPill(anchorId);
             setTimeout(() => smoothScrollTo(anchorId), 180);
         }
 
@@ -2545,7 +2733,7 @@
         }
 
         // ========================================================
-        // عرض المنتجات والتحكم بـ "عرض المزيد" المتوازن
+        // عرض المنتجات والتحكم بـ "عرض المزيد (+4)" و "عرض أقل"
         // ========================================================
         function initializeAllShowcases() {
             Object.keys(storeProductsDatabase).forEach(catKey => {
@@ -2565,8 +2753,11 @@
             const rawProducts = storeProductsDatabase[catKey] || [];
             const filtered = rawProducts.filter(item => subFilter === 'all' || item.sub === subFilter);
 
-            const isExpanded = Boolean(showcaseLimitsState[catKey]);
-            const productsToRender = isExpanded ? filtered : filtered.slice(0, INITIAL_SHOWCASE_LIMIT);
+            const currentLimit = Number.isInteger(showcaseLimitsState[catKey])
+                ? showcaseLimitsState[catKey]
+                : INITIAL_SHOWCASE_LIMIT;
+            const visibleCount = Math.min(currentLimit, filtered.length);
+            const productsToRender = filtered.slice(0, visibleCount);
 
             container.innerHTML = '';
 
@@ -2590,13 +2781,13 @@
                 container.insertAdjacentHTML('beforeend', cardHTML);
             });
 
-            manageShowMoreButton(catKey, filtered.length);
+            manageShowMoreButton(catKey, filtered.length, visibleCount);
             if (typeof window.scanDynamicCards === 'function') {
                 window.scanDynamicCards();
             }
         }
 
-        function manageShowMoreButton(catKey, totalItems) {
+        function manageShowMoreButton(catKey, totalItems, visibleCount) {
             const oldRow = document.getElementById(`btn-row-${catKey}`);
             if (oldRow) oldRow.remove();
 
@@ -2605,34 +2796,52 @@
             const container = document.getElementById(`container-${catKey}`);
             if (!container) return;
 
-            const isExpanded = Boolean(showcaseLimitsState[catKey]);
-            const remainingItems = totalItems - INITIAL_SHOWCASE_LIMIT;
+            const remainingItems = totalItems - visibleCount;
+            const hasMore = remainingItems > 0;
+            const nextStepCount = Math.min(SHOW_MORE_STEP, remainingItems);
+            const canShowLess = visibleCount > INITIAL_SHOWCASE_LIMIT;
+
+            const moreBtnHTML = hasMore
+                ? `<button type="button" class="category-toggle-btn" onclick="handleShowMoreClick('${catKey}', ${totalItems})">عرض المزيد (+${nextStepCount})</button>`
+                : '';
+
+            const lessBtnHTML = canShowLess
+                ? `<button type="button" class="category-collapse-btn" onclick="handleCollapseCategory('${catKey}')">عرض أقل</button>`
+                : '';
 
             const buttonHTML = `
-                <div id="btn-row-${catKey}" style="width: 100%; text-align: center; margin: 22px auto 10px;">
-                    <button type="button" class="category-toggle-btn" onclick="handleShowMoreClick('${catKey}')">
-                        ${isExpanded ? 'عرض أقل ⬆️' : `عرض المزيد (+${remainingItems}) ⬇️`}
-                    </button>
+                <div id="btn-row-${catKey}" class="showcase-pagination-row">
+                    ${moreBtnHTML}
+                    ${lessBtnHTML}
                 </div>
             `;
             container.insertAdjacentHTML('afterend', buttonHTML);
         }
 
-        function handleShowMoreClick(catKey) {
+        function handleShowMoreClick(catKey, totalItems) {
             if (showcaseLimitsState[catKey] === undefined) return;
-            const wasExpanded = showcaseLimitsState[catKey];
-            showcaseLimitsState[catKey] = !wasExpanded;
+            const currentLimit = Number.isInteger(showcaseLimitsState[catKey])
+                ? showcaseLimitsState[catKey]
+                : INITIAL_SHOWCASE_LIMIT;
 
-            const currentSub = activeSubFilters[catKey] || 'all';
-            renderShowcaseCategory(catKey, currentSub);
-
-            if (wasExpanded) {
-                smoothScrollTo(`${catKey.replace('_', '-')}-anchor`);
+            if (currentLimit < totalItems) {
+                showcaseLimitsState[catKey] = Math.min(currentLimit + SHOW_MORE_STEP, totalItems);
+                const currentSub = activeSubFilters[catKey] || 'all';
+                renderShowcaseCategory(catKey, currentSub);
             }
         }
 
+        function handleCollapseCategory(catKey) {
+            if (showcaseLimitsState[catKey] === undefined) return;
+            showcaseLimitsState[catKey] = INITIAL_SHOWCASE_LIMIT;
+            const currentSub = activeSubFilters[catKey] || 'all';
+            renderShowcaseCategory(catKey, currentSub);
+            const anchorId = `${catKey.replace('_', '-')}-anchor`;
+            smoothScrollTo(anchorId);
+        }
+
         function filterCategoryProducts(btnElement, catKey, subKey) {
-            showcaseLimitsState[catKey] = false;
+            showcaseLimitsState[catKey] = INITIAL_SHOWCASE_LIMIT;
             const parent = btnElement.parentElement;
             if (parent) {
                 parent.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -2640,6 +2849,67 @@
             btnElement.classList.add('active');
             renderShowcaseCategory(catKey, subKey);
         }
+
+        // ========================================================
+        // مراقبة دخول وخروج الأقسام الأساسية لتفعيل القائمة العائمة الذكية
+        // ========================================================
+        (function initCoreCategoriesFloatingDock() {
+            const dock = document.getElementById('tanqar-core-floating-dock');
+            const coreZone = document.getElementById('core-categories-zone');
+            const coreSections = Array.from(document.querySelectorAll('#core-categories-zone .core-category-section'));
+            if (!dock || !coreZone || !coreSections.length) return;
+
+            function syncFloatingDockState() {
+                const menuOpen = document.getElementById('albaraka-side-menu')?.classList.contains('open');
+                const cartOpen = document.getElementById('sidebarCart')?.classList.contains('open');
+                const modalOpen = Boolean(document.getElementById('albaraka-sky-modal'));
+
+                if (menuOpen || cartOpen || modalOpen) {
+                    dock.classList.remove('dock-visible');
+                    return;
+                }
+
+                const headerHeight = (document.querySelector('.custom-premium-header')?.offsetHeight || 74) + 18;
+                const zoneRect = coreZone.getBoundingClientRect();
+                const viewportH = window.innerHeight || document.documentElement.clientHeight;
+
+                const isInsideCoreZone = zoneRect.top < viewportH - 90 && zoneRect.bottom > headerHeight + 70;
+                dock.classList.toggle('dock-visible', isInsideCoreZone);
+
+                if (!isInsideCoreZone) return;
+
+                let activeSectionId = coreSections[0].id;
+                let minDistance = Infinity;
+
+                coreSections.forEach((sec) => {
+                    const rect = sec.getBoundingClientRect();
+                    const triggerLine = headerHeight + 80;
+                    const dist = Math.abs(rect.top - triggerLine);
+                    if (rect.top <= triggerLine + 140 && dist < minDistance) {
+                        minDistance = dist;
+                        activeSectionId = sec.id;
+                    }
+                });
+
+                document.querySelectorAll('#tanqar-core-floating-dock .core-dock-pill').forEach((pill) => {
+                    pill.classList.toggle('is-active', pill.dataset.dockTarget === activeSectionId);
+                });
+            }
+
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        syncFloatingDockState();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            window.addEventListener('resize', syncFloatingDockState, { passive: true });
+            window.addEventListener('DOMContentLoaded', () => setTimeout(syncFloatingDockState, 120));
+        })();
 
         // ========================================================
         // السلة وإدارة الكميات وحركة طيران وتصغير صورة المنتج للسلة
@@ -2675,92 +2945,93 @@
             }, 1800);
         }
 
-      function launchProductFlightToBasket(productImg, basketBtn) {
-    if (!productImg || !basketBtn) return;
+        function launchProductFlightFromPlusBtn(plusBtn, productImg, basketBtn) {
+            if (!plusBtn || !basketBtn) return;
 
-    const startRect = productImg.getBoundingClientRect();
-    const targetRect = basketBtn.getBoundingClientRect();
-    if (!startRect.width || !startRect.height || !targetRect.width) return;
+            const originRect = plusBtn.getBoundingClientRect();
+            const targetRect = basketBtn.getBoundingClientRect();
+            if (!originRect.width || !originRect.height || !targetRect.width) return;
 
-    const isMobile = window.innerWidth <= 768;
-    const flyerSize = isMobile ? 26 : 32;
-    const initialScale = isMobile ? 0.55 : 0.65;
-    const finalScale = isMobile ? 0.12 : 0.15;
+            const isMobile = window.innerWidth <= 768;
+            const flyerSize = isMobile ? 24 : 28;
+            const initialScale = 0.55;
+            const finalScale = isMobile ? 0.14 : 0.16;
 
-    const imgUrl = productImg.currentSrc || productImg.src || FALLBACK_IMG;
-    const flyer = document.createElement('div');
-    flyer.className = 'flying-product-premium';
-    flyer.style.width = `${flyerSize}px`;
-    flyer.style.height = `${flyerSize}px`;
-    flyer.innerHTML = `<img src="${imgUrl}" alt="">`;
-    document.body.appendChild(flyer);
+            const imgUrl = (productImg && (productImg.currentSrc || productImg.src)) || FALLBACK_IMG;
+            const flyer = document.createElement('div');
+            flyer.className = 'flying-product-premium';
+            flyer.style.width = `${flyerSize}px`;
+            flyer.style.height = `${flyerSize}px`;
+            flyer.innerHTML = `<img src="${imgUrl}" alt="">`;
+            document.body.appendChild(flyer);
 
-    const startCenterX = startRect.left + startRect.width / 2;
-    const startCenterY = startRect.top + startRect.height / 2;
-    const targetCenterX = targetRect.left + targetRect.width / 2;
-    const targetCenterY = targetRect.top + targetRect.height / 2;
+            const startCenterX = originRect.left + originRect.width / 2;
+            const startCenterY = originRect.top + originRect.height / 2;
+            const targetCenterX = targetRect.left + targetRect.width / 2;
+            const targetCenterY = targetRect.top + targetRect.height / 2;
 
-    const arcLift = isMobile ? 22 : 44;
-    const duration = isMobile ? 580 : 660;
-    const startTime = performance.now();
+            const arcLift = isMobile ? 20 : 36;
+            const duration = isMobile ? 540 : 620;
+            const startTime = performance.now();
 
-    function easeInOutCubic(t) {
-        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
+            function easeInOutCubic(t) {
+                return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            }
 
-    function step(now) {
-        const rawT = Math.min(1, (now - startTime) / duration);
-        const progress = easeInOutCubic(rawT);
+            function step(now) {
+                const rawT = Math.min(1, (now - startTime) / duration);
+                const progress = easeInOutCubic(rawT);
 
-        const currentCenterX = startCenterX + (targetCenterX - startCenterX) * progress;
-        const arcOffset = -4 * arcLift * rawT * (1 - rawT);
-        const currentCenterY = startCenterY + (targetCenterY - startCenterY) * progress + arcOffset;
+                const currentCenterX = startCenterX + (targetCenterX - startCenterX) * progress;
+                const arcOffset = -4 * arcLift * rawT * (1 - rawT);
+                const currentCenterY = startCenterY + (targetCenterY - startCenterY) * progress + arcOffset;
 
-        const scale = initialScale - (initialScale - finalScale) * Math.pow(rawT, 1.2);
-        const rotateDeg = (targetCenterX < startCenterX ? -1 : 1) * 8 * progress;
-        const opacity = rawT < 0.7 ? 0.92 : Math.max(0, 0.92 * (1 - (rawT - 0.7) / 0.3));
-        const radiusPx = 12 + (50 - 12) * progress;
+                const scale = initialScale - (initialScale - finalScale) * Math.pow(rawT, 1.15);
+                const rotateDeg = (targetCenterX < startCenterX ? -1 : 1) * 10 * progress;
+                const opacity = rawT < 0.72 ? 0.94 : Math.max(0, 0.94 * (1 - (rawT - 0.72) / 0.28));
+                const radiusPx = 14 + (50 - 14) * progress;
 
-        const tx = currentCenterX - flyerSize / 2;
-        const ty = currentCenterY - flyerSize / 2;
+                const tx = currentCenterX - flyerSize / 2;
+                const ty = currentCenterY - flyerSize / 2;
 
-        flyer.style.transform = `translate3d(${tx.toFixed(1)}px, ${ty.toFixed(1)}px, 0) scale(${scale.toFixed(3)}) rotate(${rotateDeg.toFixed(1)}deg)`;
-        flyer.style.borderRadius = `${radiusPx.toFixed(1)}%`;
-        flyer.style.opacity = opacity.toFixed(3);
+                flyer.style.transform = `translate3d(${tx.toFixed(1)}px, ${ty.toFixed(1)}px, 0) scale(${scale.toFixed(3)}) rotate(${rotateDeg.toFixed(1)}deg)`;
+                flyer.style.borderRadius = `${radiusPx.toFixed(1)}%`;
+                flyer.style.opacity = opacity.toFixed(3);
 
-        if (rawT < 1) {
+                if (rawT < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    flyer.remove();
+                    basketBtn.classList.add('basket-catch-pulse');
+                    setTimeout(() => basketBtn.classList.remove('basket-catch-pulse'), 280);
+                }
+            }
+
             requestAnimationFrame(step);
-        } else {
-            flyer.remove();
-            basketBtn.classList.add('basket-catch-pulse');
-            setTimeout(() => basketBtn.classList.remove('basket-catch-pulse'), 280);
         }
-    }
 
-    requestAnimationFrame(step);
-}
-       function animateAndAddProduct(event, id, name, price) {
-    const btnElement = event.currentTarget;
-    const basketBtn = document.getElementById('main-basket-btn');
-    const productCard = btnElement ? btnElement.closest('.premium-product-card') : null;
+        function animateAndAddProduct(event, id, name, price) {
+            const btnElement = event.currentTarget;
+            const basketBtn = document.getElementById('main-basket-btn');
+            const productCard = btnElement ? btnElement.closest('.premium-product-card') : null;
 
-    if (productCard) {
-        productCard.classList.add("island-pulse");
-        setTimeout(() => productCard.classList.remove("island-pulse"), 450);
-    }
+            if (productCard) {
+                productCard.classList.add("island-pulse");
+                setTimeout(() => productCard.classList.remove("island-pulse"), 450);
+            }
 
-    const productImg = productCard ? productCard.querySelector('.product-img-frame img') : null;
-    launchProductFlightToBasket(productImg, basketBtn);
+            const productImg = productCard ? productCard.querySelector('.product-img-frame img') : null;
+            launchProductFlightFromPlusBtn(btnElement, productImg, basketBtn);
 
-    const existing = userCartList.find(item => item.id === id);
-    if (existing) {
-        existing.qty += 1;
-    } else {
-        userCartList.push({ id, name, price, qty: 1 });
-    }
+            const existing = userCartList.find(item => item.id === id);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                userCartList.push({ id, name, price, qty: 1 });
+            }
 
-    refreshCartInterface();
-}
+            refreshCartInterface();
+        }
 
         function refreshCartInterface() {
             const cartItemsContainer = document.getElementById('cart-items-list-container');
@@ -2846,7 +3117,6 @@
             } catch (_) {}
         }
 
-        // إغلاق تلقائي للسلة عند الضغط خارجها على الهواتف والأجهزة اللوحية والحاسوب
         (function bindOutsideCartDismissal() {
             function handleOutsideDismiss(event) {
                 const sidebar = document.getElementById('sidebarCart');
@@ -3099,7 +3369,12 @@
                         div.addEventListener("click", () => {
                             dropdown.classList.remove("active");
                             searchWrapper.classList.remove("focused");
-                            showcaseLimitsState[prod.catKey] = true;
+                            const catList = storeProductsDatabase[prod.catKey] || [];
+                            const prodIdx = catList.findIndex(item => item.id === prod.id && item.name === prod.name);
+                            const requiredLimit = prodIdx >= 0
+                                ? Math.ceil((prodIdx + 1) / SHOW_MORE_STEP) * SHOW_MORE_STEP
+                                : INITIAL_SHOWCASE_LIMIT;
+                            showcaseLimitsState[prod.catKey] = Math.max(INITIAL_SHOWCASE_LIMIT, requiredLimit);
                             renderShowcaseCategory(prod.catKey, activeSubFilters[prod.catKey] || 'all');
 
                             setTimeout(() => {
@@ -3205,12 +3480,12 @@
                     sub: "شغفنا هو تقديم الأفضل، لأسلوب حياة صحي ومتميز"
                 },
                 {
-                    img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop",
+                    img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1200&auto=format&fit=crop&q=80",
                     title: "مخبوزات طازجة يوميًا",
                     sub: "أصناف متنوعة من الخبز والمعجنات الطازجة"
                 },
                 {
-                    img: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1200&auto=format&fit=crop",
+                    img: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&auto=format&fit=crop",
                     title: "تسوق أسرع وأسهل",
                     sub: "اختر منتجاتك وأتمم طلبك مباشرة عبر واتساب"
                 }
