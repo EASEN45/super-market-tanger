@@ -2070,7 +2070,7 @@
 
                 <div class="liquid-cat-card liq-dairy" onclick="smoothScrollTo('dairy-anchor')">
                     <div class="liquid-cat-orb">
-                        <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=300&auto=format&fit=crop&q=60" alt="الألبان والأجبان">
+                           <img src="https://media.istockphoto.com/id/1031348326/photo/fresh-dairy-products.jpg?s=2048x2048&w=is&k=20&c=ndFC_KdrczKeopimbfCFafBPwszDTVIWILqc777YsxU=" alt="الألبان والأجبان">
                     </div>
                     <span class="liquid-cat-name">الألبان والأجبان</span>
                 </div>
@@ -2084,21 +2084,21 @@
 
                 <div class="liquid-cat-card liq-grocery" onclick="smoothScrollTo('grocery-anchor')">
                     <div class="liquid-cat-orb">
-                        <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&auto=format&fit=crop&q=60" alt="مواد تموينية">
+                        <img src="https://media.istockphoto.com/id/1284074785/photo/non-perishable-foods-coming-out-a-paper-bag-copy-space.jpg?s=2048x2048&w=is&k=20&c=oNRuym5KMRrfiHfNVoXVFbXN0CeY-XFYSOT0SaKeePY=" alt="المواد التموينية">
                     </div>
                     <span class="liquid-cat-name">مواد تموينية</span>
                 </div>
 
                 <div class="liquid-cat-card liq-sweets" onclick="smoothScrollTo('sweets-anchor')">
                     <div class="liquid-cat-orb">
-                        <img src="https://images.unsplash.com/photo-1548814971-12502693faaf?w=300&auto=format&fit=crop&q=60" alt="الحلويات">
+                      <img src="https://media.istockphoto.com/id/639434416/photo/bar-of-dark-chocolate-close-up-and-variety-of-candy.jpg?s=2048x2048&w=is&k=20&c=aBKWFKjDpMFHDSLzr_A0zlaILSjG-Xgaty-s8qWmMNY=" alt="الحلويات">
                     </div>
                     <span class="liquid-cat-name">الحلويات</span>
                 </div>
 
                 <div class="liquid-cat-card liq-homecare" onclick="smoothScrollTo('homecare-anchor')">
                     <div class="liquid-cat-orb">
-                        <img src="https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=300&auto=format&fit=crop&q=60" alt="المنظفات">
+                         <img src="https://media.istockphoto.com/id/1434398256/photo/basket-full-of-cleaning-products-and-tools-on-kitchen-counter.jpg?s=2048x2048&w=is&k=20&c=TUPR8DI9ukdCMFqzDuhjZf5j33_JjalmJwXz7YYyyoA=" alt="المنظفات">
                     </div>
                     <span class="liquid-cat-name">المنظفات</span>
                 </div>
@@ -2254,68 +2254,158 @@
     <script>
         const FALLBACK_IMG = "https://placehold.co/400x300/0f766e/ffffff?text=دكانة+طنقر";
 
-        const storeProductsDatabase = {
-            dairy: [
-                { id: 101, name: "جبنة بيضاء 9% دهون", price: 7.00, sub: "white_cheese", img: "https://noyhasade.b-cdn.net/wp-content/uploads/2026/03/7290000047942_600.jpg" },
-                { id: 102, name: "حليب مدعم 3% دهون", price: 9.00, sub: "yogurt", img: "https://noyhasade.b-cdn.net/wp-content/uploads/2020/09/7290107932080-600-fix.jpg" },
-                { id: 103, name: "جبنة صفراء شرائح فاخرة", price: 14.00, sub: "yellow_cheese", img: "https://images.unsplash.com/photo-1624806992066-5ffcf7ca186b?w=400" },
-                { id: 104, name: "جبنة قشقوان قالب ممتاز", price: 19.00, sub: "yellow_cheese", img: "https://images.unsplash.com/photo-1608686207856-001b95cf60ca?w=400" },
-                { id: 105, name: "حليب طازج كامل الدسم 1 لتر", price: 6.50, sub: "yogurt", img: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400" },
-                { id: 106, name: "لبن شمينت غني بالدسم", price: 3.50, sub: "white_cheese", img: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400" },
-                { id: 107, name: "كوتج مع حبة / קוטג", price: 7.00, sub: "white_cheese", img: "images/w1.jpg" },
-                { id: 108, name: "كوتج زيتون / קוטג זית", price: 7.00, sub: "white_cheese", img: "images/w2.webp" },
-                { id: 109, name: "كوتج كلاسيك / קוטג", price: 7.00, sub: "white_cheese", img: "images/w3.webp" },
-                { id: 110, name: "لبنة 5% / גבינה לבנה", price: 7.00, sub: "white_cheese", img: "images/w4.jpg" },
-                { id: 111, name: "شمينة طبيعية / קרם גבינת שמנת", price: 7.00, sub: "white_cheese", img: "images/w5.webp" },
-                { id: 112, name: "جبنة مذابة / גבינה מותכת", price: 4.00, sub: "white_cheese", img: "images/w6.jpg" },
-                { id: 113, name: "جبنة زيتون أخضر 200 غرام", price: 8.00, sub: "white_cheese", img: "images/w7.webp" },
-                { id: 114, name: "جبنة بيضاء بدون حبة", price: 7.00, sub: "white_cheese", img: "images/w8.webp" },
-                { id: 115, name: "شمينت جبنة طبيعية 25% دسم", price: 7.00, sub: "white_cheese", img: "images/w9.jpg" },
-                { id: 116, name: "جبنة SKY Cheese", price: 7.00, sub: "white_cheese", img: "images/w10.webp" },
-                { id: 117, name: "شمينت عادية 15% دسم", price: 3.00, sub: "white_cheese", img: "images/w12.jpg" },
-                { id: 118, name: "كريمة حلويات 32% دسم 250 مل", price: 5.00, sub: "yogurt", img: "images/w13.jpg" },
-                { id: 119, name: "كريمة للطبخ 15% دسم 250 مل", price: 5.00, sub: "yogurt", img: "images/w14.jpg" },
-                { id: 120, name: "شمينت 27% دسم", price: 5.00, sub: "yogurt", img: "images/w15.jpg" }
-            ],
-            cold_drinks: [
-                { id: 186, name: "فانتا برتقال", price: 7.00, sub: "soda", img: "images/w80.png" },
-                { id: 187, name: "سبرايت ليمون", price: 7.00, sub: "soda", img: "images/w81.jpg" },
-                { id: 188, name: "شويبس مشروب فواكه استوائية", price: 7.00, sub: "juices", img: "images/w82.jpg" },
-                { id: 189, name: "شويبس مشروب التفاح", price: 7.00, sub: "juices", img: "images/w83.jpg" },
-                { id: 194, name: "مشروب شويبس عنب", price: 7.00, sub: "juices", img: "images/w84.webp" },
-                { id: 183, name: "مشروب بارد منعش 1", price: 7.00, sub: "soda", img: "images/w77.jpg" },
-                { id: 184, name: "مشروب بارد منعش 2", price: 7.00, sub: "soda", img: "images/w78.png" },
-                { id: 185, name: "مشروب بارد منعش 3", price: 7.00, sub: "soda", img: "images/w79.png" }
-            ],
-            grocery: [
-                { id: 301, name: "زيت ذرة نقي عالي الجودة", price: 35.00, sub: "oils", img: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400" },
-                { id: 302, name: "أرز بسمتي حبة طويلة 5 كجم", price: 45.00, sub: "rice_beans", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400" },
-                { id: 303, name: "صلصة طماطم عبوة توفيرية", price: 5.00, sub: "canned", img: "https://images.unsplash.com/photo-1582284540020-8acbe03f4924?w=400" },
-                { id: 304, name: "مكرونة سباجيتي إيطالية", price: 4.50, sub: "rice_beans", img: "https://images.unsplash.com/photo-1551462147-37885acc36f1?w=400" },
-                { id: 305, name: "سكر أبيض نقي ناعم 1 كجم", price: 4.00, sub: "drinks", img: "https://images.unsplash.com/photo-1581441363689-1f3c3c414635?w=400" },
-                { id: 306, name: "قهوة عربية مطحونة بالهيل", price: 20.00, sub: "drinks", img: "https://images.unsplash.com/photo-1559525839-b184a4d698c7?w=400" },
-                { id: 307, name: "علبة تونة بالزيت نخب أول", price: 6.50, sub: "canned", img: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=400" },
-                { id: 308, name: "عدس مجروش فاخر للشوربة", price: 8.00, sub: "rice_beans", img: "https://images.unsplash.com/photo-1515942400420-2b98fed1f515?w=400" }
-            ],
-            bakery: [
-                { id: 401, name: "خبز قمح كامل طازج ساخن", price: 8.00, sub: "all", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400" },
-                { id: 402, name: "كرواسون فرنسي بالزبدة الهشة", price: 5.00, sub: "all", img: "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=400" },
-                { id: 403, name: "كعك بالسمسم مقرمش", price: 12.00, sub: "all", img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400" },
-                { id: 404, name: "خبز صمون للسندوتشات", price: 6.00, sub: "all", img: "https://images.unsplash.com/photo-1534620808146-d33bb39128b2?w=400" }
-            ],
-            sweets: [
-                { id: 501, name: "شوكولاتة فاخرة مشكلة", price: 15.00, sub: "chocolate", img: "https://images.unsplash.com/photo-1548814971-12502693faaf?w=400" },
-                { id: 502, name: "بسكويت شاي سادة مقرمش", price: 8.00, sub: "biscuits", img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400" },
-                { id: 503, name: "شيبس بطاطس طبيعي بالملح", price: 5.00, sub: "chips", img: "https://images.unsplash.com/photo-1566478989037-e924e50ba09c?w=400" },
-                { id: 504, name: "بقلاوة مشكلة بالفستق", price: 45.00, sub: "chocolate", img: "https://images.unsplash.com/photo-1534080391025-4979e831447d?w=400" }
-            ],
-            homecare: [
-                { id: 601, name: "سائل جلي مركز للأطباق", price: 12.00, sub: "cleaners", img: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=400" },
-                { id: 602, name: "مسحوق غسيل أوتوماتيك 5 كجم", price: 48.00, sub: "laundry", img: "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400" },
-                { id: 603, name: "منظف ومعطر أرضيات باللافندر", price: 15.00, sub: "cleaners", img: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400" },
-                { id: 604, name: "مناديل ورقية ناعمة عبوة توفيرية", price: 20.00, sub: "papers", img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400" }
-            ]
-        };
+   const storeProductsDatabase = {
+    dairy: [
+        
+     { id: 101, name: "جبنة بيضاء بنسبة 9% دهون ", price: 7.00, sub: "white_cheese", img: "https://noyhasade.b-cdn.net/wp-content/uploads/2026/03/7290000047942_600.jpg" },
+     { id: 102, name: "حليب مدعم بنسبة 3% دهون", price: 9.00, sub: "white_cheese", img: "https://noyhasade.b-cdn.net/wp-content/uploads/2020/09/7290107932080-600-fix.jpg" },
+     { id: 103, name: "جبنة صفراء شرائح فاخرة", price: 14.00, sub: "yellow_cheese", img: "https://images.unsplash.com/photo-1624806992066-5ffcf7ca186b?w=400" },
+     { id: 104, name: "جبنة قشقوان قالب ممتاز", price: 19.00, sub: "yellow_cheese", img: "https://images.unsplash.com/photo-1608686207856-001b95cf60ca?w=400" },
+     { id: 105, name: "حليب طازج كامل الدسم 1 لتر", price: 6.50, sub: "yogurt", img: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400" },
+     { id: 106, name: "لبن شمينت غني بالدسم", price: 3.50, sub: "yogurt", img: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400" },
+     { id: 107, name: "تيسع خوز مع حبه/קוטג", price: 7.00, sub: "white_cheese", img: "images/w1.jpg" },
+     { id: 108, name: "كوتج  زتون/ קוטג זית", price: 7.00, sub: "white_cheese", img: "images/w2.webp" },
+     { id: 109, name: "קוטג / كوتج", price: 7.00, sub: "white_cheese", img: "images/w3.webp" },
+     { id: 110, name: "لبنه %5 / גבינה לבנה", price: 7.00, sub: "white_cheese", img: "images/w4.png" },
+     { id: 111, name: "קרם גבינת שמנת /شمينة طبيعية", price: 7.00, sub: "white_cheese", img: "images/w5.webp" },
+     { id: 112, name: "גבינה מותכת / جبنة العزابي", price: 4.00, sub: "white_cheese", img: "images/w6.jpg" },
+     { id: 113, name: "גבינה זיתים ירוקים / جبنة 200גרם ", price: 8.00, sub: "white_cheese", img: "images/w7.webp" },
+     { id: 114, name: "גבינה לבנה / جبنة بيضاء تيسع خوز بدون حبه", price: 7.00, sub: "white_cheese", img: "images/w8.webp" },
+     { id: 115, name: "גבנת שמנת / شمينت جبنه طبيعية دسم%25", price: 7.00, sub: "white_cheese", img: "images/w9.jpg" },
+     { id: 116, name: "جبنه / SKY Cheese", price: 7.00, sub: "white_cheese", img: "images/w10.webp" },
+     { id: 117, name: "شمينت عاديه%15دسم", price: 3.00, sub: "white_cheese", img: "images/w12.jpg" },
+     { id: 118, name: "كريمة كعك %32 دسم / שמנת מתוקה 250מ'ל", price: 5.00, sub: "white_cheese", img: "images/w13.jpg" },
+     { id: 119, name: "كريمة للطبخ  %15 دسم / שמנת מתוקה 250מ'ל", price: 5.00, sub: "white_cheese", img: "images/w14.jpg" },
+     { id: 120, name: " شمينت %27 دسم", price: 5.00, sub: "white_cheese", img: "images/w15.jpg" },
+     { id: 121, name: "אשל תנובה לבן %4.5 שומן", price: 4.00, sub: "white_cheese", img: "images/w16.jpg" },
+     { id: 122, name: "حليب شتراوس 2لتر/ חלב מועשר 2לטר", price: 7.00, sub: "white_cheese", img: "images/w17.png" },
+     { id: 123, name: "حليب شتراوس 1 لتر 1%دسم / חלב מועשר 1 לטר %1 שומן ", price: 7.00, sub: "white_cheese", img: "images/w18.webp" },
+     { id: 124, name: "حليب شتراوس 1 لتر 3%دسم / חלב מועשר 1 לטר 3% שומן ", price: 7.00, sub: "white_cheese", img: "images/w19.png" },
+     { id: 125, name: "נטול לקטוז חלב %2שומן 1לטר", price: 7.00, sub: "white_cheese", img: "images/w20.jpg" },
+     { id: 126, name: "חלב טרה 2% שומן حليب ", price: 7.00, sub: "white_cheese", img: "images/w21.webp" },
+     { id: 127, name: "حليب %4 دسم", price: 7.00, sub: "white_cheese", img: "images/w22.jpg" },
+     { id: 128, name: "حليب طازا %3 دسم", price: 7.00, sub: "white_cheese", img: "images/w23.jpg" },
+     { id: 128, name: "شوكه 1 لتر /שוקו ", price: 10.00, sub: "white_cheese", img: "images/w24.png" },
+     { id: 128, name: "שוקו /شوكه صغيره", price: 5.00, sub: "white_cheese", img: "images/w25.jpg" },
+     { id: 128, name: "شوكو صغيره%1.5 دسم", price: 3.00, sub: "white_cheese", img: "images/w26.png" },
+     { id: 128, name: "PRO / مشروب القهوة مع بروتين", price: 8.00, sub: "white_cheese", img: "images/w27.jpg" },
+     { id: 129, name: "GO /مشروب قهوة مثلج ", price: 8.00, sub: "white_cheese", img: "images/w28.jpg" },
+     { id: 130, name: "حمص صغير ", price: 5.00, sub: "white_cheese", img: "images/w29.webp" },
+     { id: 131, name: "דני /برلة صفراء", price: 3.00, sub: "white_cheese", img: "images/w30.jpg" },
+     { id: 132, name: "برلة سوداء /דני", price: 3.00, sub: "white_cheese", img: "images/w31.jpg" },
+     { id: 133, name: "حلوه مغطاة بشكلاته %4.5 دهون / דנןנה", price: 5.00, sub: "white_cheese", img: "images/w32.jpg" },
+     { id: 134, name: "برلة زبادي بنكهة الفراوله %3 دهون", price: 3.00, sub: "white_cheese", img: "images/w33.png" },
+     { id: 135, name: "برلة مع شكولاته الراس", price: 7.00, sub: "white_cheese", img: "images/w34.webp" },
+     { id: 136, name: "برله بدون شكلاتة الراس", price: 5.00, sub: "white_cheese", img: "images/w35.jpg" },
+     { id: 137, name: "גמאדים / قماديم اطفال ", price: 3.00, sub: "white_cheese", img: "images/w36.png" },
+     { id: 138, name: "yaplait / مشروب الفراولة ", price: 5.00, sub: "white_cheese", img: "images/w37.jpg" },
+     { id: 139, name: "مشروب زبادي  דנונה", price: 7.00, sub: "white_cheese", img: "images/w38.jpg" },
+     { id: 140, name: "", price: 7.00, sub: "white_cheese", img: "images/w39.jpg" },
+     { id: 141, name: "", price: 7.00, sub: "white_cheese", img: "images/w40.jpeg" }, 
+     { id: 142, name: "", price: 7.00, sub: "white_cheese", img: "images/w41.png" },
+     { id: 143, name: "", price: 7.00, sub: "white_cheese", img: "images/w42.jpg" },
+     { id: 144, name: "", price: 7.00, sub: "white_cheese", img: "images/w43.jpg" },
+     { id: 145, name: "", price: 7.00, sub: "white_cheese", img: "images/w44.jpg" },  
+     { id: 146, name: "", price: 7.00, sub: "white_cheese", img: "images/w45.jpg" },
+     { id: 147, name: "", price: 7.00, sub: "white_cheese", img: "images/w46.jpg" },
+     { id: 148, name: "", price: 7.00, sub: "white_cheese", img: "images/w47.jpg" },
+     { id: 149, name: "", price: 7.00, sub: "white_cheese", img: "images/w48.jpg" },
+     { id: 150, name: "", price: 7.00, sub: "white_cheese", img: "images/w49.jpg" },
+     { id: 151, name: "", price: 7.00, sub: "white_cheese", img: "images/w50.jpg" },
+     { id: 152, name: "", price: 7.00, sub: "white_cheese", img: "images/w51.jpg" },
+     { id: 156, name: "", price: 7.00, sub: "white_cheese", img: "images/w52.jpg" },
+     { id: 157, name: "", price: 7.00, sub: "white_cheese", img: "images/w53.jpg" },
+     { id: 158, name: "", price: 7.00, sub: "white_cheese", img: "images/w54.jpg" },
+     { id: 159, name: "", price: 7.00, sub: "white_cheese", img: "images/w55.jpg" },
+     { id: 160, name: "", price: 7.00, sub: "white_cheese", img: "images/w56.png" },
+     { id: 161, name: "", price: 7.00, sub: "white_cheese", img: "images/w57.png" },
+     { id: 162, name: "", price: 7.00, sub: "white_cheese", img: "images/w58.jpg" },
+     { id: 163, name: "", price: 7.00, sub: "white_cheese", img: "images/w59.jpg" },
+     { id: 164, name: "", price: 7.00, sub: "white_cheese", img: "images/w60.jpg" },
+     { id: 165, name: "", price: 7.00, sub: "white_cheese", img: "images/w61.jpg" },
+     { id: 166, name: "", price: 7.00, sub: "white_cheese", img: "images/w62.webp" },
+     { id: 167, name: "", price: 7.00, sub: "white_cheese", img: "images/w63.jpg" }, 
+     { id: 170, name: "", price: 7.00, sub: "white_cheese", img: "images/w64.jpg" },
+     { id: 170, name: "", price: 7.00, sub: "white_cheese", img: "images/w65.jpg" },
+     { id: 170, name: "", price: 7.00, sub: "white_cheese", img: "images/w66.jpg" },
+     { id: 172, name: "", price: 7.00, sub: "white_cheese", img: "images/w67.webp" },
+     { id: 173, name: "", price: 7.00, sub: "white_cheese", img: "images/w68.jpg" },
+     { id: 174, name: "", price: 7.00, sub: "white_cheese", img: "images/w69.png" },
+     { id: 175, name: "", price: 7.00, sub: "white_cheese", img: "images/w70.png" },
+     { id: 176, name: "", price: 7.00, sub: "white_cheese", img: "images/w71.jpg" },
+     { id: 177, name: "", price: 7.00, sub: "white_cheese", img: "images/w72.webp" },
+     { id: 178, name: "", price: 7.00, sub: "white_cheese", img: "images/w73.jpg" },
+     { id: 180, name: "", price: 7.00, sub: "white_cheese", img: "images/w74.jpg" },
+     { id: 181, name: "", price: 7.00, sub: "white_cheese", img: "images/w75.jpg" },
+     { id: 182, name: "", price: 7.00, sub: "white_cheese", img: "images/w76.png" },
+     { id: 183, name: "", price: 7.00, sub: "white_cheese", img: "images/w77.jpg" },
+     { id: 184, name: "", price: 7.00, sub: "white_cheese", img: "images/w78.png" },
+     { id: 185, name: "", price: 7.00, sub: "white_cheese", img: "images/w79.png" },
+     { id: 186, name: "فانتة برتقال", price: 7.00, sub: "white_cheese", img: "images/w80.png" },
+     { id: 187, name: "سبرايت ليمون", price: 7.00, sub: "white_cheese", img: "images/w81.jpg" },
+     { id: 188, name: "شويبس مشروب فواكة استوائية", price: 7.00, sub: "white_cheese", img: "images/w82.jpg" },
+     { id: 189, name: "شويبس  مشرو التفاح", price: 7.00, sub: "white_cheese", img: "images/w83.jpg" },
+     { id: 194, name: "مشروب شويبس عنب", price: 7.00, sub: "white_cheese", img: "images/w84.webp" },
+     { id: 195, name: "", price: 7.00, sub: "white_cheese", img: "" },
+     { id: 196, name: "", price: 7.00, sub: "white_cheese", img: "" },
+     { id: 197, name: "", price: 7.00, sub: "white_cheese", img: "" },
+     { id: 198, name: "", price: 7.00, sub: "white_cheese", img: "" },
+     { id: 199, name: "", price: 7.00, sub: "white_cheese", img: "" },
+     { id: 200, name: "", price: 7.00, sub: "white_cheese", img: "" }
+ ],
+    vegetables: [
+        { id: 201, name: "بندورة حمراء بلدية طازجة", price: 5.50, sub: "daily_veg", img: "https://images.unsplash.com/photo-1595855759920-86582396756a?w=400" },
+        { id: 202, name: "خيار صنديد نخب أول", price: 4.50, sub: "daily_veg", img: "https://images.unsplash.com/photo-1604948501466-4e9c339b9c24?w=400" },
+        { id: 203, name: "بطاطا بيضاء للطهي والقلي", price: 5.00, sub: "daily_veg", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400" },
+        { id: 204, name: "تفاح أحمر سكري إيطالي", price: 9.00, sub: "fruits", img: "https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?w=400" },
+        { id: 205, name: "موز صومالي حلو المذاق", price: 6.00, sub: "fruits", img: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400" },
+        { id: 206, name: "برتقال عصير طازج", price: 4.00, sub: "fruits", img: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=400" },
+        { id: 207, name: "ضمة بقدونس مغسولة ونظيفة", price: 1.50, sub: "leafy", img: "https://images.unsplash.com/photo-1515252873117-d56f57ee97a1?w=400" },
+        { id: 208, name: "ضمة نعنع أخضر ذو رائحة زكية", price: 1.50, sub: "leafy", img: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" }
+    ],
+    grocery: [
+        { id: 301, name: "زيت ذرة نقي عالي الجودة", price: 35.00, sub: "oils", img: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400" },
+        { id: 302, name: "أرز بسمتي حبة طويلة 5 كجم", price: 45.00, sub: "rice_beans", img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400" },
+        { id: 303, name: "صلصة طماطم عبوة توفيرية", price: 5.00, sub: "canned", img: "https://images.unsplash.com/photo-1582284540020-8acbe03f4924?w=400" },
+        { id: 304, name: "مكرونة سباجيتي إيطالية", price: 4.50, sub: "pasta", img: "https://images.unsplash.com/photo-1551462147-37885acc36f1?w=400" },
+        { id: 305, name: "سكر أبيض نقي ناعم 1 كجم", price: 4.00, sub: "drinks", img: "https://images.unsplash.com/photo-1581441363689-1f3c3c414635?w=400" },
+       
+        { id: 306, name: "قهوة عربية مطحونة بالهيل", price: 20.00, sub: "drinks", img: "https://images.unsplash.com/photo-1559525839-b184a4d698c7?w=400" },
+        { id: 307, name: "علبة تونة بالزيت نخب أول", price: 6.50, sub: "canned", img: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=400" },
+        { id: 308, name: "عدس مجروش فاخر للشوربة", price: 8.00, sub: "rice_beans", img: "https://images.unsplash.com/photo-1515942400420-2b98fed1f515?w=400" },
+        { id: 309, name: "عدس للشوربة", price: 10.00, sub: "rice_beans", img: "https://mosbatesabz.com/mag/wp-content/uploads/2024/07/lentils-1.jpg" }
+        
+
+    ],
+    bakery: [
+        { id: 401, name: "خبز قمح كامل طازج ساخن", price: 8.00, sub: "all", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400" },
+        { id: 402, name: "كرواسون فرنسي بالزبدة الهشة", price: 5.00, sub: "all", img: "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=400" },
+        { id: 403, name: "كعك بالسمسم مقرمش بلدية", price: 12.00, sub: "all", img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400" },
+        { id: 404, name: "خبز حمام (صمون) للسندوتشات", price: 6.00, sub: "all", img: "https://images.unsplash.com/photo-1534620808146-d33bb39128b2?w=400" }
+    ],
+    sweets: [
+        { id: 501, name: "شوكولاتة فاخرة مشكلة كادبوري", price: 15.00, sub: "all", img: "https://images.unsplash.com/photo-1548814971-12502693faaf?w=400" },
+        { id: 502, name: "بسكويت شاي سادة مقرمش عبوة ترويجية", price: 8.00, sub: "all", img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400" },
+        { id: 503, name: "شيبس بطاطس طبيعي بنكهة الملح", price: 5.00, sub: "all", img: "https://images.unsplash.com/photo-1566478989037-e924e50ba09c?w=400" },
+        { id: 504, name: "بقلاوة عربية مشكلة بالفستق الحلبي", price: 45.00, sub: "all", img: "https://images.unsplash.com/photo-1534080391025-4979e831447d?w=400" }
+    ],
+    homecare: [
+        { id: 601, name: "سائل جلي مركز للأطباق فيري", price: 12.00, sub: "all", img: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=400" },
+        { id: 602, name: "مسحوق غسيل أوتوماتيك اريال 5 كجم", price: 48.00, sub: "all", img: "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400" },
+        { id: 603, name: "منظف ومعطر أرضيات برائحة اللافندر", price: 15.00, sub: "all", img: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400" },
+        { id: 604, name: "مناديل ورقية ناعمة عبوة توفيرية", price: 20.00, sub: "all", img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400" }
+    ],
+    meats: [
+        { id: 701, name: "لحم خروف بلدي طازج مشفي", price: 85.00, sub: "red_meat", img: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?w=400" },
+        { id: 702, name: "شرائح ستيك عجل هولندي فاخر", price: 75.00, sub: "red_meat", img: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400" },
+        { id: 703, name: "صدر دجاج طازج نظيف ومسحب", price: 28.00, sub: "poultry", img: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400" },
+        { id: 704, name: "لحم مفروم عجل ناعم للكفتة والطهي", price: 60.00, sub: "red_meat", img: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=400" },
+        { id: 705, name: "شيش طاووق متبل بالخلطة الخاصة جاهز للشوي", price: 35.00, sub: "poultry", img: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400" },
+        { id: 706, name: "فخذ دجاج طازج مغسول ومنظف", price: 18.00, sub: "poultry", img: "https://images.unsplash.com/photo-1569395171110-23c902e5f980?w=400" },
+        { id: 707, name: "برجر بقري جامبو مجمد كيس عائلي", price: 40.00, sub: "frozen", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400" },
+        { id: 708, name: "أصابع كباب مجمدة مجهزة للشوي", price: 38.00, sub: "frozen", img: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400" }
+    ]
+};
 
         const INITIAL_SHOWCASE_LIMIT = 4;
 
